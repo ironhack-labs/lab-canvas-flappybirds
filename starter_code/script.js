@@ -4,7 +4,6 @@ window.onload = function() {
   };
 
   function startGame() {
-    console.log("START");
     var canvas = document.getElementById("game");
     canvas.width = 900;
     canvas.height = 504;
