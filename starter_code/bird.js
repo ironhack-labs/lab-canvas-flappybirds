@@ -3,11 +3,11 @@ var gravity = 0.3;
 
 function Bird(canvasId, sprite) {
   // debugger
-  this.canvas = document.getElementById("canvas-fb");
+  this.canvas = canvasId;
   this.ctx = this.canvas.getContext('2d');
   this.sprite = new Image();
-  this.sprite.src = "./images/flappy.png";
-  this.sprite.isReady = true;
+  this.sprite.src = sprite;
+  this.sprite.isReady = false;
   this.sprite.scale = 0.1;
   this.sprite.onload = (function() {
     this.sprite.isReady = true;
@@ -46,7 +46,7 @@ Bird.prototype.updateBird = function() {
   // Apply gravity
   this.vy += gravity;
   this.y += this.vy;
-  if ((this.y + this.radius) > this.canvas.height){// || (this.y - this.radius) < 0) {
+  if ((this.y + this.radius) > this.canvas.height){ // || (this.y - this.radius) < 0) {
        this.vy *= -1;
   }
   if ((this.x + this.radius) > this.canvas.width || (this.x - this.radius) < 0) {
