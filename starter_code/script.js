@@ -5,6 +5,7 @@ window.onload = function() {
 
   function startGame() {
 var canvas= new Canvas();
+var flappy= new Flappy();
   }
 
 };
