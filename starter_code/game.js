@@ -1,13 +1,13 @@
 function Game(canvasId, width, height) {
-  this.canvas = document.getElementById(canvasId);
-  this.ctx = this.canvas.getContext('2d');
-  this.bird = new Bird(this.canvas, "./images/flappy.png");
-  // debugger
-  this.bg= new Background(this.canvas,"./images/bg.png");
   this.x = 0;
   this.y = 0;
   this.width = width;
   this.height = height;
+  this.canvas = document.getElementById(canvasId);
+  this.ctx = this.canvas.getContext('2d');
+  this.bird = new Bird(this.canvas, "./images/flappy.png");
+  // debugger
+  this.bg= new Background(this.canvas,"./images/bg.png",this.width);
   //this.obstacles = [];
   //this.intervl =setInterval(this.addObstacle.bind(this), 3000);
   //this.points=0;
