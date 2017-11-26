@@ -1,6 +1,9 @@
 body {
   text-align: center;
 }
+canvas{
+  border: 1px solid grey;
+}
 
 body h1 {
   font-size: 30px;
