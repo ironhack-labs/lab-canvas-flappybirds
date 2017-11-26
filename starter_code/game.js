@@ -7,6 +7,7 @@ function Game(canvasId, width, height) {
   this.ctx = this.canvas.getContext('2d');
   this.bird = new Bird(this.canvas, "./images/flappy.png");
   // debugger
+  this.pipe= new Pipe(this.canvas,"./images/obstacle_bottom.png", this.width);
   this.bg= new Background(this.canvas,"./images/bg.png",this.width);
   //this.obstacles = [];
   //this.intervl =setInterval(this.addObstacle.bind(this), 3000);
@@ -24,6 +25,7 @@ Game.prototype.clear = function() {
 Game.prototype.draw = function() {
   this.clear();
   this.bg.draw();
+  this.pipe.draw();
   this.bird.updateBird();
   // if (this.isReady()) {
   //   this.bird.draw();

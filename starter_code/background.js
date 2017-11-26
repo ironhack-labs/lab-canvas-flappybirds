@@ -1,4 +1,4 @@
-function Background(canvasId, sprite,width) {
+function Background(canvasId, sprite, width) {
   // debugger
   this.canvas = canvasId;
   this.ctx = this.canvas.getContext('2d');
@@ -10,7 +10,7 @@ function Background(canvasId, sprite,width) {
     this.sprite.isReady = true;
   }).bind(this);
   // debugger
-  this.width=width;
+  this.width = width;
 }
 
 Background.prototype.isReady = function() {
@@ -27,13 +27,13 @@ Background.prototype.draw = function() {
   );
   this.ctx.drawImage(
     this.sprite,
-    this.x+900,
+    this.x + 900,
     0,
     900,
     500
   );
   this.x--;
-  if(-this.x===this.width){
-    this.x=0;
+  if (-this.x === this.width) {
+    this.x = 0;
   }
 };
