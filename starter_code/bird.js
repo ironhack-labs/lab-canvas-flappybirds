@@ -1,5 +1,5 @@
 var UP_KEY = 38;
-var gravity = 0.005;
+var gravity = 0.00005;
 
 function Bird(canvasId) {
   this.canvas = document.getElementById(canvasId);
@@ -11,15 +11,19 @@ function Bird(canvasId) {
   this.img.onload = (function() {
     this.img.isReady = true;
   }).bind(this);
-  this.x = 225;
+  this.x = 200;
   this.y = 300;
-  this.yspeed = 4;
+  this.yspeed = 1;
   this.yconstant = 3;
   document.onkeydown = this.onKeyDown.bind(this);
 }
 
+Bird.prototype.birdPosition = function() {
+  return flappyPosition = [this.x, this.y, 50, 40]
+};
+
 Bird.prototype.draw = function() {
-  this.ctx.drawImage(this.img, this.x - 25, this.y, 50, 40);
+  this.ctx.drawImage(this.img, this.x, this.y, 50, 40);
 };
 
 Bird.prototype.update = function() {
@@ -35,6 +39,11 @@ Bird.prototype.onKeyDown = function(event) {
 };
 
 Bird.prototype.moveToUp = function() {
-  this.y -= 80;
+  this.y -= 50;
   this.yspeed = 1
+};
+
+Bird.prototype.flappyFalls = function() {
+  this.draw();
+  this.yspeed += gravity;
 };

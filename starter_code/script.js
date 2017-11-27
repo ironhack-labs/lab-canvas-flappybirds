@@ -7,6 +7,6 @@ window.onload = function() {
       myGame.draw();
     }, 10);
   };
-  function startGame() {
-  }
+
+  function startGame() {}
 };
