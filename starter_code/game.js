@@ -12,10 +12,12 @@ function Game(canvasId) {
   this.bird = new Bird("canvas");
   this.obstaclesTop = [];
   setInterval(this.addObstacleTop.bind(this), 2500);
+  this.points = 0;
 }
 
 Game.prototype.addObstacleTop = function() {
-  this.obstaclesTop.push(new ObstacleTop(this.canvas, 10, 100, (Math.floor(Math.random() * (200))) - 200));
+  this.obstaclesTop.push(new ObstacleTop(this.canvas, 10, 100, (Math.floor(Math.random() * (200))) - 200))
+  this.points += 1;
 }
 
 Game.prototype.clearBg = function() {
@@ -35,7 +37,7 @@ Game.prototype.drawBg = function() {
 
 Game.prototype.draw = function() {
   this.drawBg();
-  this.bird.update();
+  this.bird.update()
   var lastObstacle = this.obstaclesTop.length - 1;
   if (this.obstaclesTop[lastObstacle] != undefined) {
     this.obstaclesTop[lastObstacle].update();
@@ -45,15 +47,18 @@ Game.prototype.draw = function() {
       this.obstaclesTop[lastObstacle].obsPositionTop()[3] + this.obstaclesTop[lastObstacle].obsPositionTop()[1] > this.bird.birdPosition()[1]) {
       // collision detected!
       alert("We have crashed with the obstacle at the top!")
-    }
-    if (this.obstaclesTop[lastObstacle].obsPositionBottom()[0] < this.bird.birdPosition()[0] + this.bird.birdPosition()[2] &&
+      var myGame = new Game("canvas");
+      this.obstaclesTop = [];
+    } else if (this.obstaclesTop[lastObstacle].obsPositionBottom()[0] < this.bird.birdPosition()[0] + this.bird.birdPosition()[2] &&
       this.obstaclesTop[lastObstacle].obsPositionBottom()[0] + this.obstaclesTop[lastObstacle].obsPositionBottom()[2] > this.bird.birdPosition()[0] &&
       this.obstaclesTop[lastObstacle].obsPositionBottom()[1] < this.bird.birdPosition()[1] + this.bird.birdPosition()[3] &&
       this.obstaclesTop[lastObstacle].obsPositionBottom()[3] + this.obstaclesTop[lastObstacle].obsPositionBottom()[1] > this.bird.birdPosition()[1]) {
       // collision detected!
       alert("We have crashed with the obstacle at the bottom!")
+      var myGame = new Game("canvas");
+      this.obstaclesTop = [];
+    } else {
+
     }
-
-
   }
 }

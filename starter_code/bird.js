@@ -1,5 +1,5 @@
 var UP_KEY = 38;
-var gravity = 0.00005;
+var gravity = 0.05;
 
 function Bird(canvasId) {
   this.canvas = document.getElementById(canvasId);
@@ -14,7 +14,7 @@ function Bird(canvasId) {
   this.x = 200;
   this.y = 300;
   this.yspeed = 1;
-  this.yconstant = 3;
+  this.yconstant = 2;
   document.onkeydown = this.onKeyDown.bind(this);
 }
 
