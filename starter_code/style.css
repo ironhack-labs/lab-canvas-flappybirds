@@ -21,3 +21,6 @@ canvas{
   border: 1px solid rgb(209, 209, 209);
   margin-bottom: 50px;
 }
+.disabled{
+  pointer-events: none;
+}
