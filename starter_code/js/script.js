@@ -1,6 +1,7 @@
 window.onload = function() {
   document.getElementById("start-button").onclick = function() {
     document.getElementById("start-button").setAttribute("class", "disabled");
+    document.getElementById("start-button").setAttribute('disabled','disabled');
     startGame();
   };
 
@@ -12,10 +13,7 @@ window.onload = function() {
 
     var img = new Image();
     img.src = "./images/bg.png";
-  //  var CanvasXSize = 900;
-  //  var CanvasYSize = 500;
     var speed = 30;
-    //var scale = 1.05;
     var y = 0;
 
     var dx = -0.75;
@@ -24,15 +22,12 @@ window.onload = function() {
     var x = 0;
     var clearX;
     var clearY;
-    //var ctx;
 
     img.onload = function() {
-      //imgW = img.width * scale;
-      //imgH = img.height * scale;
       if (imgW > canvasSize.w) {
         x = CanvasXSize + imgW;
       }
-      if (imgW >  canvasSize.w) {
+      if (imgW > canvasSize.w) {
         clearX = imgW;
       } else {
         clearX = canvasSize.w;
@@ -42,12 +37,10 @@ window.onload = function() {
       } else {
         clearY = canvasSize.y;
       }
-      //ctx = document.getElementById('canvas').getContext('2d');
       return setInterval(draw, speed);
     };
 
     function draw() {
-      console.log(x);
       ctx.clearRect(0, 0, clearX, clearY);
       if (imgW <= canvasSize.w) {
         if (x > canvasSize.w) {
@@ -69,8 +62,10 @@ window.onload = function() {
       }
       x -= dx;
       ctx.drawImage(img, x, y, imgW, imgH);
-          bird.update();
-           bird.render();
+      bird.update();
+      bird.render();
+      obstaclesUp[0].render(ctx);
+      obstaclesDown[0].render(ctx);
     }
 
     var bird = createBird(ctx, canvasSize);
@@ -79,6 +74,18 @@ window.onload = function() {
       ctx.clearRect(0, 0, canvasSize.w, canvasSize.h);
     }
     setInterval(draw, 20);
+
+    var obstaclesUp = [];
+    var obstaclesDown = [];
+
+    function newObstacles() {
+      var objUp1 = new ObstacleUp(ctx, canvasSize);
+      var objDown1 = new ObstacleDown(ctx, canvasSize);
+      obstaclesUp.push(objUp1);
+      obstaclesDown.push(objDown1);
+    }
+    newObstacles();
+    console.log(obstaclesUp);
 
     document.onkeydown = function(e) {
       if (e.keyCode == 32) {
