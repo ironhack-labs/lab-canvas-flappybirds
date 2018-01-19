@@ -30,3 +30,6 @@ function createBird(ctx, canvasSize){
   };
   return bird;
 }
+
+
+
