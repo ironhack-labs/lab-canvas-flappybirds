@@ -17,3 +17,7 @@ body button {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+
+#flappy-canvas {
+  border: 1px red solid;
+}
