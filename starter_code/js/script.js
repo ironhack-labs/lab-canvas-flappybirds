@@ -1,10 +1,9 @@
 window.onload = function () {
   document.getElementById("start-button").onclick = function () {
 
- 
-
-
 function startGame() {
+
+ function  
 
   draw();
 }
@@ -12,11 +11,11 @@ var canvas = document.getElementById('flappy-canvas');
 var ctx = canvas.getContext('2d');
 
 
-var img = new Image();
+var img2= new Image();
 img.src = './images/bg.png';
 var backgroundImage = {
   img: img,
-  x: 0,
+  x: 1,
   speed: -02,
   move: function() {
     this.x += this.speed;
