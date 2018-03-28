@@ -1,11 +1,5 @@
-window.onload = function() {
-  document.getElementById("start-button").onclick = function() {
-    startGame();
-  };
 
-  const ctx = document.getElementById("canvas").getContext("2d");
-
-   startGame = () => {
+  function startGame() {
     var img = new Image();
     img.src = 'images/bg.png';
     var CanvasXSize = 750;
@@ -66,4 +60,3 @@ window.onload = function() {
       x += dx;
     }
   }
-};
