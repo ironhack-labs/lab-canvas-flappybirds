@@ -1,19 +1,5 @@
-body {
-  text-align: center;
-}
-
-body h1 {
-  font-size: 30px;
-  text-transform: uppercase;
-}
-
-body button {
-  font-size: 20px;
-  background-color: black;
-  color: #fff;
-  padding: 10px 20px;
-  border: 0;
-  box-shadow: 0;
-  border-radius: 5px;
-  margin-bottom: 20px;
+*{
+  font-smooth:never;
+  -webkit-font-smoothing: none;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
