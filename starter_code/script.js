@@ -13,6 +13,7 @@ function Game(canvasID){
   this.reset();
   this.timeBetweenObstacles = 2000;
   this.seconds = 0;
+
 }
 
 Game.prototype.reset = function(){
@@ -22,6 +23,7 @@ Game.prototype.reset = function(){
   this.obstacles = [];
   this.score = 0;
   this.seconds = 0;
+  this.exit= false;
 };
 
 Game.prototype.draw = function(){
@@ -46,7 +48,9 @@ Game.prototype.clear = function() {
 };
 
 Game.prototype.generateObstacle = function(){
-  this.obstacles.push(new Obstacle(this));
+  if (this.seconds >2) {
+    this.obstacles.push(new Obstacle(this));
+  }
 }
 
 Game.prototype.clearObstacles = function(){
@@ -71,6 +75,7 @@ Game.prototype.outOfCanvas = function(){
   return false;
 }
 Game.prototype.gameOver = function(){
+  this.exit = true;
   if(confirm("GAME OVER. \n"+
               "your Score is "+ parseInt(this.score)+"\nPlay again?")) {
     this.reset();
@@ -111,6 +116,10 @@ Game.prototype.start = function(){
       this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
       this.draw();
       this.moveAll(delta);
+      if(this.exit){
+        this.clear;
+        return;
+      }
       window.requestAnimationFrame(update);
     }.bind(this);
   window.requestAnimationFrame(update);
