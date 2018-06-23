@@ -56,8 +56,8 @@ Game.prototype.clearObstacles = function(){
 Game.prototype.isColision = function(){
   return this.obstacles.some(function (e){
     return (
-      ((this.player.x + this.player.width)  > e.x) && 
-      ((this.player.y < e.topEnds) || 
+      ((this.player.x + 3*this.player.width/4)  > e.x) && 
+      ((this.player.y + this.player.height/4 < e.topEnds) || 
       ((this.player.y + this.player.height) > e.bottomStarts)));
   }.bind(this));
 }
@@ -72,9 +72,10 @@ Game.prototype.gameOver = function(){
   if(confirm("GAME OVER. \n"+
               "your Score is "+ parseInt(this.score)+"\nPlay again?")) {
     this.reset();
-    this.start();
-    window.reload();
+
     this.obstacles = [];
+  } else {
+    location.reload();
   }
 }
 

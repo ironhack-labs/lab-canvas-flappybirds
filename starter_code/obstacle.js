@@ -11,7 +11,7 @@ function Obstacle(game){
     this.dx = 7;
     this.width = 50;
     this.gap = 150;
-    this.topEnds = 50+parseInt(Math.random()                           *((this.game.canvas.height)-100)/10)                     *10;
+    this.topEnds = 50+parseInt(Math.random()                   *(this.game.canvas.height)/20)*10;
     this.bottomStarts = this.topEnds + this.gap;
 }
 

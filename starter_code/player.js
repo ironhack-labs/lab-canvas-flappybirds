@@ -33,7 +33,7 @@ Player.prototype.move = function(delta){
  Player.prototype.setListeners = function(){
     document.onkeydown = function (e){
         if (e.keyCode === 32) {
-            this.userPull = 0.05;
+            this.userPull = 0.04;
         }
     }.bind(this);
     document.onkeyup = function (e){
