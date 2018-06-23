@@ -16,8 +16,9 @@ window.onload = function() {
     updateCanvas();
   }
 
-  function updateCanvas() {
-    game.update();
+  function updateCanvas(time) {
+    var timeSec = Math.floor(time / 1000);
+    game.update(timeSec);
 
     window.requestAnimationFrame(updateCanvas);
   }

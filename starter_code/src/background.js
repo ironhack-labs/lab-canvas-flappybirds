@@ -2,7 +2,7 @@ function Background(game) {
   this.game = game;
   this.x = 0;
   this.y = 0;
-  this.speedX = 2;
+  this.speedX = -2;
   this.img = new Image();
   this.img.src = 'images/bg.png';
 }
@@ -13,7 +13,7 @@ Background.prototype.draw = function() {
 };
 
 Background.prototype.move = function() {
-  this.x -= this.speedX;
+  this.x += this.speedX;
 
   if (this.x < -this.game.canvas.width) {
     this.x = 0;

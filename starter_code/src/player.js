@@ -12,9 +12,12 @@ function Player(game) {
   this.image = new Image();
   this.image.src = "images/flappy.png";
 
+  this.width = this.playerSize * this.ratio;
+  this.height = this.playerSize;
+
   this.limitX_left = 10;
-  this.limitX_right = this.game.canvas.width - this.playerSize * this.ratio - 10;
-  this.limitY_bottom = this.game.canvas.height - this.playerSize - 10;
+  this.limitX_right = this.game.canvas.width - this.width - 10;
+  this.limitY_bottom = this.game.canvas.height - this.height - 10;
   this.limitY_up = 10;
 
   this.events();
@@ -25,8 +28,8 @@ Player.prototype.draw = function() {
     this.image,
     this.x,
     this.y,
-    this.playerSize * this.ratio,
-    this.playerSize
+    this.width,
+    this.height
   );
 };
 
