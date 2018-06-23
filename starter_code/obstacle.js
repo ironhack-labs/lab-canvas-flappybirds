@@ -9,7 +9,7 @@ function Obstacle(game){
     this.x = this.game.canvas.width;
     this.y = 0;
     this.dx = 7;
-    this.width = 50;
+    this.width = 100;
     this.gap = 150;
     this.topEnds = 50+parseInt(Math.random()                   *(this.game.canvas.height)/20)*10;
     this.bottomStarts = this.topEnds + this.gap;

@@ -12,6 +12,7 @@ function Game(canvasID){
   this.ctx = canvas.getContext("2d");
   this.reset();
   this.timeBetweenObstacles = 2000;
+  this.seconds = 0;
 }
 
 Game.prototype.reset = function(){
@@ -20,6 +21,7 @@ Game.prototype.reset = function(){
   this.player = new Player(this);
   this.obstacles = [];
   this.score = 0;
+  this.seconds = 0;
 };
 
 Game.prototype.draw = function(){
@@ -72,7 +74,6 @@ Game.prototype.gameOver = function(){
   if(confirm("GAME OVER. \n"+
               "your Score is "+ parseInt(this.score)+"\nPlay again?")) {
     this.reset();
-
     this.obstacles = [];
   } else {
     location.reload();
@@ -92,11 +93,11 @@ Game.prototype.drawScore = function() {
 //start with requestAnimationFrame
 Game.prototype.start = function(){
     var lastTime = 0;
-    var second = 0;
     this.clear();
     update = function(time){
-      if (second != parseInt(time/this.timeBetweenObstacles)){
-        second = parseInt(time/this.timeBetweenObstacles);
+      console.log(this.obstacles)
+      if (this.seconds != parseInt(time/this.timeBetweenObstacles)){
+        this.seconds = parseInt(time/this.timeBetweenObstacles);
         this.generateObstacle();
       }
       this.clearObstacles();
@@ -104,9 +105,6 @@ Game.prototype.start = function(){
         this.gameOver();
       }
       this.score += 0.1;
-      if (this.score %1) {
-        console.log(parseInt(this.score));
-      }
       this.clear();
       var delta = time-lastTime;
       lastTime = time;
