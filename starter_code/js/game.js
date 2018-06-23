@@ -54,8 +54,8 @@ Game.prototype.isCollision = function() {
     return (
       ((this.flappy.x + 50) >= obstacle.x &&
        this.flappy.x < (obstacle.x + 400*obstacle.pipeRatio) &&
-       this.flappy.y >= obstacle.heightTop &&
-       this.flappy.y +50 <= obstacle.heightBottom)
+       this.flappy.y <= obstacle.heightTop &&
+       this.flappy.y +50 >= obstacle.heightBottom)
     );
   }.bind(this));
 };
