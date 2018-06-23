@@ -9,8 +9,9 @@ function Player(game) {
   this.imgWidth = 65
   this.imgHeight = 46
 
-  this.velocity = 1
-  this.acceleration = 1.5
+  this.velocity = 0
+  this.acceleration = 0
+  this.lift = 0
 
   this.setListeners()
 }
@@ -20,21 +21,25 @@ Player.prototype.draw = function() {
 }
 
 Player.prototype.move = function() {
-  var gravity = 0.4;
-
+  var gravity = 0.2
   if (this.y >= this.game.canvas.height - this.imgHeight) {
-    this.velocity = 1;
-    this.y = this.yIni;
+    this.game.gameOver()
   } else {
-    this.velocity += gravity;
-    this.y += this.velocity;
+      this.velocity += gravity;
+      this.y += this.velocity;
   }
 }
 
 Player.prototype.setListeners = function() {
   document.onkeydown = function(event) {
-    if (event.keyCode === 32) {
-      //Lift
+    if(event.keyCode == 32){
+      this.velocity = -5
     }
-  }
+  }.bind(this)
+
+  document.onkeyup = function(event) {
+    if (event.keyCode == 32) {
+      this.velocity = 0
+    }
+  }.bind(this)
 }

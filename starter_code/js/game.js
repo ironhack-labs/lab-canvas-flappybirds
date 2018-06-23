@@ -2,6 +2,7 @@ function Game(canvas) {
   this.canvas = document.getElementById(canvas)
   this.ctx = this.canvas.getContext("2d")
   this.fps = 60
+  this.score = 0
   this.reset()
 }
 
@@ -20,6 +21,12 @@ Game.prototype.start = function() {
     this.step()
 
     this.clearObstacles()
+
+    if (this.isCollision()) {
+      this.gameOver();
+    } else {
+      this.score += 0.01
+    }
   }.bind(this), 1000 / this.fps)
 }
 
@@ -37,6 +44,8 @@ Game.prototype.draw = function() {
     obstacle.draw()
   })
   this.player.draw()
+  this.ctx.font = '20px Arial'
+  this.ctx.fillText('Score: ' + this.score.toFixed(0), 10, 20)
 }
 
 Game.prototype.step = function() {
@@ -64,4 +73,19 @@ Game.prototype.clearObstacles = function() {
   this.obstacles = this.obstacles.filter(function(obstacle) {
     return obstacle.x >= -100;
   })
+}
+
+Game.prototype.isCollision = function() {
+  return this.obstacles.some(function(obstacle) {
+    if ((this.player.x + this.player.imgWidth >= obstacle.x) &&
+        (this.player.x < obstacle.x + obstacle.imgWidth)) {
+      if (this.player.y <= obstacle.yTop || this.player.y >= obstacle.yBottom) {
+        return true
+      }
+    }
+  }.bind(this))
+}
+
+Game.prototype.gameOver = function() {
+  this.stop()
 }
