@@ -9,15 +9,10 @@ function Background(game){
 
     //Initial speed:
     this.dx = 5;
-    this.counter = 0;
 
 } 
 
 Background.prototype.draw = function(){
-    this.counter++;
-    if (this.counter == 100){
-        this.counter = 0;
-    }
     
     this.game.ctx.drawImage(this.img, 
                             this.x, this.y, 
@@ -28,7 +23,6 @@ Background.prototype.draw = function(){
                             this.y,
                             this.game.canvas.width,
                             this.game.canvas.height);
-
 };
 
 Background.prototype.move = function(){
