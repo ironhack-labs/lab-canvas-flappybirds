@@ -7,13 +7,33 @@
   <script type="text/javascript" src="script.js">
 
   </script>
+  <script type="text/javascript" src="game.js"></script>
+  <script type="text/javascript" src="player.js"></script>
+  <script type="text/javascript" src="background.js"></script>
+  <script type="text/javascript" src="obstacle.js"></script>
+  <script type="text/javascript" src="points.js"></script>
   <link rel="stylesheet" href="style.css">
   <title>Document</title>
 </head>
 <body>
-  <img src="./images/logo.png" alt="" style="width:50%;">
-  <br>
-  <button id="start-button">StartGame</button>
-  <div id="game-board"></div>
+  <div id="inicio">
+      <img src="./images/logo.png" alt="" style="width:50%;">
+      <br>
+      <button id="start-button">StartGame</button>
+  </div>
+    
+  <div id="game-board">
+    <canvas id="canvas" width="900px" height="504px"></canvas>
+    <div id="score">
+        <p id="text"></p>
+        <button id="reload">
+            Try Again!
+        </button >
+        <button id="exit">
+            Exit
+        </button>
+      </div>
+  </div>
+  
 </body>
 </html>

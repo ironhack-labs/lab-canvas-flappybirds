@@ -17,3 +17,34 @@ body button {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+
+#score{
+  width: 300px;
+  height: 150px;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.301);
+  display: none
+}
+#score > *{
+  display: inline-block;
+}
+#text{
+  width: 100%;
+  color:rgb(235, 238, 50);
+  font-size: 20px;
+
+}
+#score button{
+  width: 45%;
+  
+  
+}
+#reload{
+  background: green
+}
+#exit{
+  background: red
+}
+#game-board{
+  text-align: center
+}
