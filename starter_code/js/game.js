@@ -2,6 +2,7 @@ function Game(canvasId){
   this.canvas = document.getElementById(canvasId);
   this.ctx = this.canvas.getContext("2d");
   this.fps = 60;
+  this.framesCounter = 0;
   this.obstacles = [];
   this.reset();
 }
@@ -13,13 +14,14 @@ Game.prototype.start = function() {
       this.framesCounter = 0;
     }
 
-    if (this.framesCounter % 50 === 0) {
-      this.generateObstacle();
-    }
+    if (this.framesCounter % 50 === 0) this.generateObstacle();
 
     this.draw();
     this.moveAll();
-
+    
+    this.clearObstacles();
+    if (this.isCollision()) this.gameOver();
+    this.framesCounter++;
   }.bind(this), 1000 / this.fps);
 };
 
@@ -31,14 +33,14 @@ Game.prototype.stop = function() {
   clearInterval(this.interval);
 };
 
-// Game.prototype.gameOver = function() {
-//   this.stop();
+Game.prototype.gameOver = function() {
+  this.stop();
   
-//   if(confirm("GAME OVER. Play again?")) {
-//     this.reset();
-//     this.start();
-//   }
-// };
+  if(confirm("GAME OVER. Play again?")) {
+    this.reset();
+    this.start();
+  }
+};
 
 Game.prototype.reset = function() {
   this.background = new Background(this);
@@ -47,15 +49,16 @@ Game.prototype.reset = function() {
   this.score = 0;
 };
 
-// Game.prototype.isCollision = function() {
-//   return this.obstacles.some(function(obstacle) {
-//     return (
-//       ((this.player.x + this.player.w) >= obstacle.x &&
-//        this.player.x < (obstacle.x + obstacle.w) &&
-//        this.player.y + (this.player.h - 20) >= obstacle.y)
-//     );
-//   }.bind(this));
-// };
+Game.prototype.isCollision = function() {
+  return this.obstacles.some(function(obstacle) {
+    return (
+      ((this.flappy.x + 50) >= obstacle.x &&
+       this.flappy.x < (obstacle.x + 400*obstacle.pipeRatio) &&
+       this.flappy.y >= obstacle.heightTop &&
+       this.flappy.y +50 <= obstacle.heightBottom)
+    );
+  }.bind(this));
+};
 
 Game.prototype.clearObstacles = function() {
   this.obstacles = this.obstacles.filter(function(obstacle) {
@@ -71,11 +74,7 @@ Game.prototype.generateObstacle = function() {
 Game.prototype.draw = function() {
   this.background.draw();
   this.flappy.draw();
-  this.obstacles.forEach(function(obstacle) { obstacle.draw(); });
-
-  // this.ctx.font = "30px sans-serif";
-  // this.ctx.fillStyle = "green";
-  // this.ctx.fillText(Math.floor(this.score), 50, 50);
+  this.obstacles.forEach(function(obstacle) { console.log(obstacle); obstacle.draw(); });
 };
 
 Game.prototype.moveAll = function() {

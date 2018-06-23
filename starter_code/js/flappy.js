@@ -10,7 +10,6 @@ function Flappy(game, x,y) {
   this.img = new Image();
   this.img.src ='./images/flappy.png';
   this.gravity = 0.25;
-  console.log(this.y);
   this.setListeners();
 }
 Flappy.prototype.draw = function(){
