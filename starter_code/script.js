@@ -13,14 +13,19 @@ window.onload = function() {
   function startGame() {
     game = new Game('canvas');
     
-    updateCanvas();
+    updateCanvas(-1);
   }
 
   function updateCanvas(time) {
     var timeSec = Math.floor(time / 1000);
     game.update(timeSec);
 
-    window.requestAnimationFrame(updateCanvas);
+    if (!game.gameOver) {
+      window.requestAnimationFrame(updateCanvas);
+    } else {
+      startBtn.style.display = '';
+      logo.className = '';
+    }
   }
 
 };
