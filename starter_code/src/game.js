@@ -12,6 +12,8 @@ Game.prototype.setUp = function() {
   this.obstacles = [];
   this.nextTime = 0;
   this.gameOver = false;
+  this.score = 0;
+  this.counter = 0;
 }
 
 Game.prototype.update = function(time) {
@@ -35,6 +37,8 @@ Game.prototype.update = function(time) {
   if (this.checkCrashes()) {
     this.finishGame();
     this.gameOver = true;
+  } else {
+    this.addScore();
   }
 }
 
@@ -88,6 +92,23 @@ Game.prototype.finishGame = function() {
   this.ctx.textAlign = 'center';
   
   this.ctx.fillText('Game Over', this.canvas.width / 2, this.canvas.height / 2);
+  this.ctx.fillText('Final score: ' + this.score, this.canvas.width / 2, this.canvas.height / 2 + 60);
 
   this.ctx.restore();
+}
+
+Game.prototype.addScore = function() {
+  this.counter++;
+
+  this.ctx.save();
+
+  this.ctx.font = '16px Arial';
+  this.ctx.fillText('Score: ' + this.score, 5, 20);
+
+  this.ctx.restore();
+
+  if (this.counter === 60) {
+    this.score++;
+    this.counter = 0;
+  }
 }
