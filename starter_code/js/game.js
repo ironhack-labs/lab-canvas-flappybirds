@@ -9,10 +9,9 @@ Game.prototype.start = function() {
   this.interval = setInterval(function (){
     this.clear()
     this.framesCounter++
-    if (this.framesCounter > 1400) {
+    if (this.framesCounter > 1399) {
       this.framesCounter = 0
     }
-
     if (this.framesCounter % 70 === 0) {
       this.generateObstacle();
     }
@@ -37,10 +36,12 @@ Game.prototype.draw = function() {
   this.obstacles.forEach(function(obstacle) {
     obstacle.draw()
   })
+  this.player.draw()
 }
 
 Game.prototype.step = function() {
   this.background.move()
+  this.player.move()
   this.obstacles.forEach(function(obstacle) {
     obstacle.move()
   })
@@ -48,6 +49,7 @@ Game.prototype.step = function() {
 
 Game.prototype.reset = function() {
   this.background = new Background(this)
+  this.player = new Player(this)
   this.obstacles = []
   this.framesCounter = 0
   this.score = 0
@@ -55,7 +57,6 @@ Game.prototype.reset = function() {
 
 Game.prototype.generateObstacle = function() {
   var yTop = Math.random() * ((this.canvas.height / 2) - (this.canvas.height / 4)) + this.canvas.height / 4
-  console.log(yTop)
   this.obstacles.push(new Obstacle(this, yTop))
 }
 
