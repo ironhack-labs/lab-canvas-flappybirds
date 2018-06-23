@@ -7,11 +7,12 @@ function Game(canvasId) {
 
 Game.prototype.setUp = function() {
   this.background = new Background(this);
+  this.player = new Player(this);
 }
 
 Game.prototype.update = function() {
   this.clear();
-  
+
   this.move();
   this.draw();
 }
@@ -22,8 +23,10 @@ Game.prototype.clear = function() {
 
 Game.prototype.draw = function() {
   this.background.draw();
+  this.player.draw();
 }
 
 Game.prototype.move = function() {
   this.background.move();
+  this.player.move();
 }
