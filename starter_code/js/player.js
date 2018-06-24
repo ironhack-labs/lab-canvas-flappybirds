@@ -27,7 +27,7 @@ Player.prototype.draw = function() {
 
 Player.prototype.setListeners = function() {
   document.onkeydown = function(e) {
-    if (e.keyCode == 38) {
+    if (e.keyCode == 32) {
       this.y -= 1;
       this.speedY -= 4;
     }

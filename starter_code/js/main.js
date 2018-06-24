@@ -24,7 +24,7 @@ Game.prototype.startGame = function() {
       this.framesCounter = 0;
     }
     
-    if (this.framesCounter % 90 === 0) {
+    if (this.framesCounter % 50 === 0) {
       this.generateObstacles();
     }
 
@@ -64,8 +64,9 @@ Game.prototype.clearObstacles = function() {
   });
 };
 
-Game.prototype.generateObstacles = function() { 
-  this.obstacles.push(new Obstacle(this));
+Game.prototype.generateObstacles = function() {
+  //this.obstacles.push(new Obstacle(this, this.x, 0, "images/obstacle_top.png", 100, this.h)); 
+  this.obstacles.push(new Obstacle(this, this.x, this.h + this.gap, "images/obstacle_bottom.png", 100, this.h + this.gap));
 };
 
 Game.prototype.clear = function() {
