@@ -2,8 +2,8 @@ function Player(game) {
   this.game = game;
  
   this.x = 20;
-  //this.y0 = this.game.canvas.height * 0.5;
-  this.y = this.game.canvas.height * 0.5;
+  this.y0 = this.game.canvas.height * 0.5;
+  this.y = this.y0;
 
   this.img = new Image();
   this.img.src = 'images/flappy.png';
@@ -11,7 +11,7 @@ function Player(game) {
   this.speedX = 0;
   this.speedY = 0.03;
 
-  this.gravity = 0.5;
+  this.gravity = 0.2;
   this.gravitySpeed = 0;
 
   this.update();
@@ -32,31 +32,17 @@ Player.prototype.setListeners = function() {
       this.gravity -= 0.2;
       this.speedY -= 10;
     }
-  document.onkeyup = function(e) {
-    if (e.keyCode == 32) {
-
-    }
-  }
+  //document.onkeyup = function(e) {
+  //  if (e.keyCode == 32) {
+  //  }
+  //}
   }.bind(this);
 };
-
-
 
 Player.prototype.update = function() {
   this.speedY += this.gravity;
   this.x += this.speedX;
   this.y += this.speedY;
-
-
-  //var g = this.gravity / delta;
-  //var pull = this.userPull;
-  //ball.vy += g - pull;
-  //ball.x += ball.vx * delta;
-  //ball.y += ball.vy * delta;
-  // console.log(ball);
-  // Limits in X axis for canvas
-  //if((ball.x+ball.vx) >= canvas.width || (ball.x+ball.vx) <= 0){
-  //  ball.vx *= -0.8;
 }
 
 Player.prototype.newPos = function() {
