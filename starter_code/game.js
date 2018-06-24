@@ -30,15 +30,16 @@ Game.prototype.start = function() {
 
 Game.prototype.gameOver = function() {
   clearInterval(this.interval);
-  
+  window.removeEventListener("keyup",spaceFunction);
   this.drawAll()
   var that = this
   //this.ctx.rotate(2*Math.PI);
   setTimeout(function(){
     that.player.y-=5
-    that.player.vY-=0.6;
+    that.player.vY-=0.8;
     var inter=setInterval(function(){
       that.clear()
+      that.player.g = 0.012
       that.player.move()
       that.drawAll()
       if (that.player.y  > that.canvas.height){
@@ -64,7 +65,15 @@ Game.prototype.showScore = function(){
 }
 
 Game.prototype.checkColisions = function() {
-  if (this.player.y >= this.canvas.height - 50 || this.player.y <= 0) {
+  if (this.player.y >= this.canvas.height - 50) {
+    this.player.y = this.canvas.height - 50
+    this.player.vY = 0
+    this.points.stop()
+    this.gameOver();
+  }
+  if(this.player.y <= 0){
+    this.player.y = 0;
+    this.player.vY = 0
     this.points.stop()
     this.gameOver();
   }
