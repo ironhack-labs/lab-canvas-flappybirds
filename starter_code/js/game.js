@@ -1,31 +1,33 @@
 function Game(canvadId) {
   this.canvas = document.getElementById(canvadId);
   this.ctx = this.canvas.getContext("2d");
-  this.fps = 60;
   this.reset();
 }
 
 Game.prototype.start = function() {
   this.interval = setInterval(function() {
-    //Clear despues del set interval para que la imagen no se multiplique o arrastre
     this.clear();
-
     this.draw();
-
-  }.bind(this), 1000 / this.fps);
+    this.moveAll();
+  }.bind(this), 1000 / 20);
 };
 
-
 Game.prototype.stop = function() {
-
+  clearInterval(this.interval);
 };
 
 Game.prototype.gameOver = function() {
-
+  this.stop();
+  
+  if(confirm("GAME OVER. Play again?")) {
+    this.reset();
+    this.start();
+  }
 };
 
 Game.prototype.reset = function() {
   this.background = new Background(this);
+  this.player = new Player(this);
 };
 
 Game.prototype.isCollision = function() {
@@ -42,8 +44,10 @@ Game.prototype.clear = function() {
 
 Game.prototype.draw = function() {
   this.background.draw();
+  this.player.draw();
 }
 
 Game.prototype.moveAll = function() {
-
+  this.background.move();
+  this.player.move();
 };

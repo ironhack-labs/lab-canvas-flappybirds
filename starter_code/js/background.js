@@ -14,9 +14,6 @@ Background.prototype.draw = function() {
 
 Background.prototype.move = function() {
   this.x -= this.dx;
+  //Preguntar linea 18
   if (this.x < -this.game.canvas.width) this.x = 0;
 };
-
-
-
-
