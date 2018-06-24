@@ -1,4 +1,6 @@
 window.onload = function() {
+  background.draw();
+  flappy.draw();
   document.getElementById("start-button").onclick = function() {
     startGame();
   };
@@ -11,10 +13,15 @@ window.onload = function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     background.draw();
     flappy.draw();
+    flappy.move();
+    obstacles.draw();
+    obstacles.move();
+    score.draw();
     requestAnimationFrame(updateCanvas);
   }
 
   function startGame() {
+    document.getElementById("start-button").disabled = true; // startGame buttom, if not dissabled, makes the game goes faster and faster!
     updateCanvas();
   }
 
