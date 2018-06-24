@@ -9,7 +9,7 @@ function Player(game) {
   this.img.src = 'images/flappy.png';
 
   this.speedX = 0;
-  this.speedY = 0.03;
+  this.speedY = 0;
 
   this.gravity = 0.2;
   this.gravitySpeed = 0;
@@ -27,14 +27,10 @@ Player.prototype.draw = function() {
 
 Player.prototype.setListeners = function() {
   document.onkeydown = function(e) {
-    if (e.keyCode == 32) {
+    if (e.keyCode == 38) {
       this.y -= 1;
       this.speedY -= 4;
     }
-  //document.onkeyup = function(e) {
-  //  if (e.keyCode == 32) {
-  //  }
-  //}
   }.bind(this);
 };
 

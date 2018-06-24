@@ -18,14 +18,26 @@ Game.prototype.startGame = function() {
   this.interval = setInterval(function() {
     this.clear();
 
-    //this.framesCounter++;
-//
-    //if (this.framesCounter > 1000) {
-    //  this.framesCounter = 0;
-    //}
+    this.framesCounter++;
+
+    if (this.framesCounter > 1000) {
+      this.framesCounter = 0;
+    }
+    
+    if (this.framesCounter % 90 === 0) {
+      this.generateObstacles();
+    }
+
+    // Si Flappy cae al vacío 
+    if (this.player.y >= this.canvas.height) {
+      this.gameOver();
+    }
 
     this.drawAll();
     this.moveAll();
+    //this.game.player.update();
+
+    this.clearObstacles();
   
   }.bind(this), 1000 / this.fps);
 };
@@ -34,12 +46,26 @@ Game.prototype.stop = function() {
   clearInterval(this.interval);
 };
 
+Game.prototype.gameOver = function() {
+  this.stop();
+};
+
 Game.prototype.reset = function() {
   this.background = new Background(this);
   this.player = new Player(this);
-  //this.obstacles = [];
-  //this.framesCounter = 0;
+  this.obstacles = [];
+  this.framesCounter = 0;
   //this.score = 0;
+};
+
+Game.prototype.clearObstacles = function() {
+  this.obstacles = this.obstacles.filter(function(obstacle) {
+    return obstacle.x >= 0;
+  });
+};
+
+Game.prototype.generateObstacles = function() { 
+  this.obstacles.push(new Obstacle(this));
 };
 
 Game.prototype.clear = function() {
@@ -49,13 +75,17 @@ Game.prototype.clear = function() {
 Game.prototype.drawAll = function() {
   this.background.draw();
   this.player.draw();
+  this.obstacles.forEach(function(obstacle) { 
+    obstacle.draw(); 
+  });
 };
 
 Game.prototype.moveAll = function() {
   this.background.move();
   this.player.move();
-//
-//  this.obstacles.forEach(function(obstacle) { obstacle.move(); });
+  this.obstacles.forEach(function(obstacle) { 
+    obstacle.move(); 
+  });
 };
 
 
