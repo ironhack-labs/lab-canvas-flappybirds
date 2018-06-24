@@ -29,8 +29,7 @@ Player.prototype.setListeners = function() {
   document.onkeydown = function(e) {
     if (e.keyCode == 32) {
       this.y -= 1;
-      this.gravity -= 0.2;
-      this.speedY -= 10;
+      this.speedY -= 4;
     }
   //document.onkeyup = function(e) {
   //  if (e.keyCode == 32) {
@@ -58,14 +57,6 @@ Player.prototype.move = function() {
   } else {
     this.speedY += this.gravity;
     this.y += this.speedY;
-
-    
   }
-  //if (this.y >= this.y0) {
-  //  this.speedY = 1;
-  //  this.y = this.y0;
-  //} else {
-  //  this.speedY += this.gravity;
-  //  this.y += this.speedY;
-  //}
+
 };
