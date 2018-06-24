@@ -35,3 +35,5 @@ function Obstacles() {
 }
 
 var obstacles = new Obstacles();
+var obstacles2 = new Obstacles();
+obstacles2.x = 1400;

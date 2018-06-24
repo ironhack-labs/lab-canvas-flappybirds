@@ -16,8 +16,15 @@ window.onload = function() {
     flappy.move();
     obstacles.draw();
     obstacles.move();
+    obstacles2.draw();
+    obstacles2.move();
+    
     score.draw();
-    requestAnimationFrame(updateCanvas);
+    
+    if(crash.gameover() === false){
+      requestAnimationFrame(updateCanvas);
+    }
+
   }
 
   function startGame() {
