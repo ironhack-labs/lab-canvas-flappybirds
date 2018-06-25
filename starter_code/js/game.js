@@ -2,7 +2,10 @@ function Game(canvasId) {
   this.canvas = document.getElementById(canvasId);
   this.ctx = this.canvas.getContext("2d");
   this.fps = 60;
-
+  this.background = new Background(this);
+  this.player = new Player(this);
+  this.obstacles = [];
+  
   this.reset();
 }
 
@@ -49,9 +52,6 @@ Game.prototype.gameOver = function() {
 };
 
 Game.prototype.reset = function() {
-  this.Background = new Background(this);
-  this.player = new Player(this);
-  this.obstacles = [];
   this.framesCounter = 0;
   this.score = 0;
 };
@@ -83,15 +83,15 @@ Game.prototype.clear = function() {
 
 Game.prototype.draw = function() {
   this.background.draw();
-  this.Player.draw();
-  this.Obstacles.forEach(function(obstacle) { 
+  this.player.draw();
+  this.obstacles.forEach(function(obstacle) { 
     obstacle.draw(); 
   });
 };
 
 Game.prototype.moveAll = function() {
-  this.Background.move();
-  this.Player.move();
+  this.background.move();
+  this.player.move();
 
   this.obstacles.forEach(function(obstacle) { 
     obstacle.move(); 

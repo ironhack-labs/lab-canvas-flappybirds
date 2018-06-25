@@ -15,7 +15,7 @@ function Player(game) {
 
 
 Player.prototype.draw = function() { 
-  this.game.ctx.drawImage(this.img, this.x, this.y, 20 * imgScale, 40); 
+  this.game.ctx.drawImage(this.img, this.x, this.y, 20 * this.imgScale, 40); 
 };
 
 
