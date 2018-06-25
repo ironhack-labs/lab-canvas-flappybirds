@@ -1,10 +1,9 @@
-window.onload = function() {
-  document.getElementById("start-button").onclick = function() {
-    startGame();
+
+window.onload = function () {
+  document.getElementById("start-button").onclick = function () {
+    var game = new Game("canvas");
+    game.start();
   };
 
-  function startGame() {
-
-  }
-
 };
+
