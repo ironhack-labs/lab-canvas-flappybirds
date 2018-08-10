@@ -7,10 +7,15 @@ class Component {
     this.color = color;
   }
   update(ctx) {
-    // ctx.rect(this.x, this.y, this.width, this.height)
+    // ctx.clearRect(0, 0, 700, 500)
+    ctx.fillStyle = this.color;
+    ctx.fillRect(this.x, this.y, this.width, this.height)
     // ctx.fill()
-    
-    
   }
+  left() { return this.x }
+  right() { return (this.x + this.width )}
+  top() { return this.y }
+  bottom() { return (this.y + this.height )}
+
 
 }
