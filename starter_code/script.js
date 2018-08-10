@@ -4,21 +4,22 @@ let background = new Background();
 let faby = new Faby();
 
 window.onload = function() {
-  document.getElementById("start-button").onclick = function() {
+  $("#start-button").click(function() {
+    $("#start-button").hide();
     background.drawBackground();
     startGame();
-  };
-
-  function startGame() {
-    setInterval(update, 1000 / 50);
-  }
-
+  });
   document.addEventListener("keypress", function(e) {
     if (e.keyCode === 32) {
+      console.log("pressed space bar");
       faby.hop();
     }
   });
 };
+
+function startGame() {
+  setInterval(update, 1000 / 50);
+}
 
 function update() {
   background.drawBackground();

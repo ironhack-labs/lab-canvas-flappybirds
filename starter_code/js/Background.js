@@ -11,6 +11,7 @@ Background.prototype.drawBackground = function() {
 
   ctx.drawImage(this.image, this.xPos, 0);
   ctx.drawImage(this.image, this.xPos + 900, 0);
+
   if (this.xPos === -900) {
     this.xPos = 0;
   }
