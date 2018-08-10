@@ -6,7 +6,7 @@ function Faby() {
   this.height = ctx.canvas.height / 2;
   this.speedX = 1;
   this.speedY = 1;
-  this.gravity;
+  this.gravity = 0.9;
   this.gravitySpeed;
 }
 
