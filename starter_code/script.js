@@ -48,6 +48,7 @@ window.onload = function() {
         myGameArea.stop()
       }
     })
+    bird.y += 5;
     myGameArea.frame ++;
     myGameArea.clear();
     if (myGameArea.frame % 80 === 0) {
@@ -62,10 +63,14 @@ window.onload = function() {
 
       count ++;
       let x = 200 + count*50;
-      obstacleArr.push(new Component(canvasWidth, 0, 5, height, 'orange'));
 
-      obstacleArr.push(new Component(canvasWidth, height + gap, 5, 500 - height - gap, 'blue'))
-      // downObs.update(myGameArea.context)
+      const obs_top = new Component(canvasWidth, 0, 20, height, 'orange');
+      obs_top.createTop(myGameArea.context);
+      obstacleArr.push(obs_top);
+
+      const obs_btm = new Component(canvasWidth, height + gap, 20, 500 - height - gap, 'blue');
+      obs_btm.createBtm(myGameArea.context)
+      obstacleArr.push(obs_btm)
 
     }
     obstacleArr.forEach(i => {
@@ -80,21 +85,18 @@ window.onload = function() {
   }
 
   const crash = (obstacle) => {
-    console.log(bird)
-    console.log(obstacle)
     return !(bird.top() > obstacle.bottom() ||
        bird.bottom() < obstacle.top() ||
        bird.left() > obstacle.right() ||
        bird.right() < obstacle.left()) 
-      
   }
 
   document.onkeydown = (e) => {
     switch(e.keyCode) {
       case 38: bird.moveUp(); break;
-      case 40: bird.moveDown(); break;
-      case 37: bird.moveLeft(); break;
-      case 39: bird.moveRight(); break;
+      // case 40: bird.moveDown(); break;
+      // case 37: bird.moveLeft(); break;
+      // case 39: bird.moveRight(); break;
     }
   }
 };

@@ -14,7 +14,7 @@ class Bird {
     ctx.drawImage(this.img_bird, this.x, this.y, this.width, this.height)
   }
   moveUp() {
-    this.y -= 10;
+    this.y -= 50;
   }
   moveDown() {
     this.y += 10;
