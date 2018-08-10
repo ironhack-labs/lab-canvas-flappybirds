@@ -1,6 +1,6 @@
 function Faby() {
-  this.imageF = new Image();
-  this.imageF.src = "./images/flappy.png";
+  this.image = new Image();
+  this.image.src = "./images/flappy.png";
 
   this.width = ctx.canvas.width / 3;
   this.height = ctx.canvas.height / 2;
@@ -12,11 +12,10 @@ function Faby() {
 
 Faby.prototype.update = function() {
   let pos = this.newPos();
-  ctx.drawImage(this.imageF, pos.x, pos.y, 30, 30);
+  ctx.drawImage(this.image, pos.x, pos.y, 30, 30);
 };
 
 Faby.prototype.newPos = function() {
-  console.log(this.speedY);
   this.width = this.width * this.speedX;
   this.speedY -= this.gravity * this.gravitySpeed;
   if (this.speedY > 10) this.speedY = 10;
