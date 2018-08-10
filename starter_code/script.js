@@ -55,7 +55,7 @@ function Bird(width, height, speedY, gravitiySpeed) {
   this.width = width;
   this.height = height;
   this.speedY = speedY;
-  this.gravity = 0.05;
+  this.gravity = 1;
   this.gravitySpeed = gravitiySpeed;
   this.y = myGameArea.canvas.height/2;
   this.x = myGameArea.canvas.width/3;
