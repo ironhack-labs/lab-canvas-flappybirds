@@ -1,4 +1,5 @@
 window.onload = function() {
+  console.log("hello");
   var canvas = document.createElement("canvas");
   var context = canvas.getContext("2d");
   var img = new Image();
