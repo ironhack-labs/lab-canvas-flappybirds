@@ -3,6 +3,7 @@ var ctx = canvas.getContext('2d');
 var isGameStarted = false;
 
 window.onload = function() {
+  //Start button begins game
   document.getElementById('start-button').onclick = function() {
     if (!isGameStarted) {
       startGame();
@@ -10,6 +11,7 @@ window.onload = function() {
     }
   };
 
+  //background image
   var img = new Image();
   img.src = 'images/bg.png';
 
@@ -23,41 +25,50 @@ window.onload = function() {
     }
   };
 
-  var fabyImg = new Image();
-  fabyImg.src = 'images/flappy.png';
-
-  var vy = 2;
-  var gs = 1;
-  var gravitySpeed = 0.9;
-
   //Faby contructor function
-  function FabyConstructor(y, vy){
+  function FabyConstructor(y, vy) {
     this.y = y;
     this.vy = vy;
-    this.drawFaby= function() {
-      ctx.drawImage(fabyImg, 40, this.y, 30 * 1.418, 30);
+
+    this.drawFaby = function() {
+      var fabyImg = new Image();
+      fabyImg.src = 'images/flappy.png';
+      ctx.drawImage(fabyImg, 100, this.y, 30 * 1.418, 30);
     };
-    this.update=function() {
-      this.y += this.speedY;
-      this.speedY += this.gravitySpeed;
+    //simple animation
+    this.update = function() {
+      this.y += this.vy;
+
+      if (this.y >= 470) {
+        this.y = 470;
+        this.vy = 0;
+      }
     };
-    this.newPos=function() {
-      y -= 0.000001;
-      if (y)
+    //reaction to spacebar
+    this.newPos = function() {
+      this.y -= 10;
+      this.vy = -3;
+    };
+
+    this.stopMove = function() {
+      this.vy = 2;
     };
   }
 
-var faby = new FabyConstructor(250, 2)
+  //obstacle constructor
+  function Obstacle(width, height, color, x, y) {
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;
+    ctx = myGameArea.context;
+    ctx.fillStyle = color;
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+  }
+  //first Faby drawn
+  var faby = new FabyConstructor(250, 2);
 
-
-
-
-
-    
-    
-    
-  };
-
+  //spacebar functions and key events
   document.onkeydown = function(e) {
     switch (e.keyCode) {
       case 32:
@@ -70,7 +81,11 @@ var faby = new FabyConstructor(250, 2)
     }
     updateCanvas();
   };
+  document.onkeyup = function(e) {
+    faby.stopMove();
+  };
 
+  //updating of canvas
   function updateCanvas() {
     console.log(faby.vy);
     faby.update();
@@ -79,7 +94,7 @@ var faby = new FabyConstructor(250, 2)
     ctx.drawImage(img, background.x + 900, 0, 900, 500);
     faby.drawFaby();
   }
-
+  //initial startgame call
   function startGame() {
     setInterval(function() {
       background.loop();
