@@ -11,10 +11,7 @@ class Component {
     this.img_btm_obstable.src = './images/obstacle_bottom.png';
   }
   createTop(ctx) {
-    // ctx.clearRect(0, 0, 700, 500)
-
     ctx.drawImage(this.img_top_obstable, this.x, this.y, this.width, this.height)
-    // ctx.fill()
   }
   createBtm(ctx) {
     ctx.drawImage(this.img_btm_obstable, this.x, this.y, this.width, this.height)
@@ -22,9 +19,9 @@ class Component {
   }
   update(ctx) {
     if (this.y === 0) {
-      this.createBtm(ctx);
-    } else {
       this.createTop(ctx);
+    } else {
+      this.createBtm(ctx);
     }
     
    

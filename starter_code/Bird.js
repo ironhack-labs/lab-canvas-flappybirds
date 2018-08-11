@@ -4,26 +4,25 @@ class Bird {
     this.y = y;
     this.width = width;
     this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;
+    this.gravity = 0.5;
+    this.gravitySpeed = 0;
+
     this.img_bird = new Image();
     this.img_bird.src = './images/flappy.png'
   }
-  update(ctx) {
-    
+  newPos(ctx) {
+    this.gravitySpeed += this.gravity;
+    this.x += this.speedX;
+    this.y += this.speedY + this.gravitySpeed
   }
   create(ctx) {
     ctx.drawImage(this.img_bird, this.x, this.y, this.width, this.height)
   }
   moveUp() {
     this.y -= 50;
-  }
-  moveDown() {
-    this.y += 10;
-  }
-  moveRight() {
-    this.x += 10;
-  }
-  moveLeft() {
-    this.x -= 10;
+    this.gravitySpeed = 0;
   }
 
   left() { return this.x }

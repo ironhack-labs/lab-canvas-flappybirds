@@ -1,29 +1,46 @@
-var myGameArea, bird, obstacleArr;
+var myGameArea, bird;
 
 window.onload = function() {
 
-  bird = new Bird(0, 0, 49.8, 35.1)
-  obstacleArr = [];
-  let count = 0;
+  bird = new Bird(50, 250, 49.8, 35.1)
+  var obstacleArr = [];
+  var background = new Image();
+  background.src = "./images/bg.png";
+  console.log(background)
+
+  const canvas = document.createElement('canvas');
+  canvas.width = 700;
+  canvas.height = 500;
+  canvas.style = 'border: 4px green solid';
+  document.querySelector('#game-board').insertBefore(canvas, null);
+  const context = canvas.getContext('2d');
+
+    
+
 
 
 
   myGameArea = {
-    canvas: document.createElement('canvas'),
     start() {
-      this.canvas.width = 700;
-      this.canvas.height = 500;
-      this.canvas.style = 'border: 4px green solid';
-      document.querySelector('#game-board').insertBefore(this.canvas, null);
-      this.context = this.canvas.getContext('2d');
-      this.interval = setInterval(update, 100)
+      background.onload = () => {
+        context.drawImage(background, 0, 0, 100, 100)
+        console.log('hello')
+      }
+      this.interval = setInterval(update, 40);
     },
     clear() {
-      this.context.clearRect(0, 0, 700, 500)
+      context.clearRect(0, 0, 700, 500)
     },
     frame: 0,
     stop() {
       clearInterval(this.interval)
+    },
+    score: 0,
+    restart() {
+      obstacleArr = [];
+      this.frame = 0;
+      context.clearRect(0, 0, 700, 500);
+      this.stop()
     }
     
   }
@@ -32,71 +49,107 @@ window.onload = function() {
   document.getElementById("start-button").onclick = function() {
     startGame();
   };
+  document.querySelector('#restart').onclick = () => {
+    myGameArea.restart()
+    startGame();
+  }
 
   function startGame() {
     myGameArea.start()
-    // crate bird
-    bird.create(myGameArea.context)
 
-    // create obstacle
+    bird.create(context)
+
     update()
   }
 
+  const updateScore = (ctx) => {
+    ctx.clearRect(0, 0, 700, 500)
+    ctx.font = "30px Comic Sans MS";
+    ctx.fillStyle = "red";
+    ctx.textAlign = "center";
+    ctx.fillText(`Score: ${myGameArea.score}`, 550, 30); 
+  }
+
   const update = () => {
+    context.drawImage(background, 0, 0, 100, 100)
     obstacleArr.forEach(i => {
-      if (crash(i)) {
+      if (crashWithObstacle(i)) {
         myGameArea.stop()
       }
     })
-    bird.y += 5;
+    if (crashWithBorder()) {
+      myGameArea.stop()
+    }
+    bird.newPos()
+
+
     myGameArea.frame ++;
     myGameArea.clear();
-    if (myGameArea.frame % 80 === 0) {
-      const canvasWidth = myGameArea.canvas.width;
-      const maxHeight = 200;
-      const minHeight = 40;
+    updateScore(context);
+
+    if (myGameArea.frame % 100 === 0) {
+    console.log(obstacleArr)
+
+      const canvasWidth = canvas.width;
+      const maxHeight = 150;
+      const minHeight = 80;
       const height = Math.floor(Math.random()*(maxHeight + 1)) + minHeight
 
-      const minGap = 80;
-      const maxGap = 200;
+      const minGap = 120;
+      const maxGap = 150;
       const gap = Math.floor(Math.random()*(maxGap + 1)) + minGap;
 
-      count ++;
-      let x = 200 + count*50;
+      // count ++;
+      // let x = 200 + count*50;
 
-      const obs_top = new Component(canvasWidth, 0, 20, height, 'orange');
-      obs_top.createTop(myGameArea.context);
+      const obs_top = new Component(canvasWidth, 0, 30, height, 'orange');
+      obs_top.createTop(context);
       obstacleArr.push(obs_top);
 
-      const obs_btm = new Component(canvasWidth, height + gap, 20, 500 - height - gap, 'blue');
-      obs_btm.createBtm(myGameArea.context)
+      const obs_btm = new Component(canvasWidth, height + gap, 30, 500 - height - gap, 'blue');
+      obs_btm.createBtm(context)
       obstacleArr.push(obs_btm)
-
+      console.log(obstacleArr)
     }
+    let passedNum = 0
     obstacleArr.forEach(i => {
-      i.x -= 1;
-      i.update(myGameArea.context)
+      i.x -= 4;
+      i.update(context)
+      if (bird.left() > i.x) {
+        passedNum ++ 
+      }
     })
+    myGameArea.score = passedNum / 2;
+    
 
 
 
-    bird.create(myGameArea.context)
-    obstacleArr.forEach(i => i.update(myGameArea.context))
+    bird.create(context)
+    obstacleArr.forEach(i => i.update(context))
   }
 
-  const crash = (obstacle) => {
-    return !(bird.top() > obstacle.bottom() ||
+  // crash - obstacle 
+  const crashWithObstacle = (obstacle) => {
+    return (!(bird.top() > obstacle.bottom() ||
        bird.bottom() < obstacle.top() ||
        bird.left() > obstacle.right() ||
-       bird.right() < obstacle.left()) 
+       bird.right() < obstacle.left()))
   }
+
+  // crash - top-border / bottom-border 
+  const crashWithBorder = () => {
+    return (bird.top() < 0 || bird.bottom() > 500)
+  }
+
 
   document.onkeydown = (e) => {
     switch(e.keyCode) {
       case 38: bird.moveUp(); break;
-      // case 40: bird.moveDown(); break;
-      // case 37: bird.moveLeft(); break;
-      // case 39: bird.moveRight(); break;
+
     }
   }
+
+  // canvas.onclick = () => {
+  //     bird.moveUp();
+  // }
 };
