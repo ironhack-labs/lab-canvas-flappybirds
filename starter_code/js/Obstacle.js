@@ -1,16 +1,15 @@
-function Obstacle(width, height, x, y, bottom) {
+function Obstacle(width, height, x, y, isBottom) {
+  Component.call(this, width, height);
+  this.isBottom = isBottom;
+
   this.image = new Image();
-  if (bottom) this.image.src = "./images/obstacle_bottom.png";
+  if (this.isBottom) this.image.src = "./images/obstacle_bottom.png";
   else this.image.src = "./images/obstacle_top.png";
 
-  this.width = width;
-  this.height = height;
   this.x = x;
   this.y = y;
-  //   ctx = myGameArea.context;
-  //   ctx.fillStyle = color;
-  //   ctx.fillRect(this.x, this.y, this.width, this.height);
 }
+Obstacle.prototype = Object.create(Component.prototype);
 
 Obstacle.prototype.update = function() {
   ctx.drawImage(this.image, this.x, this.y, this.width, this.height);

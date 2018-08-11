@@ -1,7 +1,7 @@
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 let background = new Background();
-let faby = new Faby();
+let faby = new Faby(30, 30);
 let frames = 0;
 let obstacles = [];
 
@@ -13,14 +13,17 @@ window.onload = function() {
   });
   document.addEventListener("keypress", function(e) {
     if (e.keyCode === 32) {
-      console.log("pressed space bar");
       faby.hop();
     }
   });
 };
 
 function startGame() {
-  setInterval(update, 1000 / 50);
+  this.interval = setInterval(update, 1000 / 50);
+}
+
+function stopGame() {
+  clearInterval(this.interval);
 }
 
 function update() {
@@ -28,7 +31,7 @@ function update() {
   background.drawBackground();
   faby.update();
 
-  if (frames % 220 === 0) {
+  if (frames % 80 === 0) {
     console.log("time for an obstacle!");
 
     x = canvas.width;
@@ -46,6 +49,14 @@ function update() {
   for (i = 0; i < obstacles.length; i += 1) {
     obstacles[i].x += -1;
     obstacles[i].update();
-    console.log(obstacles[i].height);
+  }
+
+  var crashed = obstacles.some(function(obstacle) {
+    return faby.crashWith(obstacle);
+  });
+  console.log("crashed? " + crashed);
+
+  if (crashed) {
+    stopGame();
   }
 }
