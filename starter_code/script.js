@@ -95,8 +95,8 @@ window.onload = function() {
       const minHeight = 80;
       const height = Math.floor(Math.random()*(maxHeight + 1)) + minHeight
 
-      const minGap = 80;
-      const maxGap = 120;
+      const minGap = 120;
+      const maxGap = 140;
       const gap = Math.floor(Math.random()*(maxGap + 1)) + minGap;
 
       // count ++;
