@@ -2,14 +2,14 @@ var myGameArea, bird;
 
 window.onload = function() {
 
-  bird = new Bird(50, 250, 49.8, 35.1)
+  bird = new Bird(50, 150, 49.8, 35.1)
   var obstacleArr = [];
   var background = new Image();
   background.src = "./images/bg.png";
   console.log(background)
 
   const canvas = document.createElement('canvas');
-  canvas.width = 700;
+  canvas.width = 350;
   canvas.height = 500;
   canvas.style = 'border: 4px green solid';
   document.querySelector('#game-board').insertBefore(canvas, null);
@@ -23,13 +23,13 @@ window.onload = function() {
   myGameArea = {
     start() {
       background.onload = () => {
-        context.drawImage(background, 0, 0, 100, 100)
+        context.drawImage(background, 0, 0, 350, 500)
         console.log('hello')
       }
       this.interval = setInterval(update, 40);
     },
     clear() {
-      context.clearRect(0, 0, 700, 500)
+      context.clearRect(0, 0, 350, 500)
     },
     frame: 0,
     stop() {
@@ -39,7 +39,7 @@ window.onload = function() {
     restart() {
       obstacleArr = [];
       this.frame = 0;
-      context.clearRect(0, 0, 700, 500);
+      context.clearRect(0, 0, 350, 500);
       this.stop()
     }
     
@@ -63,15 +63,15 @@ window.onload = function() {
   }
 
   const updateScore = (ctx) => {
-    ctx.clearRect(0, 0, 700, 500)
+    ctx.clearRect(0, 0, 350, 500)
     ctx.font = "30px Comic Sans MS";
     ctx.fillStyle = "red";
     ctx.textAlign = "center";
-    ctx.fillText(`Score: ${myGameArea.score}`, 550, 30); 
+    ctx.fillText(`Score: ${myGameArea.score}`, 250, 30); 
   }
 
   const update = () => {
-    context.drawImage(background, 0, 0, 100, 100)
+    context.drawImage(background, 0, 0, 350, 500)
     obstacleArr.forEach(i => {
       if (crashWithObstacle(i)) {
         myGameArea.stop()
@@ -95,8 +95,8 @@ window.onload = function() {
       const minHeight = 80;
       const height = Math.floor(Math.random()*(maxHeight + 1)) + minHeight
 
-      const minGap = 120;
-      const maxGap = 150;
+      const minGap = 80;
+      const maxGap = 120;
       const gap = Math.floor(Math.random()*(maxGap + 1)) + minGap;
 
       // count ++;
@@ -148,6 +148,11 @@ window.onload = function() {
 
     }
   }
+  canvas.addEventListener('touchstart', function(ev) {
+    // Iterate through the touch points that were activated
+    // for this element and process each event 'target'
+   bird.moveUp()
+  }, false);
 
   // canvas.onclick = () => {
   //     bird.moveUp();
