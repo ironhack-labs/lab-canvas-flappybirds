@@ -16,7 +16,6 @@ function Obstacle(name, x, y, width, height, vx, vy){
   this.right = function(){ return this.x + this.width}
   this.top = function(){ return this.y }
   this.bottom = function(){ return this.y + this.height}
-  
 }
 
 Obstacle.prototype.boMove = function(){

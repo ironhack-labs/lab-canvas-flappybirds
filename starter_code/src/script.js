@@ -31,6 +31,12 @@ var background = {
 }
 
 function updateCanvas(){
+  for (i = 0; i < obArray.length; i += 1) {
+    if (b1.checkCrash(obArray[i])) {
+        gameover();
+        return;
+    } 
+  }
   background.move();
   ctx.clearRect(0,0,canvas.width,canvas.height);
   background.draw();
@@ -66,27 +72,39 @@ stopButton.onclick = function() {
   clearInterval(intervalId);
 }
 
-function checkCrash(bird, obstacle){
-  return ((bird.bottom() < obstacle.top())    ||
-  (bird.top()  > obstacle.bottom()) ||
-  (bird.right() < obstacle.left()) ||
-  (bird.left() > obstacle.right())) 
-}
-
-var checkCrash1 = checkCrash(b1,obArray[0]);
-var checkCrash2 = checkCrash(b1,obArray[1]);
-var checkCrash3 = checkCrash(b1,obArray[2]);
-var checkCrash4 = checkCrash(b1,obArray[3]);
-
-if(checkCrash1 || checkCrash2 || checkCrash3 || checkCrash4){
-  gameover();
-}
+// function updateGameArea() {
+//   for (i = 0; i < obArray.length; i += 1) {
+//       if (b1.checkCrash(obArray[i])) {
+//           gameover();
+//           return;
+//       } 
+//   }
+// }
 
 function gameover(){
   ctx.font = "60px arial";
   ctx.fillStyle = "red"
   ctx.fillText("Game Over!", 300, 200);
 }
+
+// function checkCrash(bird, obstacle){
+//   return ((bird.bottom() < obstacle.top()) ||
+//   (bird.top()  > obstacle.bottom()) ||
+//   (bird.right() < obstacle.left()) ||
+//   (bird.left() > obstacle.right())) 
+// }
+
+// console.log(b1);
+// console.log(obArray[0]);
+// console.log(checkCrash(b1,obArray[0]));
+// var checkCrash1 = checkCrash(b1,obArray[0]);
+// var checkCrash2 = checkCrash(b1,obArray[1]);
+// var checkCrash3 = checkCrash(b1,obArray[2]);
+// var checkCrash4 = checkCrash(b1,obArray[3]);
+
+// if(checkCrash1 || checkCrash2 || checkCrash3 || checkCrash4){
+//   gameover();
+// }
 
 
 // var test1 = 1 > 2; // false 
