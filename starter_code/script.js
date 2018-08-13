@@ -1,6 +1,8 @@
 var canvas = document.getElementById('game');
 var ctx = canvas.getContext('2d');
 var isGameStarted = false;
+var canvasWidth = ctx.canvas.width;
+var canvasHeight = ctx.canvas.height;
 
 window.onload = function() {
   //Start button begins game
@@ -54,19 +56,48 @@ window.onload = function() {
       this.vy = 2;
     };
   }
+  //first Faby drawn
+  var faby = new FabyConstructor(250, 2);
 
   //obstacle constructor
-  function Obstacle(width, height, color, x, y) {
+
+  var obstacleImageTop = new Image();
+  var obstacleImageBottom = new Image();
+  obstacleImageTop.src = 'images/obstacle_top.png';
+  obstacleImageBottom.src = 'images/obstacle_bottom.png';
+
+  function Obstacle(width, height, obstacleImg, x, y) {
     this.width = width;
     this.height = height;
     this.x = x;
     this.y = y;
-    ctx = myGameArea.context;
-    ctx.fillStyle = color;
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.drawImage(obstacleImg, this.x, this.y, this.width, this.height);
   }
-  //first Faby drawn
-  var faby = new FabyConstructor(250, 2);
+
+  var myObstacles = [];
+  var frames = 0;
+
+  function updateObstacles() {
+    for (i = 0; i < myObstacles.length; i++) {
+      myObstacles[i].x--;
+      console.log('updating an obstacle');
+    }
+  }
+
+  function drawObstacles() {
+    //done temporarily to see the obstacles
+    x = 500;
+    minHeight = 20;
+    maxHeight = 400;
+    height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
+    minGap = 50;
+    maxGap = 200;
+    gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+    myObstacles.push(new Obstacle(10, height, obstacleImageTop, x, 0));
+    myObstacles.push(new Obstacle(10, x - height - gap, obstacleImageBottom, x, height + gap));
+    console.log('drawing an obstacle');
+    console.log(myObstacles);
+  }
 
   //spacebar functions and key events
   document.onkeydown = function(e) {
@@ -89,11 +120,17 @@ window.onload = function() {
   function updateCanvas() {
     console.log(faby.vy);
     faby.update();
+    if (frames % 120) {
+      updateObstacles();
+    }
     ctx.clearRect(0, 0, 900, 500);
     ctx.drawImage(img, background.x, 0, 900, 500);
     ctx.drawImage(img, background.x + 900, 0, 900, 500);
+    drawObstacles();
     faby.drawFaby();
+    frames++;
   }
+
   //initial startgame call
   function startGame() {
     setInterval(function() {
