@@ -76,10 +76,15 @@ class Flappy{
     }
 
     crashWith(item){
-        return  (this.x < item.x + item.width) &&
+
+        var crash =  (this.x < item.x + item.width) &&
                 (this.x + this.width > item.x) &&
                 (this.y < item.y + item.height) &&
                 (this.y + this.height > item.y);
+        
+        if(crash) this.crash.play()
+        return crash
+    
     }
 
  }
