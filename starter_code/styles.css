@@ -1,0 +1,17 @@
+section{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  background: greenyellow;
+}
+
+img{
+  width: 30%
+}
