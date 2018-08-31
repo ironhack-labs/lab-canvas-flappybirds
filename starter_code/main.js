@@ -41,7 +41,7 @@ if(this.x < -this.width) this.x =0
 ctx.drawImage(this.image,this.x,this.y,this.width,this.height)
 ctx.drawImage(this.image,this.x + this.width,this.y,this.width,this.height)
 ctx.font = "50px Avenir"
-ctx.fillText(frames,100,100)
+//ctx.fillText(frames,100,100)
     }
 } //clase Board
 class Flappy{
@@ -131,9 +131,11 @@ function start(){
 function gameOver (){
     clearInterval(interval)
     ctx.font="80px Avenir"
+    ctx.fillStyle = "red"
     ctx.fillText("GAME OVER",50,250)
+
     ctx.font="50px Avenir"
-    ctx.fillStyle = "yellow"
+    ctx.fillStyle = "black"
     ctx.fillText("Press 'esc' to restart", 50,300)
     interval = null
     board.music.pause()
