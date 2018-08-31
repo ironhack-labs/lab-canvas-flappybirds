@@ -125,6 +125,7 @@ function update (){
 
 function start(){
     if(interval) return
+    board.music.play()
     pipes = [] //se borran los pipes
     interval = setInterval(update, 1000/60)
 }
@@ -139,6 +140,8 @@ function gameOver (){
     ctx.fillText("Press 'esc' to restart", 50,300)
     interval = null
     board.music.pause()
+
+    
 }
 
 //-------------------------------------//
@@ -194,9 +197,9 @@ addEventListener("keydown",function(e){
     if(e.keyCode === 27){
         start()
     }
-    if(e.key = "Enter"){
+    /*if(e.key = "Enter"){
         start()
         board.music.play()
-    }
+    }*/
 })
 
