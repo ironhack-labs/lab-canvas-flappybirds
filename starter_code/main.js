@@ -146,17 +146,17 @@ function gameOver (){
 //Funciones aux
 
 function generatePipes(){
-    if(frames % 100 === 0){
+    if(frames % 130 === 0){
 
     //var pipe = new Pipe(100, 300, "pipe1")
     
     //1- generar el tubo de arriba
     var y = 0;
-    var alto = Math.floor(Math.random() * 400) + 20     //* de qué rango a qué rango saca (qué tan alto lo quiero)
+    var alto = Math.floor(Math.random() * 350) + 20     //* de qué rango a qué rango saca (qué tan alto lo quiero)
     var topPipe = new Pipe (y,alto, "pipe2")
 
     //2- establecer el espacio donde pasa flappy
-    var window = 100
+    var window = 125
     var alto2 = canvas.height - (window + alto)
 
     //3- generar la pipa de abajo
@@ -188,7 +188,7 @@ function checkCollitions (){
 //Observadores
 addEventListener("keydown",function(e){
     if(e.keyCode === 32 && flappy.y >50){
-        flappy.y -=60
+        flappy.y -=50
     }
 
     if(e.keyCode === 27){
