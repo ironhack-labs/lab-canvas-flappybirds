@@ -11,5 +11,8 @@ section{
   flex-direction: column;
 }
 img{
-  width: 80%;
+  width: 50%;
+}
+h3{
+  color:#fff;
 }
