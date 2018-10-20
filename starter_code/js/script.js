@@ -101,6 +101,9 @@ function checkCrashes() {
   if (frames >= 299  ) console.log(pipes[0].topImgY+400)
 
 
+  if (player.y === pipes[0].topImgY+400 || player.x === ) 
+
+
 
 }
 
