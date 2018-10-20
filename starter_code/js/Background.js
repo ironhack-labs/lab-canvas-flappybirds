@@ -7,6 +7,7 @@ class Background {
     this.x = 0
     this.height = this.ctx.canvas.height
     this.width = this.height*this.img.width / this.img.height
+    
   }
   update() {
     this.x -= this.speed

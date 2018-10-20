@@ -13,16 +13,16 @@ class Faby {
     this.y = y
   }
 
-  update() {
-   
-
-    console.log('hey')
-  }
-
-
   draw() {
     this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
   }
 
-
+  update() {
+    // update position
+    this.y += this.gravity  
+  }
+  
+  newPos() {
+    this.y - 5;
+  }
 }
