@@ -22,11 +22,12 @@ class Faby {
   }
 
   jump() {
-    player.gravity = this.jumpSpeed
-    isJumping = true;
-    setTimeout(function(){ 
-      isJumping = false
-      player.gravity = +2;
-    }, 400);
+    // player.gravity = this.jumpSpeed
+    // isJumping = true;
+    // setTimeout(function(){ 
+    //   isJumping = false
+    //   player.gravity = +2;
+    // }, 400);
+    this.y -= 100
   }
 }

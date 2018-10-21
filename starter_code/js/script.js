@@ -49,6 +49,7 @@ function update()  {
   updatePipes();
   generatePipes();
   checkCrashes();
+  checkPipeCrash()
 }
 
 // Pipe functions
@@ -82,24 +83,54 @@ function updatePipes() {
   });
 }
 
+function checkPipeCrash() {
+
+
+
+  pipes.forEach(function(pipes) {
+
+    let width = 100;
+    height = 400;
+    if (player.x + player.width > pipes.x && player.x < pipes.x + width) {
+      
+      console.log('PLAYER-Y',player.y)
+      console.log(pipes.topImgY)
+
+
+      if (player.y > pipes.topImgY + height) {
+        console.log('touch up')
+
+
+      }
+
+      
+ 
+    }
+  });
+  
+  return false;
+
+}
+
 // Check for crashes
 function checkCrashes() {
-  if (player.y === 0 || player.y === height-player.height) {
-    player.gravity = 100
-    setTimeout(function() {
-      clearInterval(gameUpdate)
-      document.getElementById("start-button").style.visibility = 'visible'
-      ctx.font = "80px Arial";
-      ctx.fillText("GAME OVER", 200, 200);
-    }, 100)
-    
-
+  if (player.y === 0 || player.y === height - player.height) {
+    gameOver()
   }
+}
 
 
+function gameOver() {
+  player.gravity = 100
+  setTimeout(function() {
+    clearInterval(gameUpdate)
+    document.getElementById("start-button").style.visibility = 'visible'
+    ctx.font = "80px Arial";
+    ctx.fillText("GAME OVER", 200, 200);
+    console.log(player.y)
+  }, 100)
 
 
-  
 }
 
 // Spacebar Listener
