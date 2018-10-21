@@ -1,11 +1,11 @@
 class Faby {
-  constructor(ctx, url, speedX, speedY, gravity, gravitySpeed, x, y) {
+  constructor(ctx, url, speedX, jumpSpeed, gravitySpeed, x, y) {
     this.ctx = ctx
     this.width = 70
     this.height = 50
     this.speedX = speedX
-    this.speedY = speedY
-    this.gravity = gravity
+    this.jumpSpeed = jumpSpeed
+    this.gravity = gravitySpeed
     this.gravitySpeed = gravitySpeed
     this.img = new Image()
     this.img.src = url
@@ -18,11 +18,15 @@ class Faby {
   }
 
   update() {
-    // update position
     this.y += this.gravity  
   }
-  
-  newPos() {
-    this.y - 5;
+
+  jump() {
+    player.gravity = this.jumpSpeed
+    isJumping = true;
+    setTimeout(function(){ 
+      isJumping = false
+      player.gravity = +2;
+    }, 400);
   }
 }

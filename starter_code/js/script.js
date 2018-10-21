@@ -1,4 +1,3 @@
-
 // Canvas
 var canvas = document.createElement('canvas')
 var ctx = canvas.getContext('2d');
@@ -6,59 +5,53 @@ canvas.height = 504;
 canvas.width = 900;
 var height = canvas.height;
 var width = canvas.width;
-
-
+var gameUpdate;
 
 // Declarations
-var bg = new Background(ctx, './images/bg.png', 2,);
-var player = new Faby(ctx, './images/flappy.png', 'speedx', 'speedy', 5, 'gravitySpeed', 200, 200 );
-var pipes = [];
-var frames = 0;
-
-
-// Pushing pipes to pipes array
-
-
-
-
+var bg;
+var player;
+var pipes;
+var frames;
 
 window.onload = function() {
   document.getElementById("start-button").onclick = function() {
-    document.getElementById("start-button").style.display = 'none';
+    document.getElementById("start-button").style.visibility = 'hidden';
     startGame();
+    bg = new Background(ctx, './images/bg.png', 2, 0);
+    player = new Faby(ctx, './images/flappy.png', 'speedx', -6, 2, 200, 200 );
+    pipes = [];
+    frames = 0;
+
   };
   
   function startGame() {
     document.querySelector('#game-board').appendChild(canvas);
    
-    setInterval(()=> {
+    gameUpdate = setInterval(()=> {
       update();
       drawEverything();
     }, 1000/60);
   }
 };
 
-
-
 function drawEverything() {
   ctx.clearRect(0, 0, width, height)
   bg.draw() 
   player.draw()
   drawPipes();
+
 }
 
-function update() {
+function update()  {
   frames++;
-  player.update() 
+  player.update()
   bg.update()
   updatePipes();
   generatePipes();
   checkCrashes();
 }
 
-
 // Pipe functions
-
 function generatePipes() {
   if (frames < 300) return;
   frames = 0;
@@ -76,12 +69,10 @@ function generatePipes() {
   pipes.push(pipeCouple);
 }
 
-
 function drawPipes() {
   pipes.forEach(function(pipeCouple){
   this.ctx.drawImage(pipeCouple.topImg, pipeCouple.x , pipeCouple.topImgY , 100 , 400);
-  this.ctx.drawImage(pipeCouple.bottomImg, pipeCouple.x , pipeCouple.bottomImgY , 100 , 400);
-
+  this.ctx.drawImage(pipeCouple.bottomImg, pipeCouple.x , pipeCouple.bottomImgY , 100 , 400)
   });
 }
 
@@ -92,36 +83,29 @@ function updatePipes() {
 }
 
 // Check for crashes
-
 function checkCrashes() {
+  if (player.y === 0 || player.y === height-player.height) {
+    player.gravity = 100
+    setTimeout(function() {
+      clearInterval(gameUpdate)
+      document.getElementById("start-button").style.visibility = 'visible'
+      ctx.font = "80px Arial";
+      ctx.fillText("GAME OVER", 200, 200);
+    }, 100)
+    
+
+  }
+
+
+
 
   
-
-  // console.log(player.y) 
-  if (frames >= 299  ) console.log(pipes[0].topImgY+400)
-
-
-  if (player.y === pipes[0].topImgY+400 || player.x === ) 
-
-
-
 }
-
 
 // Spacebar Listener
 let isJumping = false;
 window.addEventListener('keydown', function(e) {
-  if (e.keyCode === 32) {
-    if (!isJumping) {
-      player.gravity = -player.gravity;
-      isJumping = true;
-      setTimeout(function(){ 
-        isJumping = false
-        player.gravity = -player.gravity;
-       }, 500);
-    }
+  if (e.keyCode === 32 && !isJumping) {
+      player.jump();
   }
 })
-
-
-

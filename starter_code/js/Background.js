@@ -1,13 +1,12 @@
 class Background {
-  constructor(ctx, url, speed) {
+  constructor(ctx, url, speed, x) {
     this.ctx = ctx
     this.speed = speed
     this.img = new Image()
     this.img.src = url
-    this.x = 0
+    this.x = x
     this.height = this.ctx.canvas.height
     this.width = this.height*this.img.width / this.img.height
-    
   }
   update() {
     this.x -= this.speed
