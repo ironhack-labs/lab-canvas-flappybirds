@@ -51,9 +51,6 @@ function update() {
     for( let i =0; i < myObstacles.length; i++){
       myObstacles[i].update();
     }
-    for( let i =0; i < myObstacles.length; i++){
-      if(p1.x+498 <= myObstacles[i] && p1.y)
-    }
 }
 
 function drawEverything() {
