@@ -19,4 +19,4 @@ class Background {
             this.ctx.drawImage(this.img,this.x+i*this.width,0,this.width,this.height)
         }
     }
-  }
+}
