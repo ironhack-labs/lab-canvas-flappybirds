@@ -5,7 +5,7 @@ window.onload = function() {
 
   function startGame() {
     var myCanvas = new Canvas("myCanvas");
-    myCanvas.drawBackground();
+    myCanvas.init();
   }
 
 };
