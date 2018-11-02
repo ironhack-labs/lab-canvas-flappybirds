@@ -17,3 +17,8 @@ body button {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+
+
+#myCanvas {
+  border: 2px solid black;
+}
