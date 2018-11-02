@@ -16,6 +16,16 @@ function Canvas(id) {
   this.bX = 150;
   this.bY = 225;
 
+  this.tbBX = 600;
+  this.tbBY = 400;
+  this.tbBW = 100;
+  this.tbBH = 350;
+
+  this.tbTX = 600;
+  this.tbTY = -100;
+  this.tbTW = 100;
+  this.tbTH = 350;
+
   this.bWidth = 50;
   this.bHeight = 40;
   this.bSpeedX = 1; // b --> bird
@@ -27,15 +37,9 @@ function Canvas(id) {
 
 Canvas.prototype.draw = function () {
   this.ctx.beginPath();
-
-
-  // var img = new Image()
-  // img.src = './images/bg.png';
-  // this.ctx.drawImage(img, 0, 0, 800, 450);
   this.bgImg();
   this.birdImg();
-
-
+  this.tubeDraw();
   this.ctx.closePath();
 }
 
@@ -61,24 +65,24 @@ Canvas.prototype.birdImg = function () {
 }
 
 Canvas.prototype.birdListener = function () {
-  
+
   document.onkeydown = function (e) {
     e.preventDefault();
     console.log(this.spaceBarKeyCode)
     if (e.keyCode === this.spaceBarKeyCode) {
-      this.bY -= 40; 
+      this.bY -= 40;
       this.bSpeedY -= 10
-      if(this.bY <=this.bgH){
+      if (this.bY <= this.bgH) {
         this.by = 1
-        this.bSpeedY = 0 
+        this.bSpeedY = 0
       }
-      
 
-    } 
+
+    }
   }.bind(this)
 }
 
-Canvas.prototype.birdMove = function (){
+Canvas.prototype.birdMove = function () {
 
   this.bSpeedY += this.bGravity
   this.bY += this.bSpeedY;
@@ -86,14 +90,58 @@ Canvas.prototype.birdMove = function (){
 }
 
 
-Canvas.prototype.tubeBottomDraw = function(){
+Canvas.prototype.tubeBottomDraw = function () {
 
   var img = new Image()
   img.src = './images/obstacle_bottom.png';
   this.ctx.drawImage(img, this.tbBX, this.tbBY, this.tbBW, this.tbBH);
 
 }
+Canvas.prototype.tubeTopDraw = function () {
 
+  var img = new Image()
+  img.src = './images/obstacle_top.png';
+  this.ctx.drawImage(img, this.tbTX, this.tbTY, this.tbTW, this.tbTH);
+
+}
+
+Canvas.prototype.tubeDraw = function () {
+
+  this.tubeBottomDraw();
+  this.tubeTopDraw();
+}
+
+Canvas.prototype.tubeMove = function () {
+
+  var ran =0;
+  var negative=0;
+  this.tbBX -= 1.25;
+  this.tbTX -= 1.25;
+
+  if (this.tbBX < -85 && this.tbTX < -25) {
+
+    this.tbBX = 925;
+    this.tbTX = 925;
+
+    if(Math.random()>= 0.5){
+      negative = 1;
+    }else{
+      negative = -1;
+    }
+    
+    // ran = (Math.random()*100)*negative;    
+    // console.log(negative)
+    // console.log(ran)
+    // this.tbBY += this.tbBY+ran;
+    // this.tbTY += this.tbTY+ran;
+
+  }
+
+}
+
+
+
+// asdsaddsasdasdasdasdasdasdasdsadasdasdasdasdasdasdadadadasd
 
 window.onload = function () {
 
@@ -103,7 +151,6 @@ window.onload = function () {
 
   document.getElementById("start-button").onclick = function () {
     startGame();
-
   };
 
   function startGame() {
@@ -111,10 +158,11 @@ window.onload = function () {
     var id = setInterval(function () {
 
       canvas.draw();
-     
+      canvas.tubeMove();
       canvas.bgMove();
       canvas.birdMove();
       canvas.birdListener();
+      canvas.tubeMove
 
     }, 1000 / this.fps);
 
