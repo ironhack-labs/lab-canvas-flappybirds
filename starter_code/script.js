@@ -5,17 +5,15 @@ window.onload = function() {
 
   const KEY_SPACE = 32;
 
-  function setCanvasDimensions () {
-      game.canvas.setAttribute("height", 900)
-      game.canvas.setAttribute("width", 900)
-  }
+  const width = 1200;
+  const height = 600;
 
 
   function Game(id) {
     this.canvas =document.getElementById(id);
     this.ctx = this.canvas.getContext("2d");
-    this.background = new Background(this.canvas, 'images/bg.png', 0 , 0, 1800, 900);
-    this.character = new Character(this.canvas, 'images/flappy.png', 100 , 450, 60, 50);
+    this.background = new Background(this.canvas, 'images/bg.png', 0 , 0, width*2, height);
+    this.character = new Character(this.canvas, 'images/flappy.png', 100 , height/2, 40, 30);
     this.obstacles = [];
     this.fps = 60;
     this.counter = 0;
@@ -25,40 +23,48 @@ window.onload = function() {
 
   Game.prototype.start = function() {
 
-    setCanvasDimensions();
-
+  
     this.id = setInterval(function(){
-      this.clear();
+      // this.clear();
       this.move();
       this.draw();
+      this.gravity();
 
       this.counter++;
       
-      if(this.counter % 200 == 0) {
+      if(this.counter % 100 == 0) {
 
-        var random1 = Math.random() * 450;
-        var random2 = Math.random() * 450;
+        var random1 = ((Math.random() * height/2)- game.character.h);
+        var random2 = ((Math.random() * height/2) - game.character.h);
     
-        this.obstacles.push(new Obstacle(this.canvas,'images/obstacle_top.png','images/obstacle_bottom.png',900, 0, 900,(900 - random2),random1,random2));
-        console.log(this.obstacles);
+        this.obstacles.push(new Obstacle(this.canvas,'images/obstacle_top.png','images/obstacle_bottom.png',width, 0, width,(height - random2),random1,random2))
       }
 
     }.bind(this),1000/this.fps)
   
   }
 
-  Game.prototype.generateObstacles = function() {
-    
-  
- 
-  }
 
   Game.prototype.draw = function() {
 
    
       this.background.draw();
       this.obstacles.forEach(function(obstacle){
+        console.log(obstacle);
         obstacle.draw();
+
+        if( game.character.x+game.character.w >= obstacle.x && obstacle.x+obstacle.w >= game.character.x &&
+          game.character.y+game.character.h >= obstacle.y && obstacle.y+obstacle.h >= game.character.y
+        ){
+          stopGame();
+        }
+
+        if( game.character.x+game.character.w >= obstacle.x && obstacle.x+obstacle.w >= game.character.x &&
+          game.character.y+game.character.h >= obstacle.y1 && obstacle.y1+obstacle.h2 >= game.character.y
+        ){
+          stopGame();
+        }
+
       })
       this.character.draw();
 
@@ -70,6 +76,10 @@ window.onload = function() {
      this.obstacles.forEach(function(obstacle){
        obstacle.move();
      })
+  }
+
+  Game.prototype.gravity = function() {
+    this.character.update();
   }
 
   Game.prototype.clear = function() {
@@ -85,7 +95,7 @@ window.onload = function() {
     this.y = y;
     this.w = w;
     this.h = h;
-    this.vx = 2;
+    this.vx = 4;
 
 
     this.image.src = src;
@@ -98,7 +108,7 @@ window.onload = function() {
   }
 
   Background.prototype.infiniteLoop = function () {
-      if (this.x > -1200) {
+      if (this.x > -width*2) {
         this.x -= this.vx;
       } else {
         this.x = 0;
@@ -114,9 +124,10 @@ window.onload = function() {
     this.y = y;
     this.w = w;
     this.h = h;
-    this.vx;
-    this.vy;
-    this.gravity;
+    this.vy = 2;
+    this.vx = 0;
+    this.gravity = 0.35;
+    this.userPull = 0;
     this.vg;
 
     this.image.src = src;
@@ -129,7 +140,9 @@ window.onload = function() {
   }
 
   Character.prototype.update = function() {
-
+      this.vy += this.gravity - this.userPull;
+      this.y += this.vy;
+      this.x += this.vx
   }
 
   Character.prototype.newPos = function() {
@@ -141,20 +154,28 @@ window.onload = function() {
       e.preventDefault();
       switch(e.keyCode) {
         case KEY_SPACE: 
-        console.log('hola');
-          if (this.gravity > 0) {
-            console.log(this.gravity);
+            this.userPull = 0.6;
             this.gravity *= -1;
-          } else {
+            break;
+      }
+    }.bind(this);
+
+    document.onkeyup = function(e) {
+      this.userPull = 0.6;
+      e.preventDefault();
+      switch(e.keyCode) {
+        case KEY_SPACE: 
+            this.userPull = 0;
             this.gravity *= -1;
-          }
           break;
       }
     }.bind(this);
+
+
   }
 
 
-  function Obstacle(canvas, srcUp,srcDown,x, y, x1, y1, h, h1) {
+  function Obstacle(canvas, srcUp,srcDown,x, y, x1, y1, h, h2) {
 
     this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
@@ -162,12 +183,12 @@ window.onload = function() {
     this.imageDown = new Image();
     this.x = x;
     this.y = y;
-    this.x1 = x;
+    this.x1 = x1;
     this.y1 = y1;
     this.w = 100;
     this.h = h
-    this.h1 = h1
-    this.vx = 2;
+    this.h2 = h2
+    this.vx = 5;
 
     this.imageUp.src = srcUp;
     this.imageDown.src = srcDown;
@@ -175,15 +196,15 @@ window.onload = function() {
   }
   
   Obstacle.prototype.draw = function() {
+    this.ctx.drawImage(this.imageDown, this.x,this.y1,this.w, this.h2)
     this.ctx.drawImage(this.imageUp, this.x,this.y,this.w,this.h)
-    this.ctx.drawImage(this.imageDown, this.x1,this.y1,this.w, this.h1)
-  
 
   }
 
   // 
 
   Obstacle.prototype.move = function() {
+
     if (this.x > -100) {
       this.x -= this.vx;
     } else {
@@ -195,6 +216,10 @@ window.onload = function() {
 
   game.start();
   function startGame() {
+
+  }
+
+  function stopGame() {
     clearInterval(game.id);
   }
 
