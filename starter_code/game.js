@@ -28,7 +28,7 @@ Game.prototype.init = function(){
         this.offsetCounter++;
         console.log(this.obstaclesArray.length);
         if(this.offsetCounter % 200 ===0){
-            console.log(this.offsetCounter);
+        
             this.generateObstacles();
         }
 
@@ -41,13 +41,11 @@ Game.prototype.drawGame = function(){
     this.bird.drawBird();
 
     if(this.obstaclesArray.length>0){
-    //     this.obstaclesArray.forEach(function(obstacle) {
-          
-            this.obstaclesArray[0].draw();
-            this.obstaclesArray[0].move();
+        this.obstaclesArray.forEach(function(obstacle) {
+            obstacle.draw();
+            obstacle.move();
             
-        // })
-   //+ }
+        })
     }
    
 }
@@ -79,7 +77,11 @@ Game.prototype.moveBackground = function(){
 Game.prototype.generateObstacles = function(){
     var xObs =1100;
     var yObs = 300;
-    this.obstaclesArray.push(new Obstacles(this.ctx,xObs,yObs));
+
+    var pos = Math.floor(Math.random()*2);
+    console.log("pos "+pos);
+
+    this.obstaclesArray.push(new Obstacles(this.ctx,xObs,yObs,pos));
 }
 
 Game.prototype.clearObstacle = function(){
