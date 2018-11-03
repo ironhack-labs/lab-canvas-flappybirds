@@ -12,7 +12,7 @@ function Game(id){
     this.obstaclesArray = [];
     this.src= "images/bg.png";
     this.setListeners();
-    this.dx = 10;
+    this.dx = 5;
     this.offsetCounter=0;
     this.bird = new Bird(this.ctx,this.width/12,this.height/2,0,0,0,0);
 
@@ -20,19 +20,26 @@ function Game(id){
 
 Game.prototype.init = function(){
 
-    setInterval(function(){
+    var intervalID =  setInterval(function(){
         this.clear();
         this.moveAll();
         this.drawGame();
         this.bird.update();
         this.offsetCounter++;
         console.log(this.obstaclesArray.length);
-        if(this.offsetCounter % 200 ===0){
+        if(this.offsetCounter % 50 ===0){
         
             this.generateObstacles();
         }
 
+        if(this.isCollision()){
+            console.log("COLISION");
+            clearInterval(intervalID);
+        }
+
     }.bind(this),1000 / this.fps)
+
+    
     
 }
 
@@ -88,6 +95,23 @@ Game.prototype.clearObstacle = function(){
     this.obstaclesArray = this.obstaclesArray.filter(function(obstacle){
         return obstacle.x >=0;
     })
+}
+
+
+// if( a.x+a.w >= b.x && b.x+b.w >= a.x &&
+// 	a.y+a.h >= b.y && b.y+b.h >= a.y
+// ){}
+
+Game.prototype.isCollision = function(){
+    var col = false;
+
+    this.obstaclesArray.forEach(function(obstacle){
+        console.log("pajaro "+this.bird.x);
+        if(this.bird.x + this.bird.width >= obstacle.x && this.bird.x +this.bird.width >= this.bird.x &&
+            this.bird.y + this.bird.height >= obstacle.y && obstacle.y +height >= this.bird.y){
+                    return true;
+            }
+    }.bind(this))
 }
 
 Game.prototype.setListeners = function() {
