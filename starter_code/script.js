@@ -1,6 +1,7 @@
 window.onload = function() {
 
   document.getElementById("start-button").onclick = function() {
+    document.querySelector('#jump-button').focus();
     startGame();
   };
 
@@ -12,12 +13,9 @@ window.onload = function() {
   document.querySelector('body canvas').setAttribute("id", "canvas");
 
   function startGame(){
-
+    let canvas = document.querySelector('body canvas');
     let ctx = document.querySelector('body canvas').getContext('2d');
-    game.init(ctx);
+    game.init(ctx, canvas);
     game.renderer();
   }
-
-
-  
 };

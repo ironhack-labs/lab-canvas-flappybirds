@@ -1,18 +1,20 @@
 function Bird(ctx) {
     this.ctx = ctx;
 
-    this.w = 50;
-    this.h = 50;
+    this.w = 30;
+    this.h = 30;
     this.x = 200;
     this.y = 200;
 
     this.vx = 3;
     this.vy = -3;
-    this.gravity = 0.025;
+    this.gravity = 0.1;
     // this.gravitySpeed = 1;
 
     this.birdImg = new Image()
     this.birdImg.src = "./images/flappy.png";
+
+    this.setListeners();
 }
 
 Bird.prototype.update = function () {
@@ -20,11 +22,11 @@ Bird.prototype.update = function () {
     this.vy += this.gravity;
     this.y += this.vy;
 
-    document.querySelector('body h2').innerHTML = `this.vy: ${this.vy} this.intPosY:${this.y}`;
+    // document.querySelector('body h2').innerHTML = `this.vy: ${this.vy} this.intPosY:${this.y}`;
 }
 
 Bird.prototype.jump = function () {
-    this.vy -= 1;
+    this.vy -= 2.5;
 }
 
 // Bird.prototype.newPos = function () {
