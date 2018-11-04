@@ -2,6 +2,10 @@ body {
   text-align: center;
 }
 
+body canvas{
+  border: solid black 1px;
+}
+
 body h1 {
   font-size: 30px;
   text-transform: uppercase;
