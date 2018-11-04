@@ -58,23 +58,37 @@ window.onload = function () {
       this.gravitySpeed = gravitySpeed;
     }
 
-    update() {}
+    update() {
 
-    newPos() {}
+    }
+
+    newPos() {
+
+    }
 
     fly() {
       document.onkeydown = function (e) {
         e.preventDefault();
         if (e.keyCode == 37) {
-          gravity *= -1;
+          this.gravity *= -1;
         }
-      };
+      }.bind(this);
       document.onkeyup = function (e) {
         e.preventDefault();
         if (e.keyCode == 37) {
-          gravity *= -1;
+          this.gravity *= -1;
         }
-      };
+      }.bind(this);
+    }
+  }
+
+  class Obstacle {
+    constructor() {
+      this.canvas = document.getElementById('ironcanvas');
+      this.ctx = this.canvas.getContext('2d');
+      this.width = 138;
+      this.height = 0;
+      this.obsX = this.canvas.width - this.width / 2;
     }
   }
 };
