@@ -6,6 +6,7 @@ let game = {
     fps: 60,
     framesCounter: 0,
     intervalID: 0,
+    score: 0,
 
 
     init: function (ctx, canvas) {
@@ -24,7 +25,7 @@ let game = {
 
         //TEST OUTPUT MODULE
         var parent = document.querySelector('body');
-        var startButton = document.querySelector('#start-button');
+        var startButton = document.querySelector('#reset-button');
         var h2Elem = document.createElement('h2');
         parent.insertBefore(h2Elem, startButton);
 
@@ -49,6 +50,7 @@ let game = {
         this.intervalID = setInterval(function () {
 
             this.framesCounter++;
+            this.score++;
 
             if (this.framesounter > 1000) {
                 this.framesCounter = 0;
@@ -73,6 +75,8 @@ let game = {
             if (this.isCollision()) {
                 this.gameOver();
             };
+
+            document.querySelector('body h2').innerHTML = `SCORE: ${this.score}`;
 
         }.bind(this), 1000 / this.fps)
     },
@@ -99,11 +103,6 @@ let game = {
 
         return this.obstacles.some(function (obstacle) {
 
-            document.querySelector('body h2').innerHTML = `x1: ${(this.bird.x + this.bird.w) > obstacle.x} 
-            x2: ${this.bird.x < (obstacle.x + obstacle.w)} y1: ${(this.bird.y + this.bird.h) > obstacle.y}
-            y2: ${this.bird.y < (obstacle.y + obstacle.h)} top: ${this.bird.y < 0} bottom:${this.bird.y > this.canvas.height}`;
-
-
             return (
                 ((this.bird.x + this.bird.w) > obstacle.x &&
                     this.bird.x < (obstacle.x + obstacle.w) &&
@@ -113,10 +112,30 @@ let game = {
                     this.bird.x < (obstacle.x + obstacle.w) &&
                     (this.bird.y + this.bird.h) > obstacle.yTop &&
                     this.bird.y < (obstacle.yTop + obstacle.hTop) ||
-                        this.bird.y < 0 || this.bird.y > this.canvas.height)
+                    this.bird.y < 0 || this.bird.y > this.canvas.height)
             );
 
         }.bind(this));
+    },
+
+    reset: function () {
+        
+        var parent = document.querySelector('body');
+        var resetButton = document.querySelector('#reset-button');
+        var h2Elem = document.querySelector('h2');
+        parent.removeChild(h2Elem, resetButton);
+
+        
+        this.framesCounter = 0;
+        this.obstacles = [];
+        this.score = 0;
+        
+        this.stop();
+        let canvas = document.querySelector('body canvas');
+        let ctx = document.querySelector('body canvas').getContext('2d');
+        this.init(ctx, canvas);
+        this.renderer();
+
     },
 
 }
