@@ -26,7 +26,6 @@ Game.prototype.init = function(){
         this.drawGame();
         this.bird.update();
         this.offsetCounter++;
-        console.log(this.obstaclesArray.length);
         if(this.offsetCounter % 50 ===0){
         
             this.generateObstacles();
@@ -108,7 +107,7 @@ Game.prototype.isCollision = function(){
     this.obstaclesArray.forEach(function(obstacle){
         console.log("pajaro "+this.bird.x);
         if(this.bird.x + this.bird.width >= obstacle.x && this.bird.x +this.bird.width >= this.bird.x &&
-            this.bird.y + this.bird.height >= obstacle.y && obstacle.y +height >= this.bird.y){
+            this.bird.y + this.bird.height >= obstacle.y && obstacle.y +this.height >= this.bird.y){
                     return true;
             }
     }.bind(this))
