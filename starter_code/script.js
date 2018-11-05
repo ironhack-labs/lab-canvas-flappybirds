@@ -42,8 +42,8 @@ function Player(canvas){
   
   this.canvas = canvas;
   this.ctx = this.canvas.getContext("2d");
-  this.x = 30;
-  this.y = 300;
+  this.x = 50;
+  this.y = 200;
   this.width; 
   this.height;
 
@@ -53,7 +53,11 @@ function Player(canvas){
   this.img = new Image();
   this.img.src="../starter_code/images/flappy.png";
 
+  this.setListeners();
+
 }
+
+var SPACE = 32;
   
 Player.prototype.draw = function(){
 
@@ -61,10 +65,42 @@ Player.prototype.draw = function(){
 
 }
 
+Player.prototype.setListeners = function() {
+  // var gravity = 0.4;
+  document.onkeydown = function(event) {
+    if (event.keyCode === SPACE) {
+      this.y -= 5;
+      this.vy -= 10;
+    } 
+  }.bind(this);
+};
+
+Player.prototype.move=function(){
+ 
+  if(this.y <= 0){
+    this.y = 10;
+  } if (this.y >= 500 ){
+    this.y = 490;
+  }
+  }
+
+// Player.prototype.move = function() {
+ 
+//   var gravity = 0.4;
+
+//   if (this.y = this.y0) {
+//     this.vy = 1;
+//     this.y = this.y0;
+//   } else {
+    // this.vy += gravity;
+    // this.y += this.vy;
+//   }
+
   var canvas = document.getElementById("game");
   var ctx = canvas.getContext("2d");
   var background = new Background(canvas);
   var player = new Player(canvas);
+  
 
 
 
@@ -78,7 +114,7 @@ Player.prototype.draw = function(){
       background.draw();
       player.draw();
       background.move();
-
+      player.move();
 
     } , 1000/60)
     
