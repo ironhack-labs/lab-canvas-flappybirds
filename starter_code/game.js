@@ -16,7 +16,7 @@ function Game(canvasId) {
 }
 
 Game.prototype.addObstacleTop = function() {
-  this.obstaclesTop.push(new ObstacleTop(this.canvas, 10, 100, (Math.floor(Math.random() * (200))) - 200))
+  this.obstaclesTop.push(new Asteroid(this.canvas, 10, 10));
   this.points += 1;
 }
 
@@ -26,8 +26,8 @@ Game.prototype.clearBg = function() {
 
 Game.prototype.drawBg = function() {
   if (this.bg.xPos < this.bg.width) {
-    this.ctx.drawImage(this.bg, this.bg.xPos + 1, 0, this.bg.width, this.bg.height);
-    this.ctx.drawImage(this.bg, this.bg.xPos - this.bg.width, 0, this.bg.width, this.bg.height);
+    this.ctx.drawImage(this.bg, this.bg.xPos + 1, -100, this.bg.width, this.bg.height);
+    this.ctx.drawImage(this.bg, this.bg.xPos - this.bg.width, -100, this.bg.width, this.bg.height);
     this.bg.xPos += 1;
   } else if (this.bg.xPos == this.bg.width) {
     this.bg.xPos = 0;

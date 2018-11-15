@@ -1,5 +1,5 @@
 var UP_KEY = 38;
-var gravity = 0.05;
+var gravity = 0.025;
 
 function Bird(canvasId) {
   this.canvas = document.getElementById(canvasId);
@@ -19,11 +19,11 @@ function Bird(canvasId) {
 }
 
 Bird.prototype.birdPosition = function() {
-  return flappyPosition = [this.x, this.y, 50, 40]
+  return flappyPosition = [this.x, this.y, 75, 90]
 };
 
 Bird.prototype.draw = function() {
-  this.ctx.drawImage(this.img, this.x, this.y, 50, 40);
+  this.ctx.drawImage(this.img, this.x, this.y, 75, 90);
 };
 
 Bird.prototype.update = function() {

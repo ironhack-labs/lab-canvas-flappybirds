@@ -1,4 +1,4 @@
-function ObstacleTop(canvas, width, height, y) {
+function Worm(canvas, width, height, y) {
   this.canvas = canvas;
   this.ctx = this.canvas.getContext('2d');
   this.obstacleTopImg = new Image();
@@ -15,28 +15,28 @@ function ObstacleTop(canvas, width, height, y) {
     this.obstacleBottomImg.isReady = true;
   }).bind(this);
 
-  this.x = 20;
+  this.x = 520;
   this.y = y;
   this.width = width;
   this.height = height;
 }
 
-ObstacleTop.prototype.obsPositionTop = function() {
+Worm.prototype.obsPositionTop = function() {
 return obstacleTopPosition = [this.x - 50,this.y, (4 * 13.8), (4 * 79.3)]
 }
 
-ObstacleTop.prototype.obsPositionBottom = function() {
+Worm.prototype.obsPositionBottom = function() {
 return obstacleBottomPosition = [this.x - 50,this.y + 450, (4 * 13.8), (4 * 79.3)]
 }
 
-ObstacleTop.prototype.draw = function() {
+Worm.prototype.draw = function() {
   this.ctx.save();
   this.ctx.drawImage(this.obstacleTopImg, this.x - 50, this.y, (4 * 13.8), (4 * 79.3))
   this.ctx.drawImage(this.obstacleBottomImg, this.x - 50, this.y + 450, (4 * 13.8), (4 * 79.3))
-  this.x += 3;
+  this.x -= 10;
   this.ctx.restore();
 }
 
-ObstacleTop.prototype.update = function() {
+Worm.prototype.update = function() {
   this.draw();
 }
