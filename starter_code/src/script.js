@@ -2,6 +2,7 @@ var myGameArea = new GameArea;
 var myPlayer = new Player();
 var myObstacles = [];
 
+//adding two pipes with the gap in a random height
 function addObstacle(){
   var gap = 180;
   var minHeight = 100;
@@ -11,11 +12,31 @@ function addObstacle(){
   myObstacles.push(new Obstacle (heightTop, heightBottom))
 }
 
+//starting game by clearing the canvas, 
+//setting the player to the default values,
+//initiating a canvas and starting the animation
 function startGame(){
   myGameArea.clear();
   myPlayer.clear();
   myGameArea.start();
   animation();
+}
+
+//animation
+var myAnimation;
+function animation(){
+  updateEverything();
+  drawEverything();
+  myAnimation = window.requestAnimationFrame(animation);
+  //stop the game if flappy crashed into a pipe or the bottom
+  var crashed = myObstacles.some(function(obstacle){
+    return myPlayer.crashWith(obstacle);
+  })
+  if (crashed || myPlayer.outOfGrid()) {
+    window.cancelAnimationFrame(myAnimation);
+    myGameArea.ctx.font = "30px SansSerif"
+    myGameArea.ctx.fillText("GAME OVER",150,350)
+  }
 }
 
 function updateEverything(){
@@ -35,22 +56,6 @@ function drawEverything(){
     myObstacles[i].draw();
   }
   myPlayer.draw();
-}
-
-var myAnimation;
-function animation(){
-  updateEverything();
-  drawEverything();
-  myAnimation = window.requestAnimationFrame(animation);
-  //stop the game if the car crashed into an obstacle
-  var crashed = myObstacles.some(function(obstacle){
-    return myPlayer.crashWith(obstacle);
-  })
-  if (crashed || myPlayer.outOfGrid()) {
-    window.cancelAnimationFrame(myAnimation);
-    myGameArea.ctx.font = "30px SansSerif"
-    myGameArea.ctx.fillText("GAME OVER",150,350)
-  }
 }
 
 document.getElementById("start-button").onclick = function() {

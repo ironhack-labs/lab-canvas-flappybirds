@@ -40,9 +40,9 @@ class Player {
         else return false;
     }
     crashWith(obstacle) {
-        if((this.y + this.height < myGameArea.canvas.height - obstacle
-            .heightBottom) ||
-        (this.y > obstacle.y + obstacle.heightTop) ||
+        if(((this.y + this.height < myGameArea.canvas.height - obstacle
+            .heightBottom) &&
+        (this.y > obstacle.y + obstacle.heightTop)) ||
         (this.x + this.width < obstacle.x) ||
         (this.x > obstacle.x + obstacle.width))
             return false;

@@ -9,7 +9,6 @@ class Obstacle {
         this.width = this.imgTop.width;
         this.x = myGameArea.canvas.width;
         this.y = 0;
-        this.speed = myGameArea.speed;
     }
     draw(){
         //crop the obstacles depending on their height and draw them into canvas

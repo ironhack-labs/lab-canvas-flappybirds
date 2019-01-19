@@ -13,7 +13,7 @@ class GameArea {
     start(){
         this.frames = 0;
         this.speed = 2;
-        document.body.appendChild(this.canvas, document.querySelector('#game-board'));
+        document.querySelector('#game-board').appendChild(this.canvas);
     }
     clear(){
         this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height); 
