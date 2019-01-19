@@ -19,6 +19,7 @@ function startGame(){
   myGameArea.clear();
   myPlayer.clear();
   myGameArea.start();
+  myObstacles = [];
   animation();
 }
 
@@ -43,6 +44,11 @@ function updateEverything(){
   myGameArea.update();
   myPlayer.update();
   myGameArea.frames ++;
+  //add one point for every successfully passed pipe
+  myGameArea.points = myObstacles.reduce(function(acc,val){
+      if (val.x < 100) acc++;
+      return acc++ },0);
+  //add a pipe every 200 frames
   if (myGameArea.frames % 200 === 0){
     addObstacle();
   }
@@ -55,6 +61,7 @@ function drawEverything(){
     myObstacles[i].update();
     myObstacles[i].draw();
   }
+  myGameArea.drawPoints();
   myPlayer.draw();
 }
 

@@ -9,6 +9,7 @@ class GameArea {
         this.bgHeight = this.canvas.height;
         this.speed = 2;
         this.frames = 0;
+        this.points = 0;
     }
     start(){
         this.frames = 0;
@@ -30,12 +31,17 @@ class GameArea {
             640,480,
             this.bgX+this.bgWidth,0,
             this.bgWidth, this.bgHeight
-        )
+        ) 
+    }
+    drawPoints(){
+        this.ctx.fillStyle = 'white'
+        this.ctx.font = "bold 20px SansSerif"
+        this.ctx.fillText("Score: "+this.points, 20, 30)
     }
     update(){
         this.bgX -= this.speed;
         if(this.bgX < -this.bgWidth) {
         this.bgX += this.bgWidth;
-        }   
+        }
     }
 }
