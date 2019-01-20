@@ -4,7 +4,7 @@ function Background(game) {
     this.img = new Image()
     this.img.src = "images/bg.png"
     this.x = 0;
-    this.velocity = 10;
+    this.velocity = 6;
 }
 
 Background.prototype.draw = function () {

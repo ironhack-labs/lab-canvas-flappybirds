@@ -1,5 +1,5 @@
 function Obstacle() {
-    this.width = 200
+    this.width = 100
     this.heigth = 0
     this.x = 700
     this.y = 0
@@ -11,6 +11,7 @@ Obstacle.prototype.move = function() {
     }
 
 function ObstacleTop(game) {
+    Obstacle.call(this, game)
     this.game = game
     this.ctx = game.ctx
     this.img = new Image()
@@ -31,6 +32,7 @@ ObstacleTop.prototype.draw = function () {
 }
 
 function ObstacleBot(game) {
+    Obstacle.call(this, game)
     this.game = game
     this.ctx = game.ctx
     this.img = new Image()

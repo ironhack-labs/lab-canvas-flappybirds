@@ -24,7 +24,7 @@ var App = {
                 if (this.framesCounter % 50 === 0) {
                     this.generateObstacle()
                 }
-                
+
                 // this.score += 0.01 FIX SCORE
                 this.moveAll()
                 this.drawAll()
@@ -55,7 +55,7 @@ var App = {
     generateObstacle: function () {
         let pipeTop = new ObstacleTop(this)
         let pipeBot = new ObstacleBot(this)
-        pipeTop.heigth = Math.random() * 300
+        pipeTop.heigth = Math.floor(Math.random() * 300)
         pipeBot.y = pipeTop.heigth + 200
         pipeBot.heigth = 700 - pipeBot.y
         this.obstacles.push([pipeTop, pipeBot])
