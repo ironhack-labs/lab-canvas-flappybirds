@@ -73,6 +73,7 @@ var App = {
         this.faby = new Faby(this)
         this.score = new Score(this)
         this.framesCounter = 0
+        this.scorePoints = 0
         this.obstacles = []
     },
     drawAll: function () {
