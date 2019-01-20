@@ -4,18 +4,19 @@ var App = {
     fps: 60,
     score: undefined,
     keySpace: 32,
+    framesCounter: undefined,
     init: function (canvadId) {
-        this.canvas = document.getElementById(canvadId);
-        this.ctx = this.canvas.getContext("2d");
-        this.fps = 60;
-        this.background = new Background(this);
-        this.faby = new Faby(this);
-        this.obstacle = []
+        this.canvas = document.getElementById(canvadId)
+        this.ctx = this.canvas.getContext("2d")
+        this.fps = 60
+
+        this.reset()
+
         this.interval = setInterval(
             function () {
                 this.clear();
                 this.framesCounter++;
-                // controlamos que frameCounter no sea superior a 1000
+
                 if (this.framesCounter > 1000) {
                     this.framesCounter = 0;
                 }
@@ -26,9 +27,9 @@ var App = {
                 // this.score += 0.01; FIX SCORE
                 this.moveAll();
                 this.drawAll();
-                // eliminamos obstáculos fuera del canvas
+
                 // this.clearObstacles();
-                if (this.colision()) {
+                if (this.isColision()) {
                     this.gameOver();
                 }
             }.bind(this),
@@ -42,7 +43,7 @@ var App = {
         this.stop();
         if (confirm("GAME OVER. Play again?")) {
             this.reset();
-            this.start();
+            this.init("myGame");
         }
     },
     //esto elimina los obstáculos del array que estén fuera de la pantalla
@@ -52,10 +53,16 @@ var App = {
         });
     }, */
     generateObstacle: function () {
-        this.obstacles.push(new Obstacle(this));
+        //this.obstacles.push(new Obstacle(this));
     },
     clear: function () {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    reset: function () {
+        this.background = new Background(this);
+        this.faby = new Faby(this);
+        this.framesCounter = 0;
+        this.obstacles = [];
     },
     drawAll: function () {
         this.background.draw();
@@ -67,15 +74,12 @@ var App = {
         this.faby.move();
         // this.obstacles.forEach(function (obstacle) { obstacle.move(); });
     },
-    colision: function () {
+    isColision: function () {
         if (this.faby.y >= this.canvas.height - this.faby.height || this.faby.y <= -9) {
             return true;
         }
     }
-    //chequea si ha sucedido una colisión
-        // colisiones genéricas 
         // (p.x + p.w > o.x && o.x + o.w > p.x && p.y + p.h > o.y && o.y + o.h > p.y )
-        // esto chequea que el personaje no estén en colisión con cualquier obstáculo
         /*
         return this.obstacles.some(function (obstacle) {
             return (
