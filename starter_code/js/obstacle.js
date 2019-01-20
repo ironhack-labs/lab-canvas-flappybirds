@@ -1,6 +1,6 @@
 function Obstacle() {
     this.width = 100
-    this.heigth = 0
+    this.height = 0
     this.x = 700
     this.y = 0
     this.velocity = 10
@@ -26,7 +26,7 @@ ObstacleTop.prototype.draw = function () {
             this.game.obstacles[i][0].x,
             this.game.obstacles[i][0].y,
             this.game.obstacles[i][0].width,
-            this.game.obstacles[i][0].heigth
+            this.game.obstacles[i][0].height
         )
     }
 }
@@ -47,7 +47,7 @@ ObstacleBot.prototype.draw = function () {
             this.game.obstacles[i][1].x,
             this.game.obstacles[i][1].y,
             this.game.obstacles[i][1].width,
-            this.game.obstacles[i][1].heigth
+            this.game.obstacles[i][1].height
         )
     }
 }

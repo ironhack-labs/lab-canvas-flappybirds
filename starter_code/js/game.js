@@ -32,7 +32,7 @@ var App = {
                 this.addPoints()
 
                 this.clearObstacles()
-                if (this.isColision() || this.colision()) {
+                if (this.colisionFrame() || this.colisionPipe()) {
                     this.gameOver()
                 }
             }.bind(this),
@@ -60,9 +60,9 @@ var App = {
     generateObstacle: function () {
         let pipeTop = new ObstacleTop(this)
         let pipeBot = new ObstacleBot(this)
-        pipeTop.heigth = Math.floor(Math.random() * 300)
-        pipeBot.y = pipeTop.heigth + 200
-        pipeBot.heigth = 700 - pipeBot.y
+        pipeTop.height = Math.floor(Math.random() * 300)
+        pipeBot.y = pipeTop.height + 200
+        pipeBot.height = 700 - pipeBot.y
         this.obstacles.push([pipeTop, pipeBot])
     },
     clear: function () {
@@ -93,21 +93,18 @@ var App = {
             obstacle[1].move()
         })
     },
-    isColision: function () {
+    colisionFrame: function () {
         if (this.faby.y >= this.canvas.height - this.faby.height || this.faby.y <= -9) {
             return true
         }
     },
-    colision: function () {
+    colisionPipe: function () {
         // (p.x + p.w > o.x && o.x + o.w > p.x && p.y + p.h > o.y && o.y + o.h > p.y )
-        return this.obstacles.some(function (obstacle) {
-            return (
-                (this.faby.x + this.faby.width) > obstacle[0].x &&
-                (obstacle[0].x + obstacle[0].width) > this.faby.x &&
-                (this.faby.y + this.faby.height) > obstacle[0].y  &&
-                (obstacle[0].y + obstacle[0].h) > this.faby.y
-                )
-        }.bind(this))
+        if(this.obstacles.length > 1){
+        return (
+            (this.faby.y + this.faby.height) < this.obstacles[0][0].height) ||
+            this.faby.y > this.obstacles[0][1].y 
+        }
     },
     addPoints: function () {
         if(this.obstacles.length > 1){
