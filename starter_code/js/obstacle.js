@@ -1,27 +1,53 @@
-function Obstacle(game) {
+function Obstacle() {
+    this.width = 200
+    this.heigth = 0
+    this.x = 1600
+    this.velocity = 10
+    this.y = 0
+}
+
+Obstacle.prototype.move = function() {
+    this.x -= this.velocity;
+    }
+
+function ObstacleTop(game) {
+    Obstacle.call(this, game)
     this.game = game
-    this.ctx = this.game.ctx
-    this.imgTop = new Image()
-    this.imgTop.src = "images/obstacle_top.png"
-    this.wTop = 15
-    this.hTop = this.w * 3
-    this.dxTop = 10
-    this.xTop = this.game.canvas.width
-    this.yTop = this.game.player.y0 + this.game.player.h - this.h - 5
-    this.imgBottom = new Image()
-    this.imgBottom.src = "images/obstacle_bottom.png"
-    this.wBottom = 15
-    this.hBottom = this.w * 3
-    this.dxBottom = 10
-    this.xBottom = this.game.canvas.width
-    this.yBottom = this.game.player.y0 + this.game.player.h - this.h - 5
+    this.ctx = game.ctx
+    this.imgPTop = new Image()
+    this.imgPTop.src = "images/obstacle_top.png"
+}
+ObstacleTop.prototype = Object.create(Obstacle.prototype)
+
+ObstacleTop.prototype.draw = function () {
+    for (let i = 0; i < game.obstacle.length; i++) {
+        this.ctx.drawImage(
+            imgPTop,
+            game.obstacle[i][0].posX,
+            game.obstacle[i][0].posY,
+            game.obstacle[i][0].width,
+            game.obstacle[i][0].heigth
+        )
+    }
 }
 
-Obstacle.prototype.draw = function () {
-    this.ctx.drawImage(this.imgTop, this.xTop, 0)
-    this.ctx.drawImage(this.imgTop, this.xTop + this.game.canvas.width, 0)
+function ObstacleBot(game) {
+    Obstacle.call(this, game)
+    this.game = game
+    this.ctx = game.ctx
+    this.imgPBot = new Image()
+    this.imgPBot.src = "images/obstacle_bottom.png";
 }
+ObstacleBot.prototype = Object.create(Obstacle.prototype)
 
-Obstacle.prototype.move = function () {
-    this.xTop -= this.dxTop
+ObstacleBot.prototype.draw = function () {
+    for (let i = 0; i < game.obstacle.length; i++) {
+        this.ctx.drawImage(
+            imgPTop,
+            game.obstacle[i][1].posX,
+            game.obstacle[i][1].posY,
+            game.obstacle[i][1].width,
+            game.obstacle[i][1].heigth
+        )
+    }
 }
