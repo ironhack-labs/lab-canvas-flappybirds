@@ -5,7 +5,7 @@ var App = {
     score: undefined,
     keySpace: 32,
     framesCounter: undefined,
-    obstacle: [],
+    obstacles: undefined,
     init: function (canvadId) {
         this.canvas = document.getElementById(canvadId)
         this.ctx = this.canvas.getContext("2d")
@@ -21,10 +21,10 @@ var App = {
                 if (this.framesCounter > 1000) {
                     this.framesCounter = 0
                 }
-                // controlamos la velocidad de generación de obstáculos
-                if (this.framesCounter % 10 === 0) {
+                if (this.framesCounter % 50 === 0) {
                     this.generateObstacle()
                 }
+                
                 // this.score += 0.01 FIX SCORE
                 this.moveAll()
                 this.drawAll()
@@ -47,19 +47,18 @@ var App = {
             this.init("myGame")
         }
     },
-    //esto elimina los obstáculos del array que estén fuera de la pantalla
-    /* clearObstacles: function () {
+    clearObstacles: function () {
         this.obstacles = this.obstacles.filter(function (obstacle) {
             return obstacle.x >= 0
         })
-    }, */
+    },
     generateObstacle: function () {
         let pipeTop = new ObstacleTop(this)
         let pipeBot = new ObstacleBot(this)
-        pipeTop.heigth = Math.random() * 300 + 100
-        pipeBot.posY = pipeTop.heigth + 200
-        pipeBot.heigth = 700 - pipeBot.posY
-        this.obstacle.push([pipeTop, pipeBot])
+        pipeTop.heigth = Math.random() * 300
+        pipeBot.y = pipeTop.heigth + 200
+        pipeBot.heigth = 700 - pipeBot.y
+        this.obstacles.push([pipeTop, pipeBot])
     },
     clear: function () {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
@@ -73,12 +72,18 @@ var App = {
     drawAll: function () {
         this.background.draw()
         this.faby.draw()
-        this.obstacles.forEach(function (obstacle) { obstacle.draw() })
+        this.obstacles.forEach(function (obstacle) { 
+            obstacle[0].draw() 
+            obstacle[1].draw()
+        })
     },
     moveAll: function () {
         this.background.move()
         this.faby.move()
-        this.obstacles.forEach(function (obstacle) { obstacle.move() })
+        this.obstacles.forEach(function (obstacle) { 
+            obstacle[0].move() 
+            obstacle[1].move()
+        })
     },
     isColision: function () {
         if (this.faby.y >= this.canvas.height - this.faby.height || this.faby.y <= -9) {
