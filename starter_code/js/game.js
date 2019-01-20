@@ -29,8 +29,8 @@ var App = {
                 this.moveAll()
                 this.drawAll()
 
-                // this.clearObstacles()
-                if (this.isColision()) {
+                this.clearObstacles()
+                if (this.isColision() || this.colision()) {
                     this.gameOver()
                 }
             }.bind(this),
@@ -49,7 +49,7 @@ var App = {
     },
     clearObstacles: function () {
         this.obstacles = this.obstacles.filter(function (obstacle) {
-            return obstacle.x >= 0
+            return obstacle[0].x >= -20 && obstacle[1].x >= -20
         })
     },
     generateObstacle: function () {
@@ -89,15 +89,16 @@ var App = {
         if (this.faby.y >= this.canvas.height - this.faby.height || this.faby.y <= -9) {
             return true
         }
-    }
+    },
+    colision: function () {
         // (p.x + p.w > o.x && o.x + o.w > p.x && p.y + p.h > o.y && o.y + o.h > p.y )
-        /*
         return this.obstacles.some(function (obstacle) {
             return (
-                ((this.faby.x + this.faby.w) >= obstacle.xTop &&
-                    this.faby.x < (obstacle.xTop + obstacle.wTop) &&
-                    this.faby.y + (this.faby.h - 20) >= obstacle.y)
-            )
+                (this.faby.x + this.faby.width) > obstacle[0].x &&
+                (obstacle[0].x + obstacle[0].width) > this.faby.x &&
+                (this.faby.y + this.faby.height) > obstacle[0].y  &&
+                (obstacle[0].y + obstacle[0].h) > this.faby.y
+                )
         }.bind(this))
-    }, */
+    }
 }
