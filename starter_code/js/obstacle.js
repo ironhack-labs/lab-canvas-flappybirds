@@ -23,8 +23,8 @@ ObstacleTop.prototype.draw = function () {
     for (let i = 0; i < game.obstacle.length; i++) {
         this.ctx.drawImage(
             imgPTop,
-            game.obstacle[i][0].posX,
-            game.obstacle[i][0].posY,
+            game.obstacle[i][0].x,
+            game.obstacle[i][0].y,
             game.obstacle[i][0].width,
             game.obstacle[i][0].heigth
         )
@@ -44,8 +44,8 @@ ObstacleBot.prototype.draw = function () {
     for (let i = 0; i < game.obstacle.length; i++) {
         this.ctx.drawImage(
             imgPTop,
-            game.obstacle[i][1].posX,
-            game.obstacle[i][1].posY,
+            game.obstacle[i][1].x,
+            game.obstacle[i][1].y,
             game.obstacle[i][1].width,
             game.obstacle[i][1].heigth
         )
