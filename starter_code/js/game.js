@@ -6,6 +6,7 @@ var App = {
     keySpace: 32,
     framesCounter: undefined,
     obstacles: undefined,
+    scorePoints: 0,
     init: function (canvadId) {
         this.canvas = document.getElementById(canvadId)
         this.ctx = this.canvas.getContext("2d")
@@ -28,6 +29,7 @@ var App = {
                 // this.score += 0.01 FIX SCORE
                 this.moveAll()
                 this.drawAll()
+                this.addPoints()
 
                 this.clearObstacles()
                 if (this.isColision() || this.colision()) {
@@ -42,7 +44,10 @@ var App = {
     },
     gameOver: function () {
         this.stop()
-        if (confirm("GAME OVER. Play again?")) {
+        if (confirm(`
+        GAME OVER
+        Your score was: ${this.scorePoints} 
+        Do you want to play again?`)) {
             this.reset()
             this.init("myGame")
         }
@@ -66,6 +71,7 @@ var App = {
     reset: function () {
         this.background = new Background(this)
         this.faby = new Faby(this)
+        this.score = new Score(this)
         this.framesCounter = 0
         this.obstacles = []
     },
@@ -76,6 +82,7 @@ var App = {
             obstacle[0].draw() 
             obstacle[1].draw()
         })
+        this.score.draw()
     },
     moveAll: function () {
         this.background.move()
@@ -100,5 +107,11 @@ var App = {
                 (obstacle[0].y + obstacle[0].h) > this.faby.y
                 )
         }.bind(this))
+    },
+    addPoints: function () {
+        if(this.obstacles.length > 1){
+            if(this.obstacles[0][0].x < this.faby.x)
+            this.scorePoints++
+        }
     }
 }
