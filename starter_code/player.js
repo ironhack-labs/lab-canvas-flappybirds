@@ -21,7 +21,7 @@ Player.prototype.setListeners = function() {
   document.onkeydown = function(event) {
     if (event.keyCode == SPACE) {
       if (this.game.gameStart) {
-        console.log("Mira como salto");
+        
         this.y -= 15;
         this.gravitySpeed -= 10;
       } else {
@@ -38,3 +38,5 @@ Player.prototype.move = function() {
   this.gravitySpeed += gravity;
   this.y += this.gravitySpeed;
 };
+
+

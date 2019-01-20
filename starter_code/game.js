@@ -22,10 +22,10 @@ Game.prototype.startGame = function() {
   setInterval(function() {
       this.framesCounter++;
       if (this.framesCounter > 1000) {
-        this.framesCounter = 0;
+        this.framesCounter = 1;
       }
 
-      if (this.framesCounter % 50 === 0) {
+      if (this.framesCounter % 200 === 0) {
         this.generateObstacle();
       } 
 
@@ -35,7 +35,7 @@ Game.prototype.startGame = function() {
       })
       this.player.move();
 
-      // pinta
+      // Pinta
       this.drawBackground();
       this.obstacles.forEach(function (obstacle){
         obstacle.draw();
