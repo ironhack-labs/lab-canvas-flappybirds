@@ -1,10 +1,10 @@
 window.onload = function() {
-  document.getElementById("start-button").onclick = function() {
+   /*  document.getElementById("start-button").onclick = function() { */
     startGame();
-  };
+  // };
 
   function startGame() {
-
+    game.start("canvasExp");
   }
 
 };
