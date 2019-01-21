@@ -17,3 +17,8 @@ body button {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+
+#game-board {
+
+  padding-bottom: 10px;
+}
