@@ -221,3 +221,7 @@ addEventListener('keydown', e=> {
     break
   }
 })
+addEventListener('touchstart', e=> {
+  if(!gameOn) start()
+  if(flappy.y > flappy.height) flappy.y -= 70
+})
