@@ -1,3 +1,18 @@
+/* @import url(//db.onlinewebfonts.com/c/364d81f3f71bc524d2235f8b406e732b?family=Flappy+Bird); */
+@font-face {
+  font-family: "Flappy Bird";
+  src: url("./fonts/364d81f3f71bc524d2235f8b406e732b.eot");
+  src: url("./fonts/364d81f3f71bc524d2235f8b406e732b.eot?#iefix")
+      format("embedded-opentype"),
+    url("./fonts/364d81f3f71bc524d2235f8b406e732b.woff2")
+      format("woff2"),
+    url("./fonts/364d81f3f71bc524d2235f8b406e732b.woff")
+      format("woff"),
+    url("./fonts/364d81f3f71bc524d2235f8b406e732b.ttf")
+      format("truetype"),
+    url("./fonts/364d81f3f71bc524d2235f8b406e732b.svg#Flappy Bird")
+      format("svg");
+}
 body {
   text-align: center;
 }
@@ -8,7 +23,8 @@ body h1 {
 }
 
 body button {
-  font-size: 20px;
+  font-family: 'Flappy Bird';
+  font-size: 40px;
   background-color: black;
   color: #fff;
   padding: 10px 20px;
@@ -16,4 +32,8 @@ body button {
   box-shadow: 0;
   border-radius: 5px;
   margin-bottom: 20px;
+}
+canvas {
+  border: 3px solid;
+  border-bottom: 0px solid;
 }
