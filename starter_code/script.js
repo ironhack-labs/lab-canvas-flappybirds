@@ -12,6 +12,12 @@ let images = {
   bottomPipe: "./images/obstacle_bottom.png",
   topPipe: "./images/obstacle_top.png"
 };
+let sounds = {
+  die: './music/sfx_die.wav',
+  point: './music/sfx_point.wav',
+  wing: './music/sfx_wing.wav',
+  song: './music/Tetris Theme Song A.mp3'
+}
 let pipeSpeed = 2;
 let bgSpeed = 1;
 let pipes = [];
@@ -29,6 +35,7 @@ function Board() {
   this.height = canvas.height;
   this.image = new Image();
   this.image.src = images.bg;
+  this.song = new Audio()
   this.draw = function() {
     if (this.x < -canvas.width) {
       this.x = 0;
@@ -111,13 +118,14 @@ function update() {
     generatePipes();
   }
   deletePipes();
-  console.log(pipes.length);
+  //console.log(pipes.length);
   move()
   drawPipes();
   checkCollitions();
   scoreCounter()
   drawScore()
   frames++;
+
 }
 function gameOver() {
   clearInterval(interval);
@@ -130,7 +138,10 @@ function gameOver() {
   pipes = [];
   flappy.y = 50
   flappy.velY= 0
-  
+  board.song.pause()
+  let die = new Audio()
+  die.src = sounds.die
+  die.play()
 }
 
 //Auxiliar Functions
@@ -163,7 +174,7 @@ function checkCollitions() {
 function move(){
   flappy.y += flappy.velY
     flappy.velY += gravity
-    console.log(flappy)
+    //console.log(flappy)
 }
 
 function randomizeVars(){
@@ -177,11 +188,15 @@ function drawScore(){
   ctx.fillText(score, 850,50)
 }
 function scoreCounter(){
+  let point = new Audio()
+  point.src = sounds.point
   if (score >= 1 && (frames-416)%150 === 0) {
-    score++
+    score++   
+    point.play()
  }
   if (frames === 416) {
     score = 1
+    point.play()
   }
 
 }
@@ -191,12 +206,18 @@ document.getElementById("start-button").onclick = function() {
   if (!gamestarted) {
     startGame()
     gamestarted = true
-  
+    board.song.src = sounds.song
+    board.song.loop = true
+    board.song.volume = 0.75
+    board.song.play()
   }
 };
 
 addEventListener("keypress", e => {
   if (e.keyCode === 38 || e.keyCode === 32) {
+    let wing = new Audio()
+    wing.src = sounds.wing
+    wing.play()
     if (flappy.y > flappy.height) {
       flappy.velY = 0
       flappy.grounded = false
