@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Lobster");
+
 body {
   text-align: center;
 }
@@ -5,6 +7,14 @@ body {
 body h1 {
   font-size: 30px;
   text-transform: uppercase;
+}
+
+.background-blue {
+  background-color: blue;
+}
+
+.background-red {
+  background-color: white;
 }
 
 body button {
