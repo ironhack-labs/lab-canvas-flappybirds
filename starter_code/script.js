@@ -1,10 +1,10 @@
 window.onload = function() {
   document.getElementById("start-button").onclick = function() {
-    startGame();
-  };
+  //   startGame();
+  // };
 
-  function startGame() {
+  Game.init("canvas");
 
-  }
 
-};
+}
+}
