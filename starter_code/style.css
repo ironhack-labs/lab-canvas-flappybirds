@@ -1,5 +1,16 @@
 body {
   text-align: center;
+  display: flex;
+  overflow: hidden;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+img {
+  width: 600px;
+  margin: 50px;
 }
 
 body h1 {
@@ -16,4 +27,8 @@ body button {
   box-shadow: 0;
   border-radius: 5px;
   margin-bottom: 20px;
+}
+
+canvas {
+  margin-right: 200px;
 }
