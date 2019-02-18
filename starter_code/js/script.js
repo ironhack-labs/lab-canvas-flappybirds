@@ -1,10 +1,10 @@
 window.onload = function() {
+  var started = false
   document.getElementById("start-button").onclick = function() {
-    startGame();
-  };
-
-  function startGame() {
-
+    if(!started){
+    Game.init("bird")
+    started = true
+    }
   }
 
 };
