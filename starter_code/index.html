@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script type="text/javascript" src="script.js">
-
-  </script>
+  <script type="text/javascript" src="background.js"></script>
+  <script type="text/javascript" src="player.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="script.js"></script>
   <link rel="stylesheet" href="style.css">
   <title>Document</title>
 </head>
@@ -14,6 +15,8 @@
   <img src="./images/logo.png" alt="" style="width:50%;">
   <br>
   <button id="start-button">StartGame</button>
-  <div id="game-board"></div>
+  <div id="game-board">
+    <canvas id="game"></canvas>
+  </div>
 </body>
 </html>
