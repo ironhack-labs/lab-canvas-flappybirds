@@ -7,6 +7,17 @@ window.onload = function() {
     startGame();
   };
 
+  document.onkeydown = function(e){
+    if(e.keyCode = 32){
+      faby.speedY -= faby.gravity
+      faby.y -= faby.speedY; 
+    };
+  }
+  
+    document.onkeyup = function(e){
+      faby.speedY = 0.5
+    }
+
   function startGame() {
     myGameArea.start();
     faby.drawFaby();    
@@ -50,7 +61,7 @@ function updateGameArea() {
   bgImg.move();
   bgImg.draw();
   faby.drawFaby();
-
+  faby.update();
 }
 
 var faby = {
@@ -63,17 +74,24 @@ var faby = {
     img2.src ="images/flappy.png";
     ctx = myGameArea.ctx;
     ctx.drawImage(img2, this.x, this.y, this.width, this.height);
+  },
+  speedX: 0,
+  speedY: 0.5,
+  gravity: 0.4,
+  update: function() {
+    hitBottom()
+    this.speedY += this.gravity
+    this.y += this.speedY;
+    },
   }
   
-  /*speedX: 0,
-  speedY: 0,
-  gravity: 0.4,
-  gravitySpeed: ,
-  update: function() {
 
-  },
-  newPos: function() {
 
-  }*/
-}
 
+function hitBottom () {
+  var bottom = 600;
+    if (faby.y >= bottom - faby.height) {
+      faby.y = bottom - faby.height;
+      clearInterval(myGameArea.interval)
+    }
+  }
