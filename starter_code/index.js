@@ -1,11 +1,11 @@
 window.onload = function() {
   document.getElementById("start-button").onclick = function() {
-    startGame();
+      startGame();
   };
 
   function startGame() {
-    Gamepad.init('canvas');
 
+      Game.init("canvas")
   }
 
 };
