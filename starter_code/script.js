@@ -1,6 +1,6 @@
 // Triggers
 window.onload = function() {
-  player = new Player(50, 70, "flappy.png", 219, 390, true); //Dont know where should I put this
+  player = new Player(50, 70, "flappy.png", 319, 190); //Dont know where should I put this
   document.getElementById("start-button").onclick = function() {
     startGame();
   };
@@ -16,6 +16,9 @@ document.onkeydown = function(e) {
     case 32: //space bar
       player.moveUp();
       break;
+    case 27: //Escape
+      canvas.stop();
+      break;
   }
 }
 const myObstacles = []; //Dont know where should I put this
@@ -27,11 +30,15 @@ let canvas = {
   speed: -1,
   x : 0,
   frames: 320,
+  pause: true,
+  stop: function(){
+    this.pause = !this.pause;
+  },
   start : function () {
     this.context = this.canvas.getContext('2d')
     this.canvas.width = 880;
     this.canvas.height = 470;
-    this.image.src = './images/bg.png';   
+    this.image.src = './images/bg.png';       
     this.image.onload = updateGame();  
     document.getElementById('game-board').appendChild(this.canvas);
   },  
@@ -56,56 +63,64 @@ let canvas = {
 
 
 function updateGame (){
-    canvas.updateCanvas()
-    player.newPos();
-    player.update();
-    canvas.frames +=1;
-    if (canvas.frames % 340 === 0) {
-      x = canvas.canvas.width;
-      minHeight = 20;
-      maxHeight = 200;
-      height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-      minGap = 50;
-      maxGap = 200;
-      gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-      myObstacles.push(new Component(138, height, 'obstacle_top.png', x, 0));
-      myObstacles.push(new Component(138, x - height - gap, 'obstacle_bottom.png', x, height + gap));
-    }
-    for (i = 0; i < myObstacles.length; i++) {
-      myObstacles[i].x += -1;
-      myObstacles[i].update();
-    }
+  canvas.updateCanvas()
+  player.newPos();
+  player.update();
+  canvas.frames +=1;  
+  engine(); 
+  // if(canvas.pause){ //experimental
     requestAnimationFrame(updateGame);
+  // }
 }
-
+function engine () {
+  if (canvas.frames % 340 === 0) {
+    x = canvas.canvas.width;
+    minHeight = 20;
+    maxHeight = 200;
+    height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+    minGap = 50;
+    maxGap = 200;
+    gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+    myObstacles.push(new Component(138, height, 'obstacle_top.png', x, 0));
+    myObstacles.push(new Component(138, x - height - gap, 'obstacle_bottom.png', x, height + gap));
+  }
+  for (i = 0; i < myObstacles.length; i++) {
+    myObstacles[i].ex += -1;
+    myObstacles[i].update();
+  }
+}
 //Obstacle 
 function Component(width, height, img, x, y) {
   this.image = new Image();
   this.image.src = './images/' + img;
   this.width = width;
   this.height = height;
-  this.x = x;
+  this.ex = x;
   this.y = y;  
 }
 Component.prototype.update = function (){
   ctx = canvas.context;
-  ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
+  ctx.drawImage(this.image, this.ex, this.y, this.width, this.height)
 }
 // Player
 function Player(width, height, img, x, y) {
   Component.call(this, width, height, img, x, y); //Copying basic config from Obstacle
-  this.speedX = 0;
   this.speedY = 0;
-  this.newPos = function() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-  }
+  this.gravity = 0.01;
+  this.gravitySpeed = 0;
 }
 Player.prototype = Object.create(Component.prototype); //Copying prototypes from Component
 
-Player.prototype.moveUp = function () {this.speedY -= 1;}
+Player.prototype.newPos = function () {
+  this.gravitySpeed += this.gravity;
+  this.y += this.speedY + this.gravitySpeed; 
+}
+
+Player.prototype.moveUp = function () {
+  this.speedY -= 10
+  console.log()
+}
 
 Player.prototype.stopMove = function () {
-  this.speedX = 0;
   this.speedY = 0;
 }
