@@ -20,8 +20,7 @@ let canvas = {
     this.canvas.width = 880;
     this.canvas.height = 470;
     this.image.src = './images/bg.png';   
-    this.image.onload = this.updateCanvas();  
-    this.canvas.style.border = "thick solid #0000FF";
+    this.image.onload = updateCanvas();  
     document.getElementById('game-board').appendChild(this.canvas);
   },  
   bkgMove : function () {
@@ -31,17 +30,16 @@ let canvas = {
   bkgDraw :  function (){
     this.context.drawImage(this.image, this.x, 0);
     if (this.speed < 0){
-      console.log(this.x)
       this.context.drawImage(this.image, this.x + this.canvas.width, 0);
     } else {
       this.context.drawImage(this.image, this.x - this.image.width, 0);      
     }
-  },
-  updateCanvas : function (){
-    setInterval(()=>{
-      this.bkgMove() //at the second round this, change. 
-      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.bkgDraw();
-    }, 20)
   }
+}
+
+function updateCanvas (){
+    canvas.bkgMove() 
+    canvas.context.clearRect(0, 0, canvas.canvas.width, canvas.canvas.height);
+    canvas.bkgDraw();
+    requestAnimationFrame(updateCanvas);
 }
