@@ -17,14 +17,9 @@ window.onload = function() {
     document.getElementById('game-board').appendChild(this.canvas);
     this.img = new Image(600,800);
     this.img.src = 'images/bg.png';
-    this.img.onload = updateGame();
-    
+    console.log(this.img)
+  }  
   
-  }
-  function updateGame() {
-    console.log(this.img.src)
-    
-  }
   var myGameArea = new MyGameArea();
   myGameArea.background();
   
