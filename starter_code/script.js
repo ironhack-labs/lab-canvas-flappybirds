@@ -15,7 +15,7 @@ let canvas = {
   canvas : document.createElement('canvas'), 
   speed: -1,
   x : 0,
-  frames: 220,
+  frames: 320,
   start : function () {
     this.context = this.canvas.getContext('2d')
     this.canvas.width = 880;
@@ -47,7 +47,7 @@ let myObstacles = [];
 function updateGame (){
     canvas.updateCanvas()
     canvas.frames +=1;
-    if (canvas.frames % 240 === 0) {
+    if (canvas.frames % 340 === 0) {
       x = canvas.canvas.width;
       minHeight = 20;
       maxHeight = 200;
@@ -55,8 +55,8 @@ function updateGame (){
       minGap = 50;
       maxGap = 200;
       gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-      myObstacles.push(new Component(10, height, "green", x, 0));
-      myObstacles.push(new Component(10, x - height - gap, "green", x, height + gap));
+      myObstacles.push(new Component(138, height, 'obstacle_top.png', x, 0));
+      myObstacles.push(new Component(138, x - height - gap, 'obstacle_bottom.png', x, height + gap));
     }
     for (i = 0; i < myObstacles.length; i++) {
       myObstacles[i].x += -1;
@@ -73,10 +73,11 @@ function Component(width, height, color, x, y) {
   this.y = y;
   this.speedX = 0;
   this.speedY = 0;
+  this.image = new Image();
+  this.image.src = './images/' + color;
   this.update = function(){
       ctx = canvas.context;
-      ctx.fillStyle = color;
-      ctx.fillRect(this.x, this.y, this.width, this.height);
+      ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
   }
 
 }
