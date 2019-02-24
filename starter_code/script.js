@@ -20,7 +20,7 @@ let canvas = {
     this.canvas.width = 880;
     this.canvas.height = 470;
     this.image.src = './images/bg.png';   
-    this.image.onload = updateCanvas();  
+    this.image.onload = updateGame();  
     document.getElementById('game-board').appendChild(this.canvas);
   },  
   bkgMove : function () {
@@ -34,12 +34,31 @@ let canvas = {
     } else {
       this.context.drawImage(this.image, this.x - this.image.width, 0);      
     }
+  },
+  updateCanvas : function (){
+    this.bkgMove() 
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.bkgDraw();
   }
 }
 
-function updateCanvas (){
-    canvas.bkgMove() 
-    canvas.context.clearRect(0, 0, canvas.canvas.width, canvas.canvas.height);
-    canvas.bkgDraw();
-    requestAnimationFrame(updateCanvas);
+function updateGame (){
+    canvas.updateCanvas()
+    requestAnimationFrame(updateGame);
+}
+
+//Component 
+function Component(width, height, color, x, y) {
+  this.width = width;
+  this.height = height;
+  this.x = x;
+  this.y = y;
+  this.speedX = 0;
+  this.speedY = 0;
+  this.update = function(){
+      ctx = myGameArea.context;
+      ctx.fillStyle = color;
+      ctx.fillRect(this.x, this.y, this.width, this.height);
+  }
+
 }
