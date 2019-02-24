@@ -13,6 +13,8 @@ window.onload = function() {
 let canvas = {  
   image : new Image(),  
   canvas : document.createElement('canvas'), 
+  speed: -1,
+  x : 0,
   start : function () {
     this.context = this.canvas.getContext('2d')
     this.canvas.width = 880;
@@ -23,14 +25,13 @@ let canvas = {
     document.getElementById('game-board').appendChild(this.canvas);
   },  
   bkgMove : function () {
-    this.speed = -1;
-    this.x = 0;
     this.x += this.speed;
     this.x %= this.canvas.width;
   },
   bkgDraw :  function (){
     this.context.drawImage(this.image, this.x, 0);
     if (this.speed < 0){
+      console.log(this.x)
       this.context.drawImage(this.image, this.x + this.canvas.width, 0);
     } else {
       this.context.drawImage(this.image, this.x - this.image.width, 0);      
@@ -38,7 +39,7 @@ let canvas = {
   },
   updateCanvas : function (){
     setInterval(()=>{
-      this.bkgMove()
+      this.bkgMove() //at the second round this, change. 
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.bkgDraw();
     }, 20)
