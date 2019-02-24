@@ -1,15 +1,26 @@
+// Triggers
 window.onload = function() {
+  player = new Player(50, 70, "flappy.png", 219, 390, true); //Dont know where should I put this
   document.getElementById("start-button").onclick = function() {
     startGame();
   };
-
   function startGame() {
     canvas.start();
   }
-
+  document.onkeyup = function(e) {
+    player.stopMove();
+  }
 };
+document.onkeydown = function(e) {
+  switch (e.keyCode) {
+    case 32: //space bar
+      player.moveUp();
+      break;
+  }
+}
+const myObstacles = []; //Dont know where should I put this
 
-
+// Canvas and background animation
 let canvas = {  
   image : new Image(),  
   canvas : document.createElement('canvas'), 
@@ -42,10 +53,12 @@ let canvas = {
     this.bkgDraw();
   }
 }
-let myObstacles = [];
+
 
 function updateGame (){
     canvas.updateCanvas()
+    player.newPos();
+    player.update();
     canvas.frames +=1;
     if (canvas.frames % 340 === 0) {
       x = canvas.canvas.width;
@@ -65,19 +78,34 @@ function updateGame (){
     requestAnimationFrame(updateGame);
 }
 
-//Component 
-function Component(width, height, color, x, y) {
+//Obstacle 
+function Component(width, height, img, x, y) {
+  this.image = new Image();
+  this.image.src = './images/' + img;
   this.width = width;
   this.height = height;
   this.x = x;
-  this.y = y;
+  this.y = y;  
+}
+Component.prototype.update = function (){
+  ctx = canvas.context;
+  ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
+}
+// Player
+function Player(width, height, img, x, y) {
+  Component.call(this, width, height, img, x, y); //Copying basic config from Obstacle
   this.speedX = 0;
   this.speedY = 0;
-  this.image = new Image();
-  this.image.src = './images/' + color;
-  this.update = function(){
-      ctx = canvas.context;
-      ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
+  this.newPos = function() {
+      this.x += this.speedX;
+      this.y += this.speedY;
   }
+}
+Player.prototype = Object.create(Component.prototype); //Copying prototypes from Component
 
+Player.prototype.moveUp = function () {this.speedY -= 1;}
+
+Player.prototype.stopMove = function () {
+  this.speedX = 0;
+  this.speedY = 0;
 }
