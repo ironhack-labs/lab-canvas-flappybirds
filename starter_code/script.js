@@ -4,30 +4,21 @@ window.onload = function() {
   };
 
   // area / lienzo / canvas
-  function MyGameArea() {
-    this.canvas = document.createElement('canvas');
-    
-  }
-  
-  MyGameArea.prototype.background = function () {
-    this.canvas.width = 900;
-    this.canvas.height = 400;
-    this.canvas.id = 'canvas';
-    this.context = this.canvas.getContext("2d");
+  function myGameArea() {
+    canvas = document.createElement('canvas');
+    canvas.width = 900;
+    canvas.height = 600;
+    canvas.id = 'canvas';
+    context = this.canvas.getContext("2d");
     document.getElementById('game-board').appendChild(this.canvas);
-    this.img = new Image(600,800);
-    this.img.src = 'images/bg.png';
-    console.log(this.img)
+    var img = new Image();
+    img.onload = function() {
+      context.drawImage(img,0,0);
+    }
+    img.src = 'images/bg.png';
+    
   }  
-  
-  var myGameArea = new MyGameArea();
-  myGameArea.background();
-  
-  
-  
-  
-  
-
+myGameArea();
 
 };
 
