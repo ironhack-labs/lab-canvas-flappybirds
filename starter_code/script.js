@@ -27,6 +27,7 @@ window.onload = function() {
     }
 
   function startGame() {
+    resetGame()
     myGameArea.start();
     faby.drawFaby();    
   }
@@ -132,14 +133,13 @@ function updateGameArea() {
 
   if (myGameArea.frames % 75 === 0) {
     var minHeight = 20;
-    var maxHeight = 200;
+    var maxHeight = 400;
     var height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
     var minGap = 100;
     var maxGap = 250;
     var gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
     myObstaclesT.push(new ComponentTop(100, height, 1200, 0));
     myObstaclesB.push(new ComponentBottom(100, myGameArea.canvas.height - height - gap, 1200, height + gap));
-    points++;
   };
 
   for (i = 0; i < myObstaclesT.length; i += 1) {
@@ -150,6 +150,7 @@ function updateGameArea() {
     }
     myObstaclesT[i].x -= 5;
     myObstaclesT[i].update();
+    if (myObstaclesT[i].right() === faby.left()){points++};
   };
 
   for (i = 0; i < myObstaclesB.length; i += 1) {
@@ -178,7 +179,7 @@ var faby = {
   },
   speedX: 0,
   speedY: 0,
-  gravity: 1.5,
+  gravity: 1.8,
   update: function() {
     hitBottomOrTop()
     this.y += this.gravity
@@ -215,6 +216,15 @@ function hitBottomOrTop () {
     }
   }
 
-  function moveUp () {
-    faby.y -= 30;
+function moveUp () {
+    faby.y -= 25;
   }
+
+
+function resetGame() {
+  myObstaclesT = [];
+  myObstaclesB = [];
+  points = 0;
+  faby.x = 560;
+  faby.y = 250;
+}
