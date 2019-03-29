@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="test"></canvas>
+
+    <script>
+        var that = this
+        var canvasDOMEl = document.getElementById("test")
+
+        canvasDOMEl.setAttribute("height", window.innerHeight)
+        canvasDOMEl.setAttribute("width", window.innerWidth)
+
+        /** @type {CanvasRenderingContext2D} */
+        this.ctx = canvasDOMEl.getContext("2d")
+
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(70, 120, 100, 100);
+
+        // change this to try different layer exposition modes
+        /* source-over     
+        source-atop	    
+        source-in	    
+        source-out	    
+        destination-over
+        destination-atop
+        destination-in	
+        destination-out	
+        lighter	        
+        copy	        
+        xor*/
+
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.fillStyle = 'green';
+        ctx.arc(160, 170, 50, 0, 2 * Math.PI);
+        ctx.fill();    
+    </script>
+</body>
+
+</html>

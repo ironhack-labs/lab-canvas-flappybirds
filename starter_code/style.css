@@ -1,3 +1,8 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 body {
   text-align: center;
 }
@@ -17,3 +22,10 @@ body button {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+
+.hola  {
+  display: none;
+}
+/* #game-board {
+  background-image: url('./images/bg.png')
+} */

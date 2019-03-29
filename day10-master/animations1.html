@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+    <title>Document</title>
+    <style>
+        aside {
+            /* height: 100px; */
+            /* width: 100px; */
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        aside button {
+            font-size: 25px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="test"></canvas>
+    <aside>
+        <button id="ac">Accelerate</button>
+        <button id="de">Decelerate</button>
+        <button id="bo">Bounce</button>
+        <button id="stop">Stop/Move</button>
+    </aside>
+    <script src="./Obstacle.js"></script>
+    <script src="./Ball.js"></script>
+    <script>
+        var that = this
+        var canvasDOMEl = document.getElementById("test")
+
+        var w = window.innerWidth
+        var h = window.innerHeight
+        var h2 = h / 2
+        var w2 = w / 2
+        var PI2 = 2 * Math.PI
+
+        canvasDOMEl.setAttribute("height", window.innerHeight)
+        canvasDOMEl.setAttribute("width", window.innerWidth)
+
+        /** @type {CanvasRenderingContext2D} */
+        this.ctx = canvasDOMEl.getContext("2d")
+
+        //ball1 is an instance of Ball
+        /** @type {Ball} */
+        var ball1 = new Ball(25, 675, 25, "green")
+        var ball2 = new Ball(w - 100, 650, 50, "purple")
+        var obstacles = [400, 500, 1200]
+
+        obstacles = obstacles.map(function (posX) {
+            return new Obstacle(posX, 600)
+        })
+
+        ball1.setSpeed(2)
+        ball2.setSpeed(-4)
+
+        var moving = false
+
+        document.querySelector("#stop").onclick = function () {
+            moving = !moving
+        }
+
+        document.querySelector("#ac").onclick = function () {
+            ball1.setAccelerationFactor(1.01)
+        }
+
+        document.querySelector("#de").onclick = function () {
+            ball1.setAccelerationFactor(.99)
+        }
+
+        document.querySelector("#bo").onclick = function () {
+            ball1.bounce()
+        }
+
+        var score
+
+        var intervalID = setInterval(function () {
+            score = 0
+            ctx.clearRect(0, 0, w, h)
+            //gateway
+            ctx.beginPath()
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(0, 700, w, 20)
+            ctx.closePath()
+
+            if (moving) {
+                // ball1.moveX()
+                ball1.accelerateX()
+                // ball2.moveX()
+            }
+
+            //ball
+            ball1.draw(ctx)
+            ball2.draw(ctx)
+
+            //obstacles drawing
+            obstacles.forEach(obstacle => obstacle.draw(ctx))
+            
+            //collision detection
+            obstacles.forEach(obstacle => {
+                if (ball1.getX() + ball1.getRadius() >= obstacle.getX()) {
+                    obstacle.setAsTouched()
+                    score+=100
+
+                    if (score === 100 * obstacles.length) {
+                        alert("nivel pasado")
+                        clearInterval(intervalID)
+                    }
+                }
+            })
+
+            // score = obstacles.reduce((ac, cValue) => {
+            //     if (cValue.hasBeenTouched) {
+            //         ac += 100
+            //     }
+            // }, 0)
+
+            console.log(score)
+
+            // if (ball1.getX() + ball1.getRadius() >= obstacles[0].getX()) {
+            //     // ball1.bounce()
+            //     obstacles[0].setAsTouched()
+            // }
+
+            ctx.font = "30px Arial"
+            ctx.fillStyle = "black"
+            ctx.fillText(`Score: ${score}`, w - 200, 50)
+        }, 10)
+    </script>
+</body>
+
+</html>

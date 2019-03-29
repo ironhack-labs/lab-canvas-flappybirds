@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <aside>
+        <button id="openClose">close</button>
+        <label for="theRange">Sepia amount</label>
+        <input type="range" min="0" max="1" step="0.1" value="0" id="theRange">
+    </aside>
+
+    <canvas id="test"></canvas>
+    <script src="aside.js"></script>
+    <script src="blur.js"></script>
+    <script>
+        BlurApp.init(function () {
+            //this happens when the app is ready to work!
+            console.log("Next steps")
+            Aside.init()
+        })
+    </script>
+</body>
+
+</html>
