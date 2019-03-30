@@ -5,7 +5,7 @@ class Player {
     this.img = img;
     this.x = x;
     this.y = y;
-    this.gravitySpeed = 2;
+    this.gravitySpeed = 4;
     this.ctx = ctx;
     this.floorH = floorH;
   }
@@ -15,7 +15,7 @@ class Player {
   }
 
   jump() {
-      this.y-=20;
+      this.y-=100;
   }
 
   draw() {

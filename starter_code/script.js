@@ -132,8 +132,8 @@ window.onload = function() {
   }
 
   function generateObstacles() {
-    var topHeight = randomIntegerFromRange(200, 794);
-    var bottomHeight = topHeight - randomIntegerFromRange(200, 794);
+    var topHeight = randomIntegerFromRange(canvasH/4, canvasH/2) - 200;
+    var bottomHeight = randomIntegerFromRange(canvasH/4, canvasH - topHeight - 200);
     obstacles.push(new Obstacle(obsTopImage, canvasW, 0, topHeight, ctx));
     obstacles.push(
       new Obstacle(
