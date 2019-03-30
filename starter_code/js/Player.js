@@ -10,6 +10,7 @@ FB.Components.Player = class Player{
   }
   fly(){
     this.angle -= 5;
+    this.y -= 5;
   }
   move(){
     let key = FB.Events.SPACE_BAR;
@@ -18,9 +19,11 @@ FB.Components.Player = class Player{
       this.fly();
     }
 
-    if(performance.now() - key.timer > 500){
-      FB.Events.releaseKey(key.code);
-    }
+    // if(performance.now() - key.timer > 60){
+    //   FB.Events.releaseKey(key.code);
+    // }
+
+    this.y++;
 
     if(++this.angle >= 90){
       this.angle = 90;

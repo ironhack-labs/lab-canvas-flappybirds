@@ -46,4 +46,8 @@ var FB = {
   drawAll: function(){
     this.Components.draw();
   },
+  gameOver: function(){
+    // Add score and reset option by DOM or painting in canvas
+    FB.init();
+  }
 };

@@ -13,6 +13,7 @@ FB.Components = {
   move: function(){
     this.Background.move();
     this.movePlayers();
+    this.checkCanvasBoundaries();
   },
   draw: function(){
     this.Background.draw();
@@ -30,6 +31,16 @@ FB.Components = {
   },
   createPlayer: function(x, y){
     this.players.push(new this.Player(x, y));
+  },
+  checkCanvasBoundaries(){
+    for(let player of this.players){
+      if(player.y - player.height < 0){
+        player.y = player.height;
+      }
+      if(player.y - player.height/2 > FB.h){
+        FB.gameOver();
+      }
+    }
   }
 
 };
