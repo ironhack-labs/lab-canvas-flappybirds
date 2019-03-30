@@ -7,6 +7,7 @@ FB.Events = {
   init: function(){
     this.onResize();
     this.playButton();
+    this.restart();
   },
   playButton: function(){
     document.getElementById("start-button").onclick = function() {
@@ -38,5 +39,12 @@ FB.Events = {
         break;
       }
     }.bind(this));
+  },
+  restart: function(){
+    document.querySelector('#restart').addEventListener('click', function(){
+      document.querySelector('#game-over').style.visibility = 'hidden';
+      FB.init();
+      FB.startGame();
+    });
   }
 };

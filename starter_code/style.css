@@ -20,3 +20,45 @@ body button {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+
+#start-button{
+  cursor: pointer;
+}
+
+#game-over{
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 33%;
+  background-color: hsl(90, 80%, 30%);
+  color: #fff;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  box-shadow: 2px 2px 6px grey;
+}
+
+#game-over h2{
+  font-size: 32px;
+  text-transform: uppercase;
+}
+
+#game-over p{
+  font-size: 24px;
+  margin-top: 0;
+}
+
+#restart{
+  flex-basis: 100%;
+  background-color: hsl(90, 50%, 30%);
+  color: white;
+  padding: 15px 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid hsl(90, 50%, 20%);
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px #333;
+}

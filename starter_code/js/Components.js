@@ -3,6 +3,7 @@ FB.Components = {
   obstacles: null,
   init: function(){
     this.Background.init();
+    this.ScoreManager.init();
     this.players = [];
     this.obstacles = [];
     this.createPlayer(100, FB.h-150);
@@ -13,6 +14,7 @@ FB.Components = {
     this.movePlayers();
     this.checkCanvasBoundaries();
     this.checkObstaclesBoundaries();
+    this.checkScoreBoundary();
     this.createObstacle();
     this.moveObstacles();
   },
@@ -20,6 +22,7 @@ FB.Components = {
     this.Background.draw();
     this.drawPlayers();
     this.drawObstacles();
+    this.ScoreManager.draw();
   },
   movePlayers: function(){
     for(let player of this.players){
@@ -63,14 +66,24 @@ FB.Components = {
     // O(n**2) complexity!!!
     for(let obstacle of this.obstacles){
       for(let player of this.players){
-        if( (player.x + player.width > obstacle.top.x 
-          && player.x < obstacle.top.x + obstacle.top.width
-          && player.y < obstacle.top.y + obstacle.top.height) 
-          || (player.x + player.width > obstacle.bottom.x 
-          && player.x < obstacle.bottom.x + obstacle.bottom.width
-          && player.y + player.height > obstacle.bottom.y)){
+        if( (player.x + player.width > obstacle.top.x && 
+          player.x < obstacle.top.x + obstacle.top.width && 
+          player.y < obstacle.top.y + obstacle.top.height) || 
+          (player.x + player.width > obstacle.bottom.x && 
+          player.x < obstacle.bottom.x + obstacle.bottom.width && 
+          player.y + player.height > obstacle.bottom.y)){
             FB.gameOver();
           }
+      }
+    }
+  },
+  checkScoreBoundary: function(){
+    // O(n**2) complexity!!! Also, if there are only one scoreManager, it does not make so much sense to go through all players...
+    for(let obstacle of this.obstacles){
+      for(let player of this.players){
+        if(player.x === obstacle.top.x + obstacle.top.width/2){
+          this.ScoreManager.addPoints(1);
+        }
       }
     }
   },

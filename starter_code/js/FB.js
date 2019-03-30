@@ -6,6 +6,8 @@ var FB = {
   h: null,
   h2: null,
   frameCount: 0,
+  frameID: null,
+  status: 0,
   init: function(){
     /** @type {HTMLCanvasElement} */
     this.canvas = document.querySelector('#canvas');
@@ -30,15 +32,17 @@ var FB = {
     this.DOM.setCanvasFullScreen();
     this.Events.pressKey();
     this.Events.releaseKey();
-    this.gameLoop();
+    if(!this.status){
+      this.gameLoop();
+    }
+    this.status = 1;
   },
   gameLoop: function(){
+    this.frameID = requestAnimationFrame(this.gameLoop.bind(this));
     this.checkFrameCount();
     this.clearScreen();
     this.moveAll();
     this.drawAll();
-
-    requestAnimationFrame(this.gameLoop.bind(this));
   },
   moveAll: function(){
     this.Components.move();
@@ -48,6 +52,11 @@ var FB = {
   },
   gameOver: function(){
     // Add score and reset option by DOM or painting in canvas
-    FB.init();
+    if(this.status){
+      cancelAnimationFrame(this.frameID);
+    }
+    this.status = 0;
+    document.querySelector('#game-over').style.visibility = 'visible';
+    document.querySelector('#points').innerText = this.Components.ScoreManager.points;
   }
 };
