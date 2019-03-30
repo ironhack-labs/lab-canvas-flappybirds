@@ -28,6 +28,8 @@ var FB = {
   startGame: function(){
     this.DOM.showGame('#game-board');
     this.DOM.setCanvasFullScreen();
+    this.Events.pressKey();
+    this.Events.releaseKey();
     this.gameLoop();
   },
   gameLoop: function(){
