@@ -1,23 +1,25 @@
 FB.Components = {
-  ctx: null,
-  w: null,
-  h: null,
-  w2: null,
-  h2: null,
   players: null,
+  obstacles: null,
   init: function(){
     this.Background.init();
     this.players = [];
-    this.createPlayer(50, FB.h-150);
+    this.obstacles = [];
+    this.createPlayer(100, FB.h-150);
+    this.createObstacle();
   },
   move: function(){
     this.Background.move();
     this.movePlayers();
     this.checkCanvasBoundaries();
+    this.checkObstaclesBoundaries();
+    this.createObstacle();
+    this.moveObstacles();
   },
   draw: function(){
     this.Background.draw();
     this.drawPlayers();
+    this.drawObstacles();
   },
   movePlayers: function(){
     for(let player of this.players){
@@ -32,15 +34,45 @@ FB.Components = {
   createPlayer: function(x, y){
     this.players.push(new this.Player(x, y));
   },
-  checkCanvasBoundaries(){
+  createObstacle: function(){
+    if(FB.frameCount % 480 === 0){
+      this.obstacles.push(new this.Obstacle());
+    }
+  },
+  moveObstacles: function(){
+    for(let obstacle of this.obstacles){
+      obstacle.move();
+    }
+  },
+  drawObstacles: function(){
+    for(let obstacle of this.obstacles){
+      obstacle.draw();
+    }
+  },
+  checkCanvasBoundaries: function(){
     for(let player of this.players){
-      if(player.y - player.height < 0){
-        player.y = player.height;
+      if(player.y - player.height/2 < 0){
+        player.y = player.height/2;
       }
       if(player.y - player.height/2 > FB.h){
         FB.gameOver();
       }
     }
-  }
+  },
+  checkObstaclesBoundaries: function(){
+    // O(n**2) complexity!!!
+    for(let obstacle of this.obstacles){
+      for(let player of this.players){
+        if( (player.x + player.width > obstacle.top.x 
+          && player.x < obstacle.top.x + obstacle.top.width
+          && player.y < obstacle.top.y + obstacle.top.height) 
+          || (player.x + player.width > obstacle.bottom.x 
+          && player.x < obstacle.bottom.x + obstacle.bottom.width
+          && player.y + player.height > obstacle.bottom.y)){
+            FB.gameOver();
+          }
+      }
+    }
+  },
 
 };

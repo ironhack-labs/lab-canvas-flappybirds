@@ -19,7 +19,7 @@ var FB = {
   },
   checkFrameCount: function(){
     if(++this.frameCount > 3600){
-      this.frameCount = 0;
+      this.frameCount = 1;
     }
   },
   clearScreen: function(){
