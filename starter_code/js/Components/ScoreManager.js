@@ -6,7 +6,8 @@ FB.Components.ScoreManager = {
   draw: function(){
     FB.ctx.font = '64px Arial';
     FB.ctx.fillStyle = 'white';
-    FB.ctx.fillText(this.points, 50, 100);
+    FB.ctx.textAlign = 'center';
+    FB.ctx.fillText(this.points, FB.w/2, 100);
   },
   init: function(){
     this.points = 0;
