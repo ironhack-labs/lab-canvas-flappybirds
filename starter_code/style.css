@@ -1,3 +1,12 @@
+div {
+  outline: 1px solid silver;
+}
+
+canvas {
+  outline: 1px solid silver;
+}
+
+
 body {
   text-align: center;
 }
