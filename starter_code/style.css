@@ -1,4 +1,6 @@
-*{
+html,
+body {
+  overflow: hidden;
   margin: 0;
   padding: 0;
 }
@@ -23,9 +25,11 @@ body button {
   margin-bottom: 20px;
 }
 
-.hola  {
+.canvas {
+  background-image: url("./images/bg.png");
+  background-size: cover;
+}
+
+.hola {
   display: none;
 }
-/* #game-board {
-  background-image: url('./images/bg.png')
-} */
