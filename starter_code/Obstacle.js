@@ -24,6 +24,7 @@ class Obstacle {
 
   moveObs() {
     this.x -= this.vx;
+    if (this.x <= 0) this.x = 0;
   }
     
 }

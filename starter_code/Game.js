@@ -3,8 +3,8 @@ class Game {
   constructor(id, width, height){
     this.canvas = document.getElementById(id);
     this.ctx = this.canvas.getContext("2d");
-    this.canvas.setAttribute('width', width)
-    this.canvas.setAttribute('height', height)
+    this.canvas.setAttribute('width', width);
+    this.canvas.setAttribute('height', height);
     this.w= this.canvas.width;
     this.h= this.canvas.height;
     this.w2 = this.w/2;
@@ -15,25 +15,20 @@ class Game {
     this.counter = 0;
     this.intervalId;
   
-
-    
   }
 
 
   startGame() {
     this.intervalId = setInterval(()=>{
       this.ctx.clearRect(0,0,this.w,this.h);
-      this.counter++
+      this.counter++;
       if (this.counter%100 ===0){
         this.obstacles.push(new Obstacle(this));
       }
-      this.checkColision()
+      this.checkColision();
       this.move();
       this.draw();
 
-
-
-    
     }, 1000/60);
   }
 
@@ -60,23 +55,29 @@ class Game {
   }
 
   checkColision(){
+    var dy = this.bird.y;
+    var dx= this.bird.x;
+    var dW=this.bird.birdW;
+    if (dy+35 == this.h ) {this.stopGame()};
     this.obstacles.forEach(obstacle => {
-      console.log('1', (this.bird.y > obstacle.y))
-      console.log('2', (this.bird.y < obstacle.yBot))
-      console.log('3',  (this.bird.x + this.bird.birdW > obstacle.x))
-      console.log('4', (this.bird.x < obstacle.x + obstacle.obsW))
+    console.log(dx, dW, obstacle.x, obstacle.y +700, dy);
 
-      if 
-        (((this.bird.y < obstacle.y +700) ||(this.bird.y > obstacle.yBot)) &&
-        ((this.bird.x + this.bird.birdW > obstacle.x) ||(this.bird.x < obstacle.x + obstacle.obsW))){
-          console.log("colision")
-          this.stopGame();
-        }
-    })
+  //     if 
+  //     //   (((dy < obstacle.y +700) &&
+  //     //  (dy > obstacle.yBot)) 
+  //     //  ((dx + dW>= obstacle.x) 
+  //     //   (dx <= obstacle.x + obstacle.obsW)))
+       
+  //       (!(obstacle.yBot > dy < obstacle.y +700) &&
+  //       (dx + dW > obstacle.x) && (dx < obstacle.x + obstacle.obsW));
+        
+  //       {
+  //         console.log("colision");
+  //         this.stopGame();
+  //       }
+    });
   }
   
-  
-
 
 
 }
