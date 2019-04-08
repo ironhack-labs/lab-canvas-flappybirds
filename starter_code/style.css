@@ -1,5 +1,6 @@
 body {
   text-align: center;
+  background: #000;
 }
 
 body h1 {
@@ -15,5 +16,17 @@ body button {
   border: 0;
   box-shadow: 0;
   border-radius: 5px;
-  margin-bottom: 20px;
+  border: 1px solid #fff;
+  margin: 0 auto;
+
+  
+}
+
+#game-board {
+  width: 700px;
+  height: 400px;
+  margin: 10px 15px 5px 15px;
+  background-color: black;
+  display: none;
+  border: 5px solid #fff;
 }
