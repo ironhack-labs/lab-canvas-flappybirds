@@ -23,6 +23,8 @@ const Game = {
     this.start()
     this.background = new Background(this.ctx, this.winW, this.winH, "images/bg.png")
     this.player = new Player(this.ctx, this.winH, this.winW, 'images/flappy.png')
+    this.obstacledown= new ObstacleDown(this.ctx, this.winH, this.winW, 'images/obstacle_bottom.png')
+    this.obstacleup = new ObstacleUp(this.ctx, this.winH, this.winW,'images/obstacle_top.png')
   },
   setDimensions: function(){
     this.canvasDom.setAttribute('width', window.innerWidth)
@@ -42,6 +44,8 @@ const Game = {
     
     this.background.drawBackground()
     this.player.drawPlayer()
+    this.obstacledown.drawDown()
+    this.obstacleup.drawUp()
   
   },
   moveAll: function(){
@@ -90,10 +94,10 @@ class Player {
     this.posX = this.winW/3
     this.posY = this.winH/2
     
-    this.velX = 5
-    this.velY = 1
+    //this.velX = 5
+    this.velY = 0
 
-    this.gravity = .4  // Aumenta la velocidad en el eje y
+    this.gravity = 0  // Aumenta la velocidad en el eje y
 
     this.img = new Image()
     this.img.src = url
@@ -108,14 +112,46 @@ class Player {
     document.onkeydown= function (event){
       if(event.keyCode==16){
         this.velY = -10
+        this.gravity = 0.4  //la cambio aquí para que el pollo esté quieto 
+                            //al empezar el juego
         //this.posY--
-        
       }
     }.bind(this)
   }
 
   movePlayer(){
+
    this.velY+=this.gravity
    this.posY+=this.velY
+  }
+}
+
+class ObstacleDown {
+  constructor(ctx, winH, winW, url){
+    this.ctx=ctx
+    this.winH= winH
+    this.winW= winW
+    this.objX = this.winW/2
+    this.objY= this.winH*0.7
+    this.img = new Image()
+    this.img.src=url
+  }
+  drawDown(){
+    this.ctx.drawImage(this.img, this.objX, this.objY, 100,400)
+  }
+}
+
+class ObstacleUp {
+  constructor(ctx, winH, winW, url){
+    this.ctx=ctx
+    this.winH= winH
+    this.winW= winW
+    this.objX = this.winW/2
+    this.objY= -30
+    this.img = new Image()
+    this.img.src=url
+  }
+  drawUp(){
+    this.ctx.drawImage(this.img, this.objX, this.objY, 100,300)
   }
 }
