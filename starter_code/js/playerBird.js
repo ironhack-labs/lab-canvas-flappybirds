@@ -1,24 +1,35 @@
 class Player {
-  constructor(w, h, ctx, keys) {
+  constructor(w, h, ctx, key) {
     this.canvasW = w;
     this.canvasH = h;
     this.ctx = ctx;
-    this.keys = keys;
+    this.key = key;
     //posicion inicial
     this.x = this.canvasW / 3;
     this.y = this.canvasH / 2;
     //imagen
     this.img = new Image();
     this.img.src = "images/flappy.png";
+    // velocidad
+    this.velY = 0;
+    this.gravity = 0.4;
+
+    this.setListeners();
   }
 
   draw() {
-    this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+    this.ctx.drawImage(this.img, this.x, this.y, 70, 50);
   }
 
+  setListeners() {
+    document.onkeydown = event => {
+      event.keyCode === this.key;
+      // this.y -= 5;
+      this.velY = -10;
+    };
+  }
   move() {
-    this.x -= this.dx;
-
-    if (this.x < -this.w) this.x = 0;
+    this.velY += this.gravity;
+    this.y += this.velY;
   }
 }
