@@ -3,74 +3,73 @@
     name: 'Race Car app',
     description: 'App de carrera de obstáculos en coche en  HTML5 Canvas',
     author: 'Leti',
-    canvasSize: {
-      w: 0,
-      h: 0,
-    },
     bg: undefined,
+    player: undefined,
+    fps: 20,
 
     init: function (id) {
       this.canvasDom = document.getElementById(id)
       this.ctx = this.canvasDom.getContext('2d')
-      this.canvasSize.w = window.innerWidth
-      this.canvasSize.h = window.innerHeight
+      this.canvasDom.w = window.innerWidth
+      this.canvasDom.h = window.innerHeight
 
       //this.canvasDom.style.backgroundColor = 'red'
       //this.canvasDom.style.backgroundImage = 'images/bg.png'
       this.setDimensions()
       this.setEventListeners()
-      this.setBgImage('images/bg.png', 900, 600)
-      this.draw()
+      this.reset()
+      this.start()
+
+    },
+    start: function () {
+      this.setInterval = setInterval(() => {
+        this.clear()
+        this.drawAll()
+        this.moveAll()
+      }, 1000 / this.fps)
     },
     setDimensions: function () {
-      this.canvasDom.setAttribute('width', this.canvasSize.w)
-      this.canvasDom.setAttribute('height', this.canvasSize.w)
+      this.canvasDom.setAttribute('width', this.canvasDom.w)
+      this.canvasDom.setAttribute('height', this.canvasDom.h)
     },
-    setBgImage: function (url, width, height) {
-      this.bg = new Image()
-      this.bg.src = url
-      this.bg.width = width
-      this.bg.height = height
-      this.bg.position = {
-        x: 0,
-        y: 0
-      }
-      this.bg.velocity = {
-        x: 3
-      }
+    reset: function () {
+      this.player = new Player(this.ctx, this.canvasDom.w, this.canvasDom.h)
+      this.background = new Background(this.ctx, this.canvasDom.w, this.canvasDom.h, 'images/bg.png')
     },
-    drawBackground: function () {
-      for (var i = 0; i < 3; i += 800) {
-        this.bg.position.x += this.bg.velocity.x
-        this.ctx.drawImage(this.bg, this.bg.position.x, this.bg.position.y, this.bg.width, this.bg.height)
-        this.ctx.translate(800, 0);
-      }
-      //this.bg.position.x += 10
-      console.log(this.bg.position.x)
+    drawAll: function () {
+      this.background.draw()
+      this.player.draw()
 
     },
-    draw: function () {
-      setInterval(() => {
-        //console.log(this.count)
-        this.clear()
-        this.drawBackground()
-
-      }, 1000 / 60)
+    moveAll: function () {
+      this.background.move()
 
     },
     clear: function () {
-      this.ctx.clearRect(0, 0, this.winW, this.winH)
+      this.ctx.clearRect(0, 0, this.canvasDom.w, this.canvasDom.h)
     },
     setEventListeners: function () {
-      document.onkeyup = e => {
-          //console.log(e)
-          //if (e.keyCode === 37) //izq
-          //  if (e.keyCode === 39) //derecha
-        },
-        window.onresize = () => {
-          this.setDimensions()
+      document.onkeydown = e => {
+        console.log(e)
+        if (e.keyCode === 32) {
+          this.player.changeGravity()
+          //console.log('Speed y', this.player.speed.y)
+          // console.log("Presiono tecla. Gravity:", this.player.gravity)
         }
+      }
+      document.onkeyup = e => {
+        console.log(e)
+        if (e.keyCode == 32) this.player.changeGravity() //console.log("-gravity")
+        console.log("Suelto tecla. Gravity:", this.player.gravity)
+      }
+      window.onresize = () => {
+        this.setDimensions()
+      }
 
     },
+    stop: function () {
+      clearInterval(this.setInterval)
+      console.log('parado')
+    }
 
   }
