@@ -41,6 +41,8 @@ const myGame = {
       if (this.framesCounter % 100 === 0) {
         this.generateObstacle();
       }
+      // console.log(this.isCollission());
+      if (this.isCollission()) this.gameOver();
     }, 1000 / this.fps);
   },
   stop: function() {
@@ -83,17 +85,27 @@ const myGame = {
       new ObstacleBottom(this.ctx, this.winW, this.winH, this.imgObstacleBottom)
     );
 
-    console.log(this.obstacles);
+    // console.log(this.obstacles);
   },
 
-  isCollision: function() {
-    return this.obstacle.some(obstacle => {
+  isCollission: function() {
+    return this.obstacles.some(obstacle => {
+      console.log(this.playerBird.x + this.playerBird.width, obstacle.x);
       return (
-        this.player.x + this.player.width >= obstacle.x &&
-        this.player.x < obstacle.x + obstacle.width &&
-        this.player.y <= obstacle.y + obstacle.height &&
-        this.player.y + this.player.height >= obstacle.y
+        this.playerBird.x + this.playerBird.width >= obstacle.x &&
+        this.playerBird.x < obstacle.x + obstacle.width &&
+        this.playerBird.y <= obstacle.y + obstacle.height &&
+        this.playerBird.y + this.playerBird.height >= obstacle.y
       );
     });
+  },
+
+  gameOver: function() {
+    this.stop();
+
+    if (confirm("LOOSER!!")) {
+      this.resetGame();
+      this.startGame();
+    }
   }
 };

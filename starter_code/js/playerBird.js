@@ -14,11 +14,14 @@ class Player {
     this.velY = 0;
     this.gravity = 0.4;
 
+    this.width = 70;
+    this.height = 50;
+
     this.setListeners();
   }
 
   draw() {
-    this.ctx.drawImage(this.img, this.x, this.y, 70, 50);
+    this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
   setListeners() {
