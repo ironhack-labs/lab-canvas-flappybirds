@@ -44,18 +44,8 @@ class Player {
   }
 
   move() {
-    // solo salta cuando el personaje está en el suelo
-    // if (this.y >= this.y0) {
-    //   // this.velY = this.vel0;
-    //   this.y = this.y0;
-    // }
-    // else {
     this.velY += this.gravity;
     this.y += this.velY;
-    // }
-    // console.log(this.velY)
   }
-
-
 
 }
