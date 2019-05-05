@@ -21,7 +21,7 @@ class Component {
     const ctx = myGameArea.context;
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
-  newPos() { // only used to move the player
+  newPos() { // sólo se llama para el player
     this.gravitySpeed += this.gravity;
     this.x += this.speedX;
     this.y += this.speedY + this.gravitySpeed;
@@ -42,8 +42,6 @@ class Component {
   outOfScreen() {
     if (this.top() <= 0 || this.bottom() >= myGameArea.canvas.height) {
       return true
-    } else {
-      return false
     }
   }
 
@@ -53,8 +51,11 @@ class Component {
       this.top() > obstacle.bottom() ||
       this.right() < obstacle.left() ||
       this.left() > obstacle.right()
+
     );
   }
+
+
 }
 
 class Background {
@@ -68,7 +69,7 @@ class Background {
     this.x = 0;
     this.y = 0;
 
-    this.dx = 1; // background speed
+    this.dx = 3;
   }
 
   draw() {
@@ -89,7 +90,7 @@ class Background {
   }
 
   move() {
-    this.x -= this.dx; // dx is the speed of the background
+    this.x -= this.dx;
 
     if (this.x < -this.w) this.x = 0;
   }
@@ -126,11 +127,11 @@ const myGameArea = {
 
 function updateObstacles() {
   for (i = 0; i < myObstacles.length; i++) {
-    myObstacles[i].x += -1; // speed of obstacle
-    myObstacles[i].update(); // draw obstacle
+    myObstacles[i].x += -1;
+    myObstacles[i].update();
   }
   myGameArea.frames += 1;
-  if (myGameArea.frames % 360 === 0) { // entra nuevo obstaculo (pero todavia no lo diseña)
+  if (myGameArea.frames % 360 === 0) {
     var x = myGameArea.canvas.width;
     var minHeight = 50;
     var maxHeight = 350;
@@ -153,25 +154,29 @@ document.onkeydown = function (e) {
   if (e.keyCode == 32) {
     player.gravity = -0.2
   }
-}
+};
 
 document.onkeyup = function (e) {
   if (e.keyCode == 32) {
     player.gravity = 0.05
   }
-}
+};
 
 
 function updateGameArea() {
-  myGameArea.clear(); // clears context
+  myGameArea.clear();
   myGameArea.background.move();
   myGameArea.background.draw();
-  updateObstacles(); // move all obstacles, drwa them and create new obstacle if applicable
-  player.newPos(); // move player
-  player.update(); // draw player
-  checkGameOver(); // check if the game should stop
-  myGameArea.score(); // update and draw the score
+  updateObstacles();
+  player.newPos(true);
+  player.update();
+  // check if the game should stop
+  checkGameOver();
+  // update and draw the score
+  myGameArea.score();
 }
+
+myGameArea.start();
 
 function checkGameOver() {
   var crashed = myObstacles.some(function (obstacle) {
