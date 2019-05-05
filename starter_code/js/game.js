@@ -12,6 +12,9 @@ const myGame = {
   Key: {
     TOP_KEY: 65
   },
+  framesCounter: 0,
+  imgObstacleTop: "images/obstacle_top.png",
+  imgObstacleBottom: "images/obstacle_bottom.png",
 
   init: function(id) {
     this.canvasDom = document.getElementById(id);
@@ -23,54 +26,74 @@ const myGame = {
 
   startGame: function() {
     this.fps = 60;
-    this.clear();
     this.resetGame();
 
     this.interval = setInterval(() => {
+      this.clear();
       this.drawAll();
       this.moveAll();
-
-      /*  this.generateObstacle();
       this.clearObstacles();
- */
-      /*    this.framesCounter++;
+
+      this.framesCounter++;
       if (this.framesCounter > 1000) {
         this.framesCounter = 0;
       }
-      if (this.framesCounter % 50 === 0) {
-        this.obstacle.generateObstacle();
-      } */
+      if (this.framesCounter % 100 === 0) {
+        this.generateObstacle();
+      }
     }, 1000 / this.fps);
   },
-  clear: function() {
+  stop: function() {
     clearInterval(this.interval);
+  },
+  clear: function() {
+    this.ctx.clearRect(0, 0, this.winW, this.winH);
   },
 
   resetGame: function() {
     this.background = new Background(this.ctx, this.winW, this.winH);
     this.playerBird = new Player(this.winW, this.winH, this.ctx, this.key);
-    this.obstacles = [new Obstacle(this.winW, this.winH, this.ctx)];
-    console.log(this.obstacles);
+    this.obstacles = [];
   },
 
   drawAll: function() {
     this.background.draw();
     this.playerBird.draw();
-    //this.obstacles.draw();
+
+    this.obstacles.forEach(obstacle => obstacle.draw()); //es un array y hay que iterarla!!!!!
   },
 
   moveAll: function() {
     this.background.move();
     this.playerBird.move();
+    this.obstacles.forEach(obstacle => obstacle.move());
   },
 
   clearObstacles: function() {
     this.obstacles = this.obstacles.filter(function(obstacle) {
-      return obstacle.x >= 0;
+      return obstacle.x + obstacle.width >= 0;
     });
   },
 
   generateObstacle: function() {
-    this.obstacles.push(new Obstacle(this.winW, this.winH, this.ctx));
+    this.obstacles.push(
+      new ObstacleTop(this.ctx, this.winW, this.winH, this.imgObstacleTop)
+    );
+    this.obstacles.push(
+      new ObstacleBottom(this.ctx, this.winW, this.winH, this.imgObstacleBottom)
+    );
+
+    console.log(this.obstacles);
+  },
+
+  isCollision: function() {
+    return this.obstacle.some(obstacle => {
+      return (
+        this.player.x + this.player.width >= obstacle.x &&
+        this.player.x < obstacle.x + obstacle.width &&
+        this.player.y <= obstacle.y + obstacle.height &&
+        this.player.y + this.player.height >= obstacle.y
+      );
+    });
   }
 };

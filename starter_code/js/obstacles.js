@@ -1,36 +1,41 @@
 class Obstacle {
-  constructor(winW, winH, ctx) {
+  constructor(ctx, winW, winH, url) {
     this.ctx = ctx;
-    this.winW = 15;
-    this.winH = 30;
-    this.height = 300;
-    this.width = 200;
-    this.x = this.winW - this.width;
-    this.y = this.winH - this.height;
+    this.winW = winW;
+    this.winH = winH;
+
+    this.height = 150;
+    this.width = 150;
+
+    this.x = this.winW;
+    this.y = undefined;
+
+    this.velX = 6;
 
     this.img = new Image();
-    this.img.src = "images/obstacle_bottom.png";
+    this.img.src = url;
   }
-
   draw() {
     this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
-}
-
-/* class ObstacleTop extends Osbstacle {
-
-  constructor(w,h,ctx) {
-    super(this.ctx, this);
-    this._subtotal = subtotal;
-    this._tax = tax;
-    this._currency = "€";
-  } */
-
-/*   draw() {
-    this.ctx.fillStyle = "black";
-    this.ctx.fillRect(this.x, this.y, this.w, this.h);
-  }
 
   move() {
-    this.x -= this.dx;
-  } */
+    this.x -= this.velX;
+  }
+}
+
+class ObstacleTop extends Obstacle {
+  constructor(ctx, winW, winH, url) {
+    super(ctx, winW, winH, url);
+
+    this.y = 0;
+  }
+}
+
+class ObstacleBottom extends Obstacle {
+  constructor(ctx, winW, winH, url) {
+    super(ctx, winW, winH, url);
+
+    this.y = this.winH - this.height;
+  }
+}
