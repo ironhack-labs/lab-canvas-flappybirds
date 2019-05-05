@@ -9,14 +9,14 @@ class Obstacle {
     this.img.src = url
 
     this.w = 100
-    this.hMin = 200
-    this.hMax = 280
+    this.hMin = 150
+    this.hMax = 250
     this.h = Math.floor(Math.random() * (this.hMax - this.hMin)) + this.hMin
 
     this.x = this.canvasW - this.w
     this.y = undefined
 
-    this.velX = 10
+    this.velX = 5
   }
 
   draw() {

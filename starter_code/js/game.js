@@ -40,7 +40,6 @@ const Game = {
     // Start
     this.start()
 
-
   },
 
   setDimensions: function () {
@@ -72,7 +71,7 @@ const Game = {
       // Despues de pulsar la tecla por primera vez
       if (this.score >= 0) {
         // controlamos la velocidad de generación de obstáculos y el score cada segundo
-        if (this.framesCounter % 60 === 0) {
+        if (this.framesCounter % 100 === 0) {
           this.score++
           this.generateObstacle();
         }
@@ -147,7 +146,17 @@ const Game = {
     const gap = 19
 
     return (
+      // Colision con el suelo
       (this.player.y + this.player.h > this.canvasSizes.h + gap) ||
+      // Colision por encima de las tuberias
+      this.obstaclesArray.some(obstacle => {
+        return (
+          this.player.x + this.player.w >= obstacle.x + gap &&
+          obstacle.x + obstacle.w >= this.player.x &&
+          this.player.y + this.player.h <= 0 + gap
+        )
+      }) ||
+      // Colision con las tuberias
       this.obstaclesArray.some(obstacle => {
         return (
           this.player.x + this.player.w >= obstacle.x + gap &&
@@ -156,6 +165,7 @@ const Game = {
           this.player.y + this.player.h >= obstacle.y + gap
         )
       })
+
     )
   },
 
@@ -175,10 +185,12 @@ const Game = {
   // SetListener que activa el evento onClick para comenzar a crear obstaculos 
   setListenerStart: function () {
     document.onkeyup = e => {
-      // Solo actua cuando score es undefined y lo pone a 0
-      this.score = 0
-      // Desactivar el evento onclick para que solo se ejecute una vez
-      document.onkeyup = null
+      // Cuando pulsamos por primera vez la tecla
+      if (e.keyCode === this.key) {
+        this.score = 0
+        // Desactivar el evento onclick para que solo se ejecute una vez
+        document.onkeyup = null
+      }
     }
   }
 

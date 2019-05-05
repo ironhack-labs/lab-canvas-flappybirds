@@ -9,7 +9,7 @@ class Player {
     this.w = 70
     this.h = 50
 
-    this.x = this.canvasW * 0.5
+    this.x = this.canvasW * 0.35
     this.y0 = this.canvasH * 0.9
     this.y = this.canvasH * 0.5
     this.vel0 = 0
