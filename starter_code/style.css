@@ -17,3 +17,7 @@ body button {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+#logo {
+  position: absolute ;
+  margin: 100px 125px 125px
+}
