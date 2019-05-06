@@ -4,7 +4,7 @@ window.onload = function() {
   };
 
   function startGame() {
-
+    document.getElementById("game-board").className = "display";
+    Game.init("canvas");
   }
-
 };
