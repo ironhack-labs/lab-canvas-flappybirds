@@ -4,7 +4,12 @@ class Obstacle {
     this.winW = winW;
     this.winH = winH;
 
-    this.height = 150;
+    this.maxHeight = 320;
+    this.minHeight = 120;
+
+    this.height =
+      Math.floor(Math.random() * (this.maxHeight - this.minHeight)) +
+      this.minHeight;
     this.width = 150;
 
     this.x = this.winW;

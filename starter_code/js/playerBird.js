@@ -12,7 +12,7 @@ class Player {
     this.img.src = "images/flappy.png";
     // velocidad
     this.velY = 0;
-    this.gravity = 0.4;
+    this.gravity = 0;
 
     this.width = 70;
     this.height = 50;
@@ -29,6 +29,7 @@ class Player {
       event.keyCode === this.key;
       // this.y -= 5;
       this.velY = -10;
+      this.gravity = 0.4;
     };
   }
   move() {

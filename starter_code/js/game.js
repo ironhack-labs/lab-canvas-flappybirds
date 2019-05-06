@@ -89,21 +89,23 @@ const myGame = {
   },
 
   isCollission: function() {
-    return this.obstacles.some(obstacle => {
-      console.log(this.playerBird.x + this.playerBird.width, obstacle.x);
-      return (
-        this.playerBird.x + this.playerBird.width >= obstacle.x &&
-        this.playerBird.x < obstacle.x + obstacle.width &&
-        this.playerBird.y <= obstacle.y + obstacle.height &&
-        this.playerBird.y + this.playerBird.height >= obstacle.y
-      );
-    });
+    return;
+    this.playerBird.y + this.playerBird.height <= this.winH ||
+      this.obstacles.some(obstacle => {
+        // console.log(this.playerBird.x + this.playerBird.width, obstacle.x);
+        return (
+          this.playerBird.x + this.playerBird.width >= obstacle.x &&
+          this.playerBird.x < obstacle.x + obstacle.width &&
+          this.playerBird.y <= obstacle.y + obstacle.height &&
+          this.playerBird.y + this.playerBird.height >= obstacle.y
+        );
+      });
   },
 
   gameOver: function() {
     this.stop();
 
-    if (confirm("LOOSER!!")) {
+    if (confirm("OOOOHHHH PERDISTE")) {
       this.resetGame();
       this.startGame();
     }
