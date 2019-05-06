@@ -82,15 +82,14 @@
     },
     //(p.x + p.w > o.x && o.x + o.w > p.x && p.y + p.h > o.y && o.y + o.h > p.y )
     checkColision: function () {
+
       return this.obstacles.some(obstacle => {
 
         return ( //revisar colisiones
           this.player.position.x + this.player.w > obstacle.position.x &&
-          obstacle.position.x + obstacle.w > this.player.position.x &&
-          this.player.position.y + this.player.h > obstacle.position.bottomY //&&
-          // obstacle.position.bottomY + obstacle.bottom.height > this.player.position.y &&
-          //this.player.position.y + this.player.h > obstacle.position.topY + obstacle.top.height //&&
-          // obstacle.position.topY + obstacle.top.height > this.player.position.y
+          obstacle.position.x + obstacle.w >= this.player.position.x &&
+          this.player.position.y + this.player.h >= obstacle.position.bottomY &&
+          obstacle.position.bottomY + obstacle.bottom.height > this.player.position.y
         )
       })
     },
@@ -106,7 +105,7 @@
             // console.log("Presiono tecla. Gravity:", this.player.gravity)
           }
           if (e.keyCode == 40) this.player.changeGravity() //console.log("-gravity")
-          console.log("Suelto tecla. Gravity:", this.player.position.y)
+
         },
         window.onresize = () => {
           this.setDimensions()

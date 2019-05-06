@@ -47,6 +47,6 @@ class Player {
   changeGravity() {
     this.gravity *= -1
     this.speed.y *= this.gravity
-    console.log(this.gravity)
+    //console.log(this.gravity)
   }
 }
