@@ -23,8 +23,9 @@ const Game = {
     this.start()
     this.background = new Background(this.ctx, this.winW, this.winH, "images/bg.png")
     this.player = new Player(this.ctx, this.winH, this.winW, 'images/flappy.png')
-    this.obstacledown= new ObstacleDown(this.ctx, this.winH, this.winW, 'images/obstacle_bottom.png')
-    this.obstacleup = new ObstacleUp(this.ctx, this.winH, this.winW,'images/obstacle_top.png')
+    //this.obstacledown= new ObstacleDown(this.ctx, this.winH, this.winW, 'images/obstacle_bottom.png')
+    //this.obstacleup = new ObstacleUp(this.ctx, this.winH, this.winW,'images/obstacle_top.png')
+    this.obstArray=[]
   },
   setDimensions: function(){
     this.canvasDom.setAttribute('width', window.innerWidth)
@@ -33,10 +34,23 @@ const Game = {
     this.winW=window.innerWidth
   },
   start: function(){
+    this.counter=0
     setInterval(() => {
       this.clearAll()
       this.drawAll()
       this.moveAll()
+      this.collisionObstacle()
+      //this.generateObstacles()
+      //this.obstArray.forEach((obstacle) => {
+      //  
+      //})
+//
+      this.counter++
+      if(this.counter % 360==0){
+        this.generateObstacles()
+      }
+      
+
     }, 1000/60)
     
   },
@@ -44,22 +58,55 @@ const Game = {
     
     this.background.drawBackground()
     this.player.drawPlayer()
-    this.obstacledown.drawDown()
-    this.obstacleup.drawUp()
+
+    this.obstArray.forEach(obstacle => {
+      obstacle.draw()
+    });
+    //this.obstacledown.drawDown()
+    //this.obstacleup.drawUp()
   
   },
   moveAll: function(){
-    this.background.moveBackground()
-    
+    this.background.moveBackground()   
     this.player.movePlayer()
 
+    this.obstArray.forEach(obstacle =>{
+      obstacle.move()
+    })
+    
+    //this.obstacledown.moveDown()
+    //this.obstacleup.moveUp()
   },
+
+
   clearAll: function(){
     this.ctx.clearRect(0, 0, this.winW, this.winH)
+  },
+
+  generateObstacles: function(){
+    this.obstArray.push(
+      new ObstacleDown(this.ctx, this.winH, this.winW, 'images/obstacle_bottom.png')
+    )
+    this.obstArray.push(
+      new ObstacleUp(this.ctx, this.winH, this.winW,'images/obstacle_top.png')
+    )
+  },
+  collisionObstacle: function (){
+    return this.obstArray.some(obstacle => {
+      return (
+        this.player.posX + this.player.width >= obstacle.objX &&
+        this.player.posX < obstacle.objX + 100 &&
+        this.player.posY + (this.player.height - 20) >= obstacle.objY
+      )
+      alert('yay')}
+    ) 
   }
 
-
 }
+
+
+
+
 
 
 class Background {
@@ -80,6 +127,7 @@ class Background {
     this.posBackX -= this.dx;
     if (this.posBackX < -this.winW) this.posBackX = 0
   }
+  
 }
 
 class Player {
@@ -131,13 +179,17 @@ class ObstacleDown {
     this.ctx=ctx
     this.winH= winH
     this.winW= winW
-    this.objX = this.winW/2
+    this.objX = this.winW
     this.objY= this.winH*0.7
     this.img = new Image()
     this.img.src=url
+    this.vel=2
   }
-  drawDown(){
-    this.ctx.drawImage(this.img, this.objX, this.objY, 100,400)
+  draw(){
+    this.ctx.drawImage(this.img, this.objX, this.objY, 100,300)
+  }
+  move(){
+    this.objX -= this.vel
   }
 }
 
@@ -146,12 +198,16 @@ class ObstacleUp {
     this.ctx=ctx
     this.winH= winH
     this.winW= winW
-    this.objX = this.winW/2
+    this.objX = this.winW
     this.objY= -30
     this.img = new Image()
     this.img.src=url
+    this.vel= 2
   }
-  drawUp(){
+  draw(){
     this.ctx.drawImage(this.img, this.objX, this.objY, 100,300)
+  }
+  move(){
+    this.objX -= this.vel
   }
 }
