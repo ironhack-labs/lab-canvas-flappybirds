@@ -87,9 +87,10 @@
 
         return ( //revisar colisiones
           this.player.position.x + this.player.w > obstacle.position.x &&
-          obstacle.position.x + obstacle.w >= this.player.position.x &&
-          this.player.position.y + this.player.h >= obstacle.position.bottomY &&
-          obstacle.position.bottomY + obstacle.bottom.height > this.player.position.y
+          obstacle.position.x + obstacle.w >= this.player.position.x
+          /*&&
+                   this.player.position.y + this.player.h >= obstacle.position.bottomY &&
+                   obstacle.position.bottomY + obstacle.bottom.height > this.player.position.y*/
         )
       })
     },
