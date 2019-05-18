@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   text-align: center;
 }
@@ -5,6 +10,7 @@ body {
 body h1 {
   font-size: 30px;
   text-transform: uppercase;
+  color: blue;
 }
 
 body button {
@@ -16,4 +22,8 @@ body button {
   box-shadow: 0;
   border-radius: 5px;
   margin-bottom: 20px;
+}
+
+body {
+  background-color: black;
 }
