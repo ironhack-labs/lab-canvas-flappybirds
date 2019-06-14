@@ -1,5 +1,6 @@
 window.onload = function() {
   document.getElementById("start-button").onclick = function() {
+    canvas.focus();
     startGame();
   };
 
@@ -12,32 +13,26 @@ window.onload = function() {
     bird.draw();
 
     if (!bird.isInLimits() || checkCollition()) {
-      // gameOver();
+      gameOver();
     }
 
     generatePipes();
     drawPipes();
   }
+  function startGame() {
+    if (interval) return;
+    
+    scenario = new Board();
+    bird = new Bird();
+    frames = 0;
+    pipes = [];
+    animateHelper = 0;
 
- 
+    interval = setInterval(update, 1000 / 60);
+  }
 
- 
+  function gameOver() {
+    clearInterval(interval);
+    interval = 0; 
+  }
 };
-
-function startGame() {
-  if (interval != 0) return;
-
-  scenario = new Board();
-  bird = new Bird();
-  frames = 0;
-  pipes = [];
-  animateHelper = 0;
-
-  interval = setInterval(update, 1000 / 60);
-  canvas.addEventListener("keydown", keyDown);
-}
-function gameOver() {
-  canvas.removeEventListener("keydown", keyDown);
-  clearInterval(interval);
-  interval = 0;
-}

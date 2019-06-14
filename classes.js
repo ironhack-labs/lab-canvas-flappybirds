@@ -15,13 +15,7 @@ class Board {
   }
 
   draw() {
-    // if (frames % 3 === 0) {
-    //   this.flag ? (this.y += 5) : (this.y -= 5);
-
-    //   this.flag = !this.flag;
-    // }
-
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 
     ctx.drawImage(
       this.img,
@@ -64,7 +58,7 @@ class Pipe {
 class Bird {
   constructor() {
     this.x = 100;
-    this.y = 400;
+    this.y = 0;
     this.width = 50;
     this.height = 50;
     this.img = new Image();
@@ -79,7 +73,7 @@ class Bird {
 
   move() {
     if (this.y < canvas.height - this.height) {
-      this.y += 3;
+      this.y += 2;
     }
   }
 
