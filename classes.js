@@ -15,7 +15,7 @@ class Board {
   }
 
   draw() {
-     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 
     ctx.drawImage(
       this.img,
@@ -44,6 +44,10 @@ class Pipe {
     this.type = type;
   }
 
+  move(){
+    this.x--;
+  }
+
   draw() {
     if (this.type) {
       ctx.drawImage(this.imgTop, this.x, this.y, this.width, this.height);
@@ -51,7 +55,7 @@ class Pipe {
       ctx.drawImage(this.imgBottom, this.x, this.y, this.width, this.height);
     }
 
-    this.x--;
+    this.move();
   }
 }
 
@@ -113,5 +117,18 @@ class Bird {
 
   isInLimits() {
     return this.y > 0 && this.y + this.height < canvas.height;
+  }
+}
+
+class Score {
+  constructor() {
+    this.x = canvas.width - 250;
+    this.y = canvas.height - 10;
+  }
+
+  draw() {
+    ctx.fillStyle = "white";
+    ctx.font = "30px Arial";
+    ctx.fillText(`Score: ${frames}`, this.x, this.y);
   }
 }

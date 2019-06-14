@@ -11,7 +11,16 @@ function generatePipes() {
 }
 
 function drawPipes(){
+
+    pipes.filter(pipe)
+
     pipes.forEach((pipe) => pipe.draw());
+}
+
+function pipeIsOut(pipe){
+    return (
+        pipe.x + pipe.width < 0
+    );
 }
 
 function checkCollition(){

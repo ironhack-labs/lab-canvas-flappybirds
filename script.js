@@ -8,22 +8,24 @@ window.onload = function() {
     frames++;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+   
     scenario.draw();
 
     bird.draw();
-
-    if (!bird.isInLimits() || checkCollition()) {
-      gameOver();
-    }
-
     generatePipes();
     drawPipes();
+    score.draw();
+    if (!bird.isInLimits() || checkCollition()) {
+      gameOver();
+    }  
   }
+
   function startGame() {
     if (interval) return;
-    
+
     scenario = new Board();
     bird = new Bird();
+    score = new Score();
     frames = 0;
     pipes = [];
     animateHelper = 0;
@@ -33,6 +35,14 @@ window.onload = function() {
 
   function gameOver() {
     clearInterval(interval);
-    interval = 0; 
+    interval = 0;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    scenario.draw();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "white";
+    ctx.font = "70px Arial";
+    ctx.strokeText(`Game Over!!!`, 200, 100);
+    ctx.strokeText(`Your final score is ${frames}`, 100, 170);
   }
 };
