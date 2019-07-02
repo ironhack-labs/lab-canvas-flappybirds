@@ -124,7 +124,6 @@ function updateObstacles() {
 function checkCollition() {
   obstacles.forEach(e => {
     if(faby.crashWith(e)) {
-      console.log("choque");
       gameOver();
     }
   })
@@ -155,7 +154,5 @@ window.addEventListener("keydown", e => {
  if (gameOver && e.keyCode === 32) location.reload();
 
 });
-
-
 
 update();
