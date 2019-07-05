@@ -90,7 +90,7 @@
           this.h = h;
 
           this.img = new Image();
-          this.img.src = './images/charizard.png';
+          this.img.src = './images/flappy.png';
           this.img.onload = this.draw();
         }
 
