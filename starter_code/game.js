@@ -3,28 +3,49 @@ const Game = {
   ctx: undefined,
   width: undefined,
   height: undefined,
-  init: function(id) {
-    this.canvas = document.getElementById(id)
+  fps: 60,
+
+  init: function() {
+    this.canvas = document.getElementById("mycanvas")
     this.ctx = this.canvas.getContext("2d")
     this.setDimensions()
-    this.start() //newly done
+    this.start() //newly made
+    
   },
+
   setDimensions: function() {
-    this.width = window.innerWidth * 0.95
-    this.height = window.innerHeight * 0.6
+    this.width = window.innerWidth * 0.6
+    this.height = window.innerHeight * 0.8
     this.canvas.width = this.width
     this.canvas.height = this.height
   },
+
   start: function() {
+    this.reset()
     this.Interval = setInterval(() => {
       //AQUÍ IRÁ CLEAR ALL
-      this.drawAll()   ESTO DA PROBLEMAS. MILES DE ERRORES
-    })
+      this.clear()
+      this.drawAll()
+      this.moveAll()
+   },1000/ this.fps)
   },
-  componentes: function() {
-    this.background = new Background(this.ctx, "images/bg.png") //declarar todos los componentes
+
+  reset: function() {
+    this.background = new Background(this.ctx,this.width,this.height) //declarar todos los componentes
   },
+
   drawAll: function() {
-    this.Background.draw() //ANTES ERA  this.Background.draw()  ESTO DA PROBLEMAS. MILES DE ERRORES
-  }
+    this.background.draw()
+  },
+
+  moveAll: function () {
+    this.background.move()
+  },
+
+  clear: function () {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+  },
 }
+/*Uncaught TypeError: Cannot read property 'draw' of undefined
+at Object.drawAll(game.js: 28)
+'reused' at game.js: 21 */
