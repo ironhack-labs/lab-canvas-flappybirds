@@ -10,6 +10,9 @@ const game = {
   height: undefined,
   canvasDiv: undefined,
 
+  keys: {
+    TOP_KEY: 38
+  },
 
   init: function (id) {
     this.canvasDomObj = document.getElementById(id)
@@ -18,6 +21,7 @@ const game = {
 
     this.width = (this.canvasDiv.offsetWidth)/ 2
     this.height = (this.canvasDiv.offsetHeight) * 4
+
     this.canvasDomObj.setAttribute('width', this.width)
     this.canvasDomObj.setAttribute('height', this.height)
 
@@ -29,7 +33,7 @@ const game = {
 
   reset: function() {
     this.background = new Background(this.ctx, this.width, this.height)
-    this.player = new Player (this.ctx, this.width, this.height)
+    this.player = new Player (this.ctx, this.canvasDomObj.width, this.canvasDomObj.height, this.keys)
   
   },
 
@@ -52,9 +56,10 @@ const game = {
 
   moveAll: function() {
     this.background.move()
+    this.player.move()
   },
 
   clear: function() {
-    this.ctx.clearRect(0, 0, this.width, this.height)
+    this.ctx.clearRect(0, 0, this.canvasDomObj.width, this.canvasDomObj.height)
   },
 }
