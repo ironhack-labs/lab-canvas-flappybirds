@@ -29,7 +29,8 @@ const game = {
 
   reset: function() {
     this.background = new Background(this.ctx, this.width, this.height)
-    console.log(this.background)
+    this.player = new Player (this.ctx, this.width, this.height)
+  
   },
 
   start: function() {
@@ -45,6 +46,7 @@ const game = {
 
   drawAll: function() {
     this.background.draw()
+    this.player.draw()
 
   },
 
