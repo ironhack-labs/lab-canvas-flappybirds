@@ -32,6 +32,6 @@ class Background {
     this._posX -= this._velX
     if (this._posX <= -this._width) { this._posX = 0 }
   }
-  //antes decía this.ctx.draw.image ese era el error por el que no aparecía background
+  
 }
-
+//antes decía this.ctx.draw.image ese era el error por el que no aparecía background
