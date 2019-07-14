@@ -7,8 +7,9 @@ class Background {
     this._posY = 0
     this._width = w
     this._height = h
-    this._velX = 3
+    this._velX = .5
   }
+
   draw() {
     this._ctx.drawImage(
       this._image,
@@ -33,3 +34,4 @@ class Background {
   }
   //antes decía this.ctx.draw.image ese era el error por el que no aparecía background
 }
+
