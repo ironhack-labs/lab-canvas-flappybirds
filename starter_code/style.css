@@ -1,5 +1,10 @@
 body {
   text-align: center;
+  overflow: hidden;
+  margin: 0%;
+  padding: 0%;
+  background-image: url(https://wallpaperplay.com/walls/full/f/7/e/200800.jpg);
+  background-size: cover;
 }
 
 body h1 {
@@ -9,11 +14,26 @@ body h1 {
 
 body button {
   font-size: 20px;
-  background-color: black;
+  background-color: tomato;
   color: #fff;
   padding: 10px 20px;
   border: 0;
   box-shadow: 0;
   border-radius: 5px;
   margin-bottom: 20px;
+}
+
+#cap1 {
+  margin: 5% 20%;
+}
+
+#cap2 {
+  margin: -5% 0%;
+}
+
+div {
+  justify-items: center;
+  justify-content: center;
+  margin: 50;
+  padding: 50;
 }
