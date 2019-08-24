@@ -1,5 +1,6 @@
 body {
   text-align: center;
+  background-image: url("./images/fondo.jpg")
 }
 
 body h1 {
@@ -16,4 +17,18 @@ body button {
   box-shadow: 0;
   border-radius: 5px;
   margin-bottom: 20px;
+}
+
+.divsito {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
+.divsito button {
+  font-size: 20px;
+  color: white;
+  background-color: black;
+  width: 200px;
 }
