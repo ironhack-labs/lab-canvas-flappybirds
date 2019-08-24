@@ -96,7 +96,7 @@ function drawScore() {
     score += 1
   }
   ctx.font = '24px Courier'
-  ctx.fillText(`score: ${score}`, canvas.width / 2, 50)
+  ctx.fillText(`Dominic score: ${score}`, (canvas.width / 2)-100, 50)
 }
 
 function generatePipes() {
