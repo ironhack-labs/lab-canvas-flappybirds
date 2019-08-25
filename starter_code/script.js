@@ -4,6 +4,7 @@ let frames = 0
 let score = 0
 let interval
 const pipes = []
+let audio
 
 class Board {
   constructor() {
@@ -12,10 +13,15 @@ class Board {
     this.width = canvas.width
     this.height = canvas.height
     this.img = new Image()
-    this.img.src = './images/bg.png'
+    this.img.src = './images/townsville.png'
     this.img.onload = () => {
       this.draw()
     }
+    // this.audio = new audio();
+    // this.audio.scr = './ppg-music.wav';
+    // this.audio.onload = () => {
+    //   this.playAudio()
+    // }
   }
   draw() {
     this.x--
@@ -28,7 +34,7 @@ class Board {
       this.x + canvas.width,
       this.y,
       this.width,
-      this.height
+      this.height,
     )
   }
 }
@@ -37,18 +43,18 @@ class Flappyoso {
   constructor(x, y) {
     this.x = x
     this.y = y
-    this.width = 50
-    this.height = 50
+    this.width = 100
+    this.height = 41
     this.img = new Image()
-    this.img.src = './images/flappy.png'
+    this.img.src = './images/buttercup1.png'
     this.imgFail = new Image()
-    this.imgFail.src = './images/flappyf.png'
+    this.imgFail.src = './images/buttercupf.png'
     this.img2 = new Image()
-    this.img2.src = './images/flappy3.png'
+    this.img2.src = './images/buttercup2.png'
     this.img3 = new Image()
-    this.img3.src = './images/flappy2.png'
+    this.img3.src = './images/buttercup3.png'
     this.img4 = new Image()
-    this.img4.src = './images/flappy4.png'
+    this.img4.src = './images/buttercup4.png'
   }
   draw(flappyType, alive=true) {
     if(!alive ) {
@@ -93,9 +99,9 @@ class Pipe {
     this.height = height
     this.type = type
     this.imgTop = new Image()
-    this.imgTop.src = './images/obstacle_top.png'
+    this.imgTop.src = './images/ppg-top.png'
     this.imgBot = new Image()
-    this.imgBot.src = './images/obstacle_bottom.png'
+    this.imgBot.src = './images/ppg-bottom.png'
   }
   draw() {
     this.x--
@@ -114,15 +120,16 @@ function drawScore() {
   if (frames % 200 === 0) {
     score += 1
   }
-  ctx.font = '24px Courier'
-  ctx.fillText(score, canvas.width / 2, 50)
+  ctx.font = '35px Sonsie One'
+  ctx.fillStyle = '#111';
+  ctx.fillText(`Score: ${score}`, 550, 30)
 }
 
 
 function generatePipes() {
-  const min = 20
+  const min = 40
   const max = 100
-  const ventanita = 100
+  const ventanita = 140
   if (frames % 200 === 0) {
     const randomHeight = Math.floor(Math.random() * (max - min))
     pipes.push(new Pipe(0, 50, randomHeight, true))
@@ -167,8 +174,9 @@ function start() {
 }
 
 function gameOver() {
-  ctx.font = '50px Courier'
-  ctx.fillText('Game Over', canvas.width / 2 - 100, 200)
+  ctx.font = '50px Sonsie One'
+  ctx.fillStyle = '#213867';
+  ctx.fillText('Game Over', canvas.width / 2 - 140, 200)
   clearInterval(interval)
   flappy.draw(flappyType='ff', alive=false)
 }
