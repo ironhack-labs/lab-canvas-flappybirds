@@ -131,7 +131,7 @@ function drawScore() {
 //****************************************************************************************************************************************+******+*++***********
 function generatePipes() {
   const min = 0 // el minimo en x de la height
-  const max = 400 // el máximo en x de la heinght
+  const max = 300 // el máximo en x de la heinght
   const ventanita = 100 // está definiendo el gao que habrá en todo el obstáculo
   if (frames % 200 === 0) {   //en esta linea tambien està definiendo cada cuando van a aparecer sus pipes
     const randomHeight = Math.floor(Math.random() * (max - min))
