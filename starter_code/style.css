@@ -1,5 +1,6 @@
 body {
   text-align: center;
+  font-family: 'Lexend Deca', sans-serif;
 }
 
 body h1 {
@@ -16,4 +17,7 @@ body button {
   box-shadow: 0;
   border-radius: 5px;
   margin-bottom: 20px;
+}
+canvas{
+  border:yellow;
 }
