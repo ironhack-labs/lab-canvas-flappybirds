@@ -1,19 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #111;
+  position: relative;
 }
 
-body h1 {
-  font-size: 30px;
-  text-transform: uppercase;
+.initial,
+#game-board,
+#wasted {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-body button {
-  font-size: 20px;
-  background-color: black;
-  color: #fff;
+.initial {
+  z-index: 2;
+}
+
+img {
+  width: 50%;
+  min-width: 200px;
+  margin-bottom: 2rem;
+}
+
+button {
+  font-size: 2rem;
+  background-color: #e86101;
+  color: #fdfdfc;
   padding: 10px 20px;
-  border: 0;
-  box-shadow: 0;
-  border-radius: 5px;
-  margin-bottom: 20px;
+  border: 5px solid #fdfdfc;
+  outline: none;
+  font-family: 'VT323', monospace;
+  text-transform: uppercase;
+  text-shadow: 0 4px #c04f02;
+  outline-style: solid;
+  outline-color: #533000;
+  cursor: pointer;
+  box-shadow: 0 5px #533000;
+}
+
+canvas {
+  transition: filter 0.25s ease-in-out;
+}
+
+.loser {
+  filter: grayscale(1);
+}
+
+#wasted {
+  opacity: 0;
+}
+
+.fadeIn {
+  opacity: 1 !important;
+  transition: opacity 0.25s ease-in-out;
+}
+
+#board {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  font-size: 5rem;
+  font-family: 'VT323', monospace;
+  color: #fff;
+  text-shadow: 0 4px #533000;
 }

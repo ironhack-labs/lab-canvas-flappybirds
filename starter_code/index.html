@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script type="text/javascript" src="script.js">
-
-  </script>
-  <link rel="stylesheet" href="style.css">
-  <title>Document</title>
-</head>
-<body>
-  <img src="./images/logo.png" alt="" style="width:50%;">
-  <br>
-  <button id="start-button">StartGame</button>
-  <div id="game-board"></div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="http://flappybird.io/img/apple-icon.png" type="image/x-icon" />
+    <title>Flappy Bird</title>
+    <!-- Stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=VT323&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Start Screen -->
+    <div class="initial">
+      <img src="./images/logo.png" alt="" />
+      <br />
+      <button id="start-button">Start Game</button>
+    </div>
+    <!-- Score Board -->
+    <div id="board"></div>
+    <!-- Canvas Container -->
+    <div id="game-board">
+      <canvas width="700" height="700"></canvas>
+    </div>
+    <!-- Wasted -->
+    <div id="wasted">
+      <img
+        src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Forig09.deviantart.net%2F66f4%2Ff%2F2015%2F360%2Fe%2Fd%2F_instant_button__grand_theft_auto_v_instant_wasted_by_tukari_g3-d9lidfc.png&f=1"
+        alt="Wasted"
+      />
+    </div>
+    <!-- Audios -->
+    <audio src="./ldtc.mp3" id="bg-music"></audio>
+    <audio src="./fly.wav" id="flying-sound"></audio>
+    <audio src="./evil-morty.mp3" id="game-over-song"></audio>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="script.js"></script>
+  </body>
 </html>
