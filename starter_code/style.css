@@ -1,19 +1,15 @@
-body {
-  text-align: center;
+#game-over {
+  display: none;
 }
 
-body h1 {
-  font-size: 30px;
-  text-transform: uppercase;
+#fb-logo {
+  display: none;
 }
 
-body button {
-  font-size: 20px;
-  background-color: black;
-  color: #fff;
-  padding: 10px 20px;
-  border: 0;
-  box-shadow: 0;
-  border-radius: 5px;
-  margin-bottom: 20px;
+div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
 }
