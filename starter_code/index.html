@@ -4,16 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script type="text/javascript" src="script.js">
-
-  </script>
   <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="JS/score.js"></script>
+  <script type="text/javascript" src="JS/obstaclesDown.js"></script>
+  <script type="text/javascript" src="JS/obstaclesUp.js"></script>
+  <script type="text/javascript" src="JS/obstacles.js"></script>
+  <script type="text/javascript" src="JS/player.js"></script>
+  <script type="text/javascript" src="JS/background.js"></script>
+  <script type="text/javascript" src="JS/game.js"></script>
+  <script type="text/javascript" src="JS/script.js"></script>
   <title>Document</title>
 </head>
 <body>
-  <img src="./images/logo.png" alt="" style="width:50%;">
+  <img is="start-image" src="./images/logo.png" alt="" style="width:50%;">
   <br>
   <button id="start-button">StartGame</button>
-  <div id="game-board"></div>
+  <div id="game-board"><canvas id="myCanvas" class="hidden"></canvas></div>
+
 </body>
 </html>
