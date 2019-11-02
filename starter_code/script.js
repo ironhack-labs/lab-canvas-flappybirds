@@ -4,6 +4,7 @@ let obstacles = []
 let interval;
 let frames = 0;
 let gameOverCount  = 0;
+let score = 0;
 
 // Classes
 class Board{
@@ -116,6 +117,7 @@ function checkCollition() {
     if (flappy.isTouching(pipe)) {
       gameOver();
     }
+    if((pipe.x + pipe.width) < flappy.x && flappy.x<(pipe.x + pipe.width + 1.2)) score++;
     if (flappy.y >=canvas.height - flappy.height) {
       gameOver();
     }
@@ -123,18 +125,27 @@ function checkCollition() {
 }
 
 function gameOver() {
-  ctx.font = '50px Courier';
-  ctx.fillText('Game over', canvas.width / 2 - 150, canvas.height / 2);
+  ctx.font = '30px Courier';
+  ctx.fillText(`Game over 
+   SCORE: ${score/2}` , canvas.width / 2 - 150, canvas.height / 2);
   gameOverCount++;
   clearInterval(interval);
 }
 
+function printScore(){
+  ctx.font = '20px Courier';
+  ctx.fillStyle = "yellow"
+  ctx.fillText(`SCORE: ${score/2}`, canvas.width - 120, 30);
+}
+
+
 // Main functions
 window.onload = function() {
-  document.getElementById("start-button").onclick = function() {
+  document.getElementById("start-button").onclick = function(e) {
     if (gameOverCount!==0 ) {
       obstacles = []
       frames = 0;
+      score = 0;
       gameOverCount = 0;
       interval = false;
       flappy.x = 30;
@@ -156,24 +167,17 @@ window.onload = function() {
     flappy.draw();
     drawPipes();
     checkCollition();
+    printScore()
   }
 };
 
 
 //listeners
-
 document.onkeydown = (e) => {
   switch (e.keyCode) {
     case 32:
       flappy.flapp();
       break;
-    // case 13:
-    //   start();
-    //   break;
-    // case 82:
-    //   restart();
-    //   break;
-
     default:
       break;
   }
