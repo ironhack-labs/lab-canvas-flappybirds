@@ -7,6 +7,11 @@ body h1 {
   text-transform: uppercase;
 }
 
+canvas{
+  border: 5px;
+  border-color: teal;
+}
+
 body button {
   font-size: 20px;
   background-color: black;
