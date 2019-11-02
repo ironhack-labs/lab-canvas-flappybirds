@@ -1,5 +1,6 @@
 body {
   text-align: center;
+  background-color: lightblue;
 }
 
 body h1 {
@@ -16,4 +17,15 @@ body button {
   box-shadow: 0;
   border-radius: 5px;
   margin-bottom: 20px;
+}
+
+canvas{
+  border: solid black;
+}
+
+aside{
+  position: absolute;
+  font-size: 30px;
+  left: 40px;
+  bottom: 200px;
 }
