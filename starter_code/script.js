@@ -91,7 +91,7 @@ class Obstacle {
 		this.type = type;
 	}
 	draw() {
-		this.x -= 2;
+		this.x -= 3;
 		if (this.type) {
 			ctx.drawImage(this.imgTop, this.x, this.y, this.width, this.height);
 		} else {
@@ -131,7 +131,7 @@ function drawPipes() {
 }
 //Keep score of the passed obstacle
 function keepScore() {
-	if (frames % 300 === 0 && frames > 650) {
+	if (frames % 300 === 0 && frames > 300) {
 		score++;
 	}
 }
