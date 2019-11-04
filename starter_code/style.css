@@ -1,5 +1,7 @@
 body {
   text-align: center;
+  background: black;
+  padding: 100px 0;
 }
 
 body h1 {
@@ -9,8 +11,8 @@ body h1 {
 
 body button {
   font-size: 20px;
-  background-color: black;
-  color: #fff;
+  background-color: #A2CB3A;
+  color: #black;
   padding: 10px 20px;
   border: 0;
   box-shadow: 0;
