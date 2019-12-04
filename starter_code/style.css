@@ -1,6 +1,9 @@
 body {
   text-align: center;
 }
+img {
+  height: 100px;
+}
 
 body h1 {
   font-size: 30px;
@@ -19,4 +22,7 @@ body button {
 }
 #start-button {
   text-align: center;
+}
+.display-none {
+  display: none;
 }
