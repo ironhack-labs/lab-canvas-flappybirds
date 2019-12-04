@@ -1,7 +1,7 @@
 class Player {
   constructor(x, y) {
     // this.game = game;
-    this.ctx = canvas.getContext('2d');
+    this.ctx = myCanvas.getContext('2d'); //myCanvas is ID attribute of canvas
     this.x = x;
     this.y = y;
     this.width = 30;
@@ -74,9 +74,16 @@ class Player {
     this.vy *= 0.9;
 
     if (this.x < -this.width) {
-      this.x = canvas.width;
-    } else if (this.x > canvas.width) {
+      this.x = myCanvas.width;
+    } else if (this.x > myCanvas.width) {
       this.x = -this.width;
+    }
+    if (this.y > myCanvas.height - this.height) {
+      this.y = myCanvas.height - this.height;
+      this.vy = 0;
+    }
+    if (this.y < 0) {
+      this.y = 0;
     }
     this.birdImg.src = './images/flappy.png';
     this.ctx.drawImage(this.birdImg, this.x, this.y, this.width, this.height);

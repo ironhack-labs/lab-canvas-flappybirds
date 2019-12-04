@@ -1,9 +1,9 @@
 class Obstacle {
   constructor() {
-    this.ctx = canvas.getContext('2d');
+    this.ctx = myCanvas.getContext('2d'); //myCanvas is ID attribute of canvas
     this.width = 50;
     this.height = 200;
-    this.x = canvas.width;
+    this.x = myCanvas.width; //myCanvas is ID attribute of canvas
     this.y = 0;
     this.vx = 0.5;
     this.obstacles = [
@@ -12,12 +12,11 @@ class Obstacle {
     ];
     this.obs = new Image();
   }
-  getTopObstacles = () => {
+  getTopObstacle = () => {
     // let index = Math.floor(Math.random() * this.obstacles.length);
     // this.obs.src = this.obstacles[index];
     this.x -= this.vx;
     this.obs.src = this.obstacles[0].src;
     this.ctx.drawImage(this.obs, this.x, this.y, this.width, this.height);
-    console.log('Output for: Obstacle -> getTopObstacles -> this.x', this.x);
   };
 }
