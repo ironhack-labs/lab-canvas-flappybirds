@@ -17,3 +17,9 @@ body button {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+
+#canvas {
+  background-image: url("./images/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
