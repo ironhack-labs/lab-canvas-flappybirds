@@ -13,7 +13,7 @@ class Game {
     this.reset();
     this.canvas.width = this.width;
     this.canvas.height = this.height;
-    this.player = new Faby(this.ctx);
+    this.player = new Faby(this.ctx,this.width,this.height);
     this.start();
   }
 
@@ -44,5 +44,6 @@ class Game {
 
   moveAll() {
     this.background.move();
+    this.player.move();
   }
 }
