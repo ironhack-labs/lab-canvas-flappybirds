@@ -3,12 +3,10 @@ class Obstacle {
     this.ctx = ctx;
     this.width = width;
     this.height = height;
-​
-    this.posX = 400;
+​    this.posX = 400;
     this.posY = 600;
     this.posUp = 0;
-​
-    this.vx = 10;
+​    this.vx = 10;
   }
 ​
   draw() {
