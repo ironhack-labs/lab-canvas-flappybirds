@@ -1,5 +1,5 @@
 class Background {
-    constructor(ctx, width, height) {
+    constructor(ctx, width, height,backgroundVx = 8) {
       this.ctx = ctx;
       this.width = width;
       this.height = height;
@@ -7,7 +7,7 @@ class Background {
       this.image.src = "./images/bg.png";
       this.posX = 0;
       this.posY = 0;
-      this.vx = 8;
+      this.vx = backgroundVx;
     }
 
     draw() {
