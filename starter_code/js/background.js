@@ -7,7 +7,7 @@ class Background {
       this.image.src = "./images/bg.png";
       this.posX = 0;
       this.posY = 0;
-      this.vx = 5;
+      this.vx = 3;
     }
 
     draw() {
