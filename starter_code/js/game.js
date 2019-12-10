@@ -25,12 +25,11 @@ class Game {
       this.drawAll();
       this.moveAll();
       this.clearObstacles();
-      if (this.framesCounter % 70 === 0) this.generateObstacles();
+      if (this.framesCounter === Math.floor(Math.random()*(150 - 50)) + 50) this.generateObstacles();
       if (this.isCollision()) this.gameOver();
-      if (this.framesCounter > 1000) this.framesCounter = 0;
+      if (this.framesCounter > 200) this.framesCounter = 0;
     }, 1000 / this.fps);
   }
-
   reset() {
     this.background = new Background(this.ctx, this.width, this.height);
     this.player = new Faby(this.ctx);
@@ -55,7 +54,7 @@ class Game {
 
   generateObstacles() {
     this.obstacles.push(
-      new Obstacle(this.ctx, 50, 100, this.width, this.height)
+      new Obstacle(this.ctx, 130, 200, this.width, this.height)
     );
     console.log("generateObstacles ==>>", this.obstacles);
   }
@@ -69,14 +68,14 @@ class Game {
     // (p.x + p.w > o.x && o.x + o.w > p.x && p.y + p.h > o.y && o.y + o.h > p.y )
     return this.obstacles.some(
       obs =>
-      this.player.posX + this.player.width > obs.posX &&
-      obs.posX + obs.width > this.player.posX &&
-      this.player.posY + this.player.height > obs.posUp &&
-      obs.posUp + obs.height > this.player.posY ||
-      this.player.posX + this.player.width > obs.posX &&
-      obs.posX + obs.width > this.player.posX &&
-      this.player.posY + this.player.height > obs.posY &&
-      obs.posY + obs.height > this.player.posY
+        (this.player.posX + this.player.width > obs.posX &&
+          obs.posX + obs.width > this.player.posX &&
+          this.player.posY + this.player.height > obs.posUp &&
+          obs.posUp + obs.height > this.player.posY) ||
+        (this.player.posX + this.player.width > obs.posX &&
+          obs.posX + obs.width > this.player.posX &&
+          this.player.posY + this.player.height > obs.posY &&
+          obs.posY + obs.height > this.player.posY)
     );
   }
 
