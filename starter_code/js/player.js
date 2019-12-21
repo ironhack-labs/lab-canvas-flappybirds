@@ -17,6 +17,8 @@ class Player {
       up: false,
     };
     this.birdImg = new Image();
+    this.sound = new Audio();
+    this.sound.src = './sounds/fly.mp3';
   }
   keyEvent() {
     document.addEventListener('keydown', event => {
@@ -30,11 +32,10 @@ class Player {
         case 39:
           this.controller.right = keyState;
           break;
+        case 32:
         case 38:
           this.controller.up = keyState;
-          break;
-        case 32:
-          this.controller.up = keyState;
+          this.sound.play();
           break;
       }
     });
@@ -47,10 +48,8 @@ class Player {
         case 39:
           this.controller.right = keyState;
           break;
-        case 38:
-          this.controller.up = keyState;
-          break;
         case 32:
+        case 38:
           this.controller.up = keyState;
           break;
       }
