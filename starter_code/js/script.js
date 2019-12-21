@@ -1,15 +1,17 @@
 window.onload = function() {
-  document.getElementById('start-button').onclick = function() {
-    startGame();
-    canvas.classList.remove('display-none');
-  };
   const canvas = this.document.createElement('canvas');
-  document.getElementById('game-board').appendChild(canvas);
   canvas.setAttribute('id', 'myCanvas');
+  document.getElementById('game-board').appendChild(canvas);
   canvas.classList.add('display-none');
   const ctx = canvas.getContext('2d');
   canvas.width = 700;
   canvas.height = 500;
+  document.getElementById('start-button').onclick = function() {
+    document.querySelector('img').style.display = 'none';
+    document.getElementById('start-button').style.display = 'none';
+    canvas.classList.remove('display-none');
+    startGame();
+  };
   const player1 = new Player(canvas.width / 2, canvas.height / 2);
   const obstacle = new Obstacle();
   const bgImage = new this.Image(); //background img
@@ -40,7 +42,6 @@ window.onload = function() {
   createObstacles = () => {
     if (Math.floor(Math.random() * 25) % 2 === 0) {
       obstacles.push(new Obstacle());
-      console.log('obstacle == ', obstacles);
     }
 
     setTimeout(() => {

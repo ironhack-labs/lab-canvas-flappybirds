@@ -8,9 +8,9 @@ class Player {
     this.height = 30;
     this.vx = 0;
     this.vy = 0;
-    this.gravity = 0.7;
-    this.gravitySpeedX = 1;
-    this.gravitySpeedY = 4;
+    this.gravity = 0.5;
+    this.gravitySpeedX = 0.5;
+    this.gravitySpeedY = 2;
     this.controller = {
       left: false,
       right: false,
@@ -33,6 +33,9 @@ class Player {
         case 38:
           this.controller.up = keyState;
           break;
+        case 32:
+          this.controller.up = keyState;
+          break;
       }
     });
     document.addEventListener('keyup', event => {
@@ -45,6 +48,9 @@ class Player {
           this.controller.right = keyState;
           break;
         case 38:
+          this.controller.up = keyState;
+          break;
+        case 32:
           this.controller.up = keyState;
           break;
       }
