@@ -23,20 +23,41 @@ class Player {
 
   //collision
   crashCollision(obstacle) {
+    //bird
     let leftSide = this.x;
     let rightSide = this.x + this.width;
     let top = this.y;
     let bottom = this.y + this.height;
-    let crossFront = rightSide > obstacle.x && leftSide < obstacle.x;
+    //bird width obstacle collision
+
+    //1.right side collision
+    let crossFront =
+      rightSide >= obstacle.x &&
+      leftSide < obstacle.x &&
+      (bottom <= obstacle.yTop + obstacle.height || top >= obstacle.yBottom);
+    //2.top collision
     let crossTop =
-      top > obstacle.y + obstacle.height &&
-      bottom < obstacle.y + obstacle.height;
-    let crossBottom = bottom > obstacle.y && top < obstacle.y;
+      top <= obstacle.yTop + obstacle.height &&
+      bottom > obstacle.yTop + obstacle.height &&
+      leftSide >= obstacle.x &&
+      rightSide <= obstacle.x + obstacle.width;
+    //3.bottom collision
+    let crossBottom =
+      bottom >= obstacle.yBottom &&
+      top < obstacle.yBottom &&
+      leftSide >= obstacle.x &&
+      rightSide <= obstacle.x + obstacle.width;
+    //4.left side collision
     let crossBack =
       rightSide > obstacle.x + obstacle.width &&
-      leftSide < obstacle.x + obstacle.width;
-    if (crossFront || crossTop || crossBottom || crossBack) return true;
-    else return false;
+      leftSide <= obstacle.x + obstacle.width &&
+      (bottom <= obstacle.yTop + obstacle.height || top >= obstacle.yBottom);
+    if (crossFront) this.x = obstacle.x - this.width;
+    if (crossBack) this.x = obstacle.x + obstacle.width;
+    if (crossTop) this.y = obstacle.yTop + obstacle.height;
+    if (crossBottom) this.y = obstacle.yBottom - this.height;
+    // if (crossFront || crossTop || crossBottom || crossBack) return true;
+    // else return false;
   }
 
   keyEvent() {

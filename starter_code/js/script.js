@@ -20,21 +20,37 @@ window.onload = function() {
   ground.src = './images/fg.png';
   bgImage.src = './images/bg.png';
   const obstacles = [];
+  let passedObstacles = [];
+  let score = 0;
 
   startGame = () => {
     clear();
     //1.background
-    ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height - 70);
+    // ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height - 70);
     //2.background - animation
-    // move();
-    // draw();
+    move();
+    draw();
     //draw obstacles
     if (obstacles.length > 0) {
       for (let i = 0; i < obstacles.length; i++) {
+        console.log('Output for: startGame -> obstacles', obstacles);
+        //create obstacles
         obstacles[i].getBottomObstacle();
+        // if (player1.crashCollision(obstacles[i])) {
+        //   // this.console.log('crash');
+        //   player1.x = obstacles[i].x - player1.width;
+        // }
         obstacles[i].getTopObstacle();
-
-        if (player1.crashCollision(obstacles[i])) this.console.log('crash');
+        player1.crashCollision(obstacles[i]);
+        // if (player1.crashCollision(obstacles[i])) {
+        //   // this.console.log('crash');
+        //   player1.x = obstacles[i].x;
+        // }
+        //check collision
+        if (obstacles[i].x + obstacles[i].width == player1.x) {
+          score++;
+        }
+        //delete obstacles
         if (obstacles[i].x + obstacles[i].width < 0 && obstacles.length > 7) {
           obstacles.splice(i, 1);
         }
@@ -43,6 +59,11 @@ window.onload = function() {
     ctx.drawImage(ground, 0, canvas.height - 70, canvas.width, 70); //draw the ground/bottom of canvas
     player1.keyEvent(); //bird controller state identifier
     player1.loop(); //draw and bird controller
+
+    //score
+    ctx.fillStyle = '#000';
+    ctx.font = '20px Verdana';
+    ctx.fillText('Score : ' + score, 10, 20);
 
     requestAnimationFrame(startGame);
   };
@@ -61,6 +82,7 @@ window.onload = function() {
 
   function draw() {
     ctx.drawImage(bgImage, x, 0);
+    ctx.drawImage(ground, x, canvas.height - 70, canvas.width, 70);
     if (speed < 0) {
       ctx.drawImage(bgImage, x + canvas.width, 0);
     } else {
