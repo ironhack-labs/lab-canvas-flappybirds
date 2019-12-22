@@ -17,11 +17,10 @@ window.onload = function() {
   const player1 = new Player(canvas.width / 2, canvas.height / 2);
   const bgImage = new this.Image(); //background img
   const ground = new this.Image();
+  const obstacles = [];
+  let score = 0;
   ground.src = './images/fg.png';
   bgImage.src = './images/bg.png';
-  const obstacles = [];
-  let passedObstacles = [];
-  let score = 0;
 
   startGame = () => {
     clear();
@@ -33,21 +32,11 @@ window.onload = function() {
     //draw obstacles
     if (obstacles.length > 0) {
       for (let i = 0; i < obstacles.length; i++) {
-        console.log('Output for: startGame -> obstacles', obstacles);
         //create obstacles
         obstacles[i].getBottomObstacle();
-        // if (player1.crashCollision(obstacles[i])) {
-        //   // this.console.log('crash');
-        //   player1.x = obstacles[i].x - player1.width;
-        // }
         obstacles[i].getTopObstacle();
         player1.crashCollision(obstacles[i]);
-        // if (player1.crashCollision(obstacles[i])) {
-        //   // this.console.log('crash');
-        //   player1.x = obstacles[i].x;
-        // }
         //delete obstacles
-        console.log('Output for: startGame -> obstacles[i].x', obstacles[i].x);
         if (obstacles[i].x < -70 && obstacles.length > 7) {
           obstacles.splice(i, 1);
         }
@@ -56,8 +45,8 @@ window.onload = function() {
           // obstacles.splice(i, 1);
           score--;
         }
-        if (this.Math.round(obstacles[i].x + obstacles[i].width) == -1) {
-          score += 10;
+        if (this.Math.round(obstacles[i].x + obstacles[i].width) == 0) {
+          score += 5;
         }
       }
     }
@@ -97,7 +86,10 @@ window.onload = function() {
 
   //Create obstacles
   createObstacles = () => {
-    if (Math.floor(Math.random() * 25) % 3 === 0) {
+    if (
+      Math.floor(Math.random() * 25) % 3 === 0 &&
+      player1.controller.gameState
+    ) {
       obstacles.push(new Obstacle());
     }
     setTimeout(() => {

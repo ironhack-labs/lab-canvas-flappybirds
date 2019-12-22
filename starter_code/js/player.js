@@ -15,6 +15,7 @@ class Player {
       left: false,
       right: false,
       up: false,
+      gameState: false,
     };
     this.birdImg = new Image();
     this.sound = new Audio();
@@ -52,10 +53,12 @@ class Player {
       rightSide > obstacle.x + obstacle.width &&
       leftSide <= obstacle.x + obstacle.width &&
       (bottom <= obstacle.yTop + obstacle.height || top >= obstacle.yBottom);
+    //collision detect set not to pass through obstacles
     if (crossFront) this.x = obstacle.x - this.width;
     if (crossBack) this.x = obstacle.x + obstacle.width;
     if (crossTop) this.y = obstacle.yTop + obstacle.height;
     if (crossBottom) this.y = obstacle.yBottom - this.height;
+    //check collision detect for true or false
     if (crossFront || crossTop || crossBottom || crossBack) return true;
     else return false;
   }
@@ -63,7 +66,6 @@ class Player {
   keyEvent() {
     document.addEventListener('keydown', event => {
       //   console.log(event.keyCode);
-
       let keyState = event.type === 'keydown' ? true : false;
       switch (event.keyCode) {
         case 37:
@@ -75,6 +77,7 @@ class Player {
         case 32:
         case 38:
           this.controller.up = keyState;
+          this.controller.gameState = keyState;
           this.sound.play();
           break;
       }
@@ -99,14 +102,15 @@ class Player {
   loop() {
     if (this.controller.up) {
       this.vy -= this.gravitySpeedY;
-      // this.space = true;
     }
-    if (this.controller.left) {
-      this.vx -= this.gravitySpeedX;
-    }
-    if (this.controller.right) {
-      this.vx += this.gravitySpeedX;
-    }
+    //left and right controller
+    // if (this.controller.left) {
+    //   this.vx -= this.gravitySpeedX;
+    // }
+    // if (this.controller.right) {
+    //   this.vx += this.gravitySpeedX;
+    // }
+
     //on y
     this.vy += this.gravity;
     this.y += this.vy;
@@ -115,6 +119,10 @@ class Player {
     //gradually kill the gravity
     this.vx *= 0.9;
     this.vy *= 0.9;
+    //starting position
+    if (!this.controller.gameState) {
+      this.y = myCanvas.height / 2;
+    }
 
     //keep the bird within the canvas border
     if (this.x < -this.width) {
@@ -130,6 +138,7 @@ class Player {
     if (this.y < 0) {
       this.y = 0;
     }
+    //draw
     this.birdImg.src = './images/flappy.png';
     this.ctx.drawImage(this.birdImg, this.x, this.y, this.width, this.height);
   }
