@@ -22,24 +22,27 @@ window.onload = function() {
   const obstacles = [];
 
   startGame = () => {
-    // ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height - 70);
-    move();
     clear();
-    draw();
+    //1.background
+    ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height - 70);
+    //2.background - animation
+    // move();
+    // draw();
+    //draw obstacles
     if (obstacles.length > 0) {
       for (let i = 0; i < obstacles.length; i++) {
         obstacles[i].getBottomObstacle();
         obstacles[i].getTopObstacle();
 
-        // player1.crashCollision(obstacles[i]);
-        // if (obstacles[i].y <0) {
-        //   obstacles.splice(i, 1);
-        // }
+        if (player1.crashCollision(obstacles[i])) this.console.log('crash');
+        if (obstacles[i].x + obstacles[i].width < 0 && obstacles.length > 7) {
+          obstacles.splice(i, 1);
+        }
       }
     }
-    ctx.drawImage(ground, 0, canvas.height - 70, canvas.width, 70);
-    player1.keyEvent();
-    player1.loop();
+    ctx.drawImage(ground, 0, canvas.height - 70, canvas.width, 70); //draw the ground/bottom of canvas
+    player1.keyEvent(); //bird controller state identifier
+    player1.loop(); //draw and bird controller
 
     requestAnimationFrame(startGame);
   };
@@ -48,6 +51,7 @@ window.onload = function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
+  //background animation move and draw
   let x = 0;
   const speed = 0.3;
   function move() {
@@ -64,8 +68,9 @@ window.onload = function() {
     }
   }
 
+  //Create obstacles
   createObstacles = () => {
-    if (Math.floor(Math.random() * 25) % 2 === 0) {
+    if (Math.floor(Math.random() * 25) % 3 === 0) {
       obstacles.push(new Obstacle());
     }
     setTimeout(() => {

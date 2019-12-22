@@ -15,8 +15,6 @@ class Obstacle {
     this.obs2 = new Image();
   }
   getTopObstacle = () => {
-    // let index = Math.floor(Math.random() * this.obstacles.length);
-    // this.obs.src = this.obstacles[index];
     this.x -= this.vx;
     this.obs1.src = this.obstacles[0].src;
     this.ctx.drawImage(this.obs1, this.x, this.yTop, this.width, this.height);
