@@ -56,8 +56,8 @@ class Player {
     if (crossBack) this.x = obstacle.x + obstacle.width;
     if (crossTop) this.y = obstacle.yTop + obstacle.height;
     if (crossBottom) this.y = obstacle.yBottom - this.height;
-    // if (crossFront || crossTop || crossBottom || crossBack) return true;
-    // else return false;
+    if (crossFront || crossTop || crossBottom || crossBack) return true;
+    else return false;
   }
 
   keyEvent() {

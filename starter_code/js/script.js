@@ -46,13 +46,18 @@ window.onload = function() {
         //   // this.console.log('crash');
         //   player1.x = obstacles[i].x;
         // }
-        //check collision
-        if (obstacles[i].x + obstacles[i].width == player1.x) {
-          score++;
-        }
         //delete obstacles
-        if (obstacles[i].x + obstacles[i].width < 0 && obstacles.length > 7) {
+        console.log('Output for: startGame -> obstacles[i].x', obstacles[i].x);
+        if (obstacles[i].x < -70 && obstacles.length > 7) {
           obstacles.splice(i, 1);
+        }
+        //check collision
+        if (player1.crashCollision(obstacles[i])) {
+          // obstacles.splice(i, 1);
+          score--;
+        }
+        if (this.Math.round(obstacles[i].x + obstacles[i].width) == -1) {
+          score += 10;
         }
       }
     }
