@@ -81,8 +81,9 @@ class Player {
     } else if (this.x > myCanvas.width) {
       this.x = -this.width;
     }
-    if (this.y > myCanvas.height - this.height) {
-      this.y = myCanvas.height - this.height;
+    if (this.y > myCanvas.height - this.height - 70) {
+      //70 is ground height
+      this.y = myCanvas.height - this.height - 70;
       this.vy = 0;
     }
     if (this.y < 0) {

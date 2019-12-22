@@ -2,11 +2,11 @@ class Obstacle {
   constructor() {
     this.ctx = myCanvas.getContext('2d'); //myCanvas is ID attribute of canvas
     this.width = 50;
-    this.height = Math.floor(Math.random() * 120 + 100);
+    this.height = Math.floor(Math.random() * 120 + 200);
     this.x = myCanvas.width; //myCanvas is ID attribute of canvas
     this.yTop = 0;
-    this.yBottom = myCanvas.height - this.height;
-    this.vx = 0.5;
+    this.yBottom = this.height + 100;
+    this.vx = 0.3;
     this.obstacles = [
       { name: 'top', src: './images/obstacle_top.png' },
       { name: 'bottom', src: './images/obstacle_bottom.png' },
