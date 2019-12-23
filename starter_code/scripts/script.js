@@ -4,7 +4,8 @@ window.onload = function() {
   };
 
   function startGame() {
-
+    const newGame = new Game();
+    newGame.init();
   }
 
 };
