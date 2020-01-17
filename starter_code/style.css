@@ -17,3 +17,8 @@ body button {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+#game-board canvas{
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+}
