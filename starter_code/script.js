@@ -34,12 +34,37 @@ class Background{
 
 }
 
+class KratosFlappy{
+  constructor() {
+    this.x = 100
+    this.y = 250
+    this.width = 100
+    this.height = 100
+    this.img = new Image()
+    this.img.src = images.flappy
+  }
+
+  draw(){
+    this.y+20
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+  }
+
+  jump(){
+    this.y -= 10
+  }
+}
+
+
+
+
 let board = new Background() //SE INSTANCIA BACKG GLOBAL
+let kratongo = new KratosFlappy() //ISNTANCIA KRATOS
 
 function update(){
   frames++
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   board.draw()
+  kratongo.draw()
 
 }
 
@@ -52,3 +77,10 @@ window.onload = function() {
     interval = setInterval(update, 1000/40)
   }
 };
+
+document.addEventListener('keydown', ({ keyCode }) => {
+  switch (keyCode) {
+    case 32:
+      kratongo.jump()
+  }
+})
