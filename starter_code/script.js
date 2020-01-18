@@ -9,7 +9,8 @@ const images = {
   flappy: 'images/Kratos.png',
   logo: 'images/logo.png',
   obstacle_bot: 'images/obs_bot.png',
-  obstacle_top: 'images/Obst-top-new.png'
+  obstacle_top: 'images/Obst-top-new.png',
+  gameOver: 'images/frame_00_delay-0.12s.gif'
 }
 
 
@@ -21,6 +22,8 @@ class Background{
     this.height = canvas.height
     this.img = new Image()
     this.img.src = images.bg
+    this.imgOver = new Image()
+    this.imgOver.src = images.gameOver
     this.img.onload = () => {
       this.draw()
     }
@@ -33,6 +36,12 @@ class Background{
     ctx.drawImage(this.img, this.x + canvas.width + 300, this.y, 700, 500)
   }
 
+  drawGameOver(){
+    ctx.drawImage(this.imgOver, 0, 10, canvas.width+50, canvas.height-30)
+    ctx.font = '40px serif'
+    ctx.fillStyle = 'white'
+    ctx.fillText('GAME OVER', 80, 250)
+  }
 }
 
 class KratosFlappy{
@@ -53,6 +62,14 @@ class KratosFlappy{
   jump(){
     this.y -= 40
   }
+
+  colliding(obstacle){
+      return (
+        this.x < obstacle.x + obstacle.width &&
+        this.x + this.width > obstacle.x &&
+        this.y < obstacle.y + obstacle.height &&
+        this.y + this.height > obstacle.y )
+  }
 }
 
 
@@ -72,7 +89,7 @@ class Obstacles{
   draw() {
     this.x--
     if (this.type) {
-      ctx.drawImage(this.imgBot, this.x-50, this.y, 300, this.height)
+      ctx.drawImage(this.imgBot, this.x-100, this.y, 300, this.height)
     } else {
       ctx.drawImage(this.imgTop, this.x, this.y, this.width, this.height)
     }
@@ -99,7 +116,17 @@ function createObst(){ //necesitamos pintar cada objeto del array en otra funcio
 }
 
 function drawObst(){
-  obstArr.forEach(obst => obst.draw()) 
+  obstArr.forEach(obst => obst.draw())
+}
+
+function checkCollitions() {
+  if (kratongo.y >= canvas.height - kratongo.height || kratongo.y <= -1) return gameOver()
+  obstArr.forEach((obs, i) => {
+    if (obs.x + obs.width <= 0) {
+      obstArr.splice(i, 1)
+    }
+    kratongo.colliding(obs) ? gameOver() : null
+  })
 }
 
 function update(){
@@ -109,9 +136,14 @@ function update(){
   kratongo.draw()
   createObst()
   drawObst()
+  checkCollitions()
 
 }
 
+function gameOver(){
+  clearInterval(interval)
+  board.drawGameOver()
+}
 
 window.onload = function() {
   document.getElementById("start-button").onclick = function() {
