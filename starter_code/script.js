@@ -1,6 +1,7 @@
 const $canvas = document.querySelector('canvas')
 const ctx = $canvas.getContext('2d')
 const obs = []
+let $startButton
 let bg
 let flappy
 let pipe
@@ -29,13 +30,24 @@ class Flappy {
   }
 
   isTouching(pipe) {
-
+    return (
+      (this.x > pipe.x -pipe.width &&
+      this.y < pipe.y - (flappy.jump + 80) &&
+      this.x < pipe.x + pipe.width) ||
+      (
+        this.x > pipe.x -pipe.width &&
+        this.y > pipe.y &&
+        this.x < pipe.x + pipe.width &&
+        this.y > pipe.y - this.height
+      )
+    
+    )
   }
 }
 
 class Board {
   constructor(){
-    this.display = 5
+    this.offset = 5
     this.x = 0
     this.img = new Image()
     this.img.src = "./images/bg.png"
@@ -44,7 +56,8 @@ class Board {
 
   draw() {
     if(this.x <= -$canvas.width) this.x = 0
-    this.x -= this.display
+    this.x -= this.offset
+
     ctx.drawImage(this.img, this.x,0, $canvas.width, $canvas.height)
     ctx.drawImage(this.img, this.x + $canvas.width,0, $canvas.width, $canvas.height)
 
@@ -55,9 +68,10 @@ class Board {
 class Obstacle {
   constructor(y){
     this.x = $canvas.width
-    this.y = y
+    this.y = y + flappy.jump + 80
     this.width = 50
-    // this.height = height
+    this.height = y
+
     this.img = new Image()
     this.img2 = new Image()
     this.img.src = "./images/obstacle_top.png"
@@ -68,8 +82,8 @@ class Obstacle {
 
   draw() {
     this.x -= bg.display
-    ctx.drawImage(this.img, this.x, 0, this.width, this.y - flappy.jump -50)
-    ctx.drawImage(this.img2, this.x , this.y + flappy.jump, this.width,  $canvas.height)
+    ctx.drawImage(this.img, this.x, 0, this.width, this.height)
+    ctx.drawImage(this.img2, this.x , this.y, this.width,  $canvas.height -this.y)
   }
 
   isOut(){
@@ -77,9 +91,26 @@ class Obstacle {
   }
 }
 
+
+function drawScore(){
+  ctx.fillStyle = "white"
+  ctx.font = "36px Arial"
+  ctx.fillText("Score: " + score, $canvas.width/2-100, 80)
+}
+
 function checkCollition(){
+  obs.forEach( pipe =>{
+    if(flappy.isTouching(pipe)){
+      console.log(pipe, flappy)
+      GameOver()
+    }
+  })
 
+}
 
+function GameOver(){
+  clearInterval(intervalId)
+  console.log("GameOver")
 }
 
 function drawPipes(){
@@ -90,30 +121,35 @@ function drawPipes(){
 }
 
 function delPipe(i){
+  score++
+  console.log(score)
   obs.splice(i,1)
 }
 
 function update(){
-  console.log(obs.length)
   frames++
-  if( frames % 90 === 0) obs.push(new Obstacle( Math.floor(Math.random() * ($canvas.height - 20)) +10))
+  if( frames % 90 === 0) obs.push(new Obstacle( Math.floor(Math.random() * ($canvas.height - 200)) +10))
 
   ctx.clearRect(0,0,$canvas.width, $canvas.height)
   bg.draw()
   flappy.draw()
   drawPipes()
+  checkCollition()
+  drawScore()
 }
 
 window.onload = function() {
   bg = new Board()
   flappy = new Flappy()
+  $startButton = document.querySelector('#start-button')
 
-  document.getElementById("start-button").onclick = function() {
+  $startButton.onclick = function() {
+    $startButton.blur()
     startGame();
   };
 
   function startGame() {
-    setInterval(update, 1000/60)
+    intervalId = setInterval(update, 1000/60)
   }
 
 };
