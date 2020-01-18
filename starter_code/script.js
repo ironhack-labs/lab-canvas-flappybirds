@@ -2,7 +2,8 @@ const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
 let interval
 let frames = 0
-const obstArr = []
+let obstArr = []
+let gameOverBool = false
 
 const images = {
   bg: 'images/bg_flapy.jpeg',
@@ -42,6 +43,11 @@ class Background{
     ctx.fillStyle = 'white'
     ctx.fillText('GAME OVER', 80, 250)
   }
+
+  resetValues(){
+    this.x = 0
+    this.draw()
+  }
 }
 
 class KratosFlappy{
@@ -69,6 +75,12 @@ class KratosFlappy{
         this.x + this.width > obstacle.x &&
         this.y < obstacle.y + obstacle.height &&
         this.y + this.height > obstacle.y )
+  }
+
+  resetValues(){
+    this.x = 100
+    this.y = 250
+    this.draw()
   }
 }
 
@@ -107,8 +119,8 @@ let kratongo = new KratosFlappy() //ISNTANCIA KRATOS
 function createObst(){ //necesitamos pintar cada objeto del array en otra funcion
   if (frames % 200 === 0){
     const min = 100
-    const max = 300
-    const ventanita = 100            //espacio para que pase el kratos
+    const max = 250
+    const ventanita = 200            //espacio para que pase el kratos
     const randomHeight = Math.floor(Math.random() * (max - min)) + min
     obstArr.push(new Obstacles(0, randomHeight, false))        //este empieza en 0, osea es el de arriba
     obstArr.push(new Obstacles(randomHeight + ventanita, canvas.height - randomHeight, true))         //este empieza 500 despues de donde acaba el otra, y asi crea la ventanita para el flappyKratos
@@ -123,7 +135,7 @@ function checkCollitions() {
   if (kratongo.y >= canvas.height - kratongo.height || kratongo.y <= -1) return gameOver()
   obstArr.forEach((obs, i) => {
     if (obs.x + obs.width <= 0) {
-      obstArr.splice(i, 1)
+      obstArr.splice(i, 1) //borrar cuando salgan mapa
     }
     kratongo.colliding(obs) ? gameOver() : null
   })
@@ -137,17 +149,32 @@ function update(){
   createObst()
   drawObst()
   checkCollitions()
+}
 
+function resetValues(){
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  board.resetValues()
+  kratongo.resetValues()
+  obstArr = []
+  frames = 0
+  gameOverBool = false
 }
 
 function gameOver(){
-  clearInterval(interval)
   board.drawGameOver()
+  clearInterval(interval)
+  interval = null
+  gameOverBool = true
 }
 
 window.onload = function() {
   document.getElementById("start-button").onclick = function() {
-    startGame();
+    if(gameOverBool){
+      resetValues()
+      startGame()
+    } else {
+      startGame()
+    }
   };
 
   function startGame() {
