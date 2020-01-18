@@ -1,5 +1,8 @@
 body {
   text-align: center;
+  background-image: url("https://www.tynker.com/projects/images/5b9abecc8409f25045583e6d/background-scene---main-background-2.png");
+  background-size: cover;
+  
 }
 
 body h1 {
