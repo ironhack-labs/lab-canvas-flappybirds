@@ -5,7 +5,7 @@ let frames = 0
 
 const images = {
   bg: 'images/bg_flapy.jpeg',
-  flappy: 'images/kratosFlappy.png',
+  flappy: 'images/Kratos.png',
   logo: 'images/logo.png',
   obstacle_bot: 'images/obs_bot.png',
   obstacle_top: 'images/obstacle_top.png'
@@ -38,21 +38,46 @@ class KratosFlappy{
   constructor() {
     this.x = 100
     this.y = 250
-    this.width = 100
-    this.height = 100
+    this.width = 40
+    this.height = 70
     this.img = new Image()
     this.img.src = images.flappy
   }
 
   draw(){
-    this.y+20
+    this.y += 3
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
   }
 
   jump(){
-    this.y -= 10
+    this.y -= 40
   }
 }
+
+
+class Obstacles{
+  constructor(y, height, imgType){
+    this.x = canvas.width
+    this.y = y
+    this.height = height
+    this.width = canvas.width / 5
+    this.imgBot = new Image()
+    this.imgTop = new Image()
+    this.imgBot.src = images.obstacle_bot
+    this.imgTop.src = images.obstacle_top
+    this.typeObst = typeObst
+  }
+
+  draw() {
+    this.x--
+    if (this.typeObst) {
+      ctx.drawImage(this.imgBot, this.x, this.y, this.width, this.height)
+    } else {
+      ctx.drawImage(this.imgTop, this.x, this.y, this.width, this.height)
+    }
+  }
+}
+
 
 
 
@@ -74,6 +99,7 @@ window.onload = function() {
   };
 
   function startGame() {
+    if (interval) return
     interval = setInterval(update, 1000/40)
   }
 };
