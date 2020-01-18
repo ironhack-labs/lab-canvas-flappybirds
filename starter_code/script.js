@@ -11,6 +11,7 @@ let frames = 0
 let background
 let flappy
 const pipes = []
+let score = 0
 
 class Background {
   constructor() {
@@ -47,14 +48,6 @@ class Bird {
   }
   fly() {
     this.y -= 30
-  }
-  touching(pipe) {
-    return (
-      this.x < pipe.x + pipe.width &&
-      this.x + this.width > pipe.x &&
-      this.y < pipe.y + pipe.height &&
-      this.y + this.height > pipe.y
-    )
   }
 }
 
@@ -96,7 +89,13 @@ function checkCollision() {
   if (flappy.y >= $canvas.height - flappy.height) return gameOver()
   pipes.forEach((pipe, i) => {
     pipe.x + pipe.width <= 0 ? pipes.splice(i, 1) : null
-    flappy.touching(pipe) ? gameOver() : null
+    if (pipe.x + pipe.width === 425) score++
+    if (
+      flappy.x + flappy.width > pipe.x &&
+      flappy.x < pipe.x + pipe.width &&
+      flappy.y + flappy.height > pipe.y &&
+      flappy.y < pipe.y + pipe.height
+    ) return gameOver()
   })
 }
 
@@ -117,6 +116,12 @@ function gameOver() {
   clearInterval(interval)
 }
 
+function printScore() {
+  ctx.font = '30px monospace'
+  ctx.fillStyle = 'white'
+  ctx.fillText(`SCORE: ${score/2}`, 100, 100)
+}
+
 function update() {
   frames++
   ctx.clearRect(0, 0, $canvas.width, $canvas.height)
@@ -125,6 +130,7 @@ function update() {
   createPipes()
   drawPipes()
   checkCollision()
+  printScore()
 }
 
 window.addEventListener('keydown', ({keyCode}) => {
