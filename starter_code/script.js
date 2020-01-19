@@ -17,6 +17,7 @@ const images = {
 window.onload = function() {
   document.getElementById("start-button").onclick = function() {
     startGame();
+    start()
   };
 }
 
@@ -38,21 +39,54 @@ class Board {
       this.x = 0
     }
   }
+}
+
+class Bird {
+  constructor(){
+    this.speedX = 50,
+    this.speedY= 0,
+    this.width= 40,
+    this.heigth = 40,
+    this.birdImg = new Image(),
+    this.birdImg.src = images.flappy
+  }
+
+  draw(){
+    ctx.drawImage(this.birdImg, this.speedX,this.speedY, this.width, this.heigth)
+    this.speedY +=30
+    
+  }
+
+  gravity(){
+    this.speedY -= 20
+  }
 
 }
 
+
 const startBoard = new Board();
+const bird = new Bird();
 
 function startGame() {
-  startBoard.draw();
+  startBoard.draw()
+  bird.draw()
 }
 
 function update() {
-startBoard.draw();
+startBoard.draw()
+bird.draw()
+bird.gravity()
 }
 
 function start(){
-  interval = setInterval(update,1000);
+  interval = setInterval(update,800, 60);
 }
 
-start()
+
+
+document.addEventListener('keydown', ({keyCode}) => {
+
+if(keyCode == 32) {
+  bird.gravity();
+}
+})
