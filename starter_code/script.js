@@ -1,7 +1,7 @@
 //setup
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
-let interval;
+let interval
 let frames = 0;
 let score = 0;
 let pipes =[];
@@ -57,12 +57,12 @@ const imgs = {
       this.y -= 40
       console.log(score)
     }
-    isTouching(pipes) {
+    isTouching(pipe) {
       return (
-        this.x < pipes.x + pipes.width &&
-        this.x + this.width > pipes.x &&
-        this.y < pipes.y + pipes.height &&
-        this.y + this.height > pipes.y
+        this.x < pipe.x + pipe.width &&
+        this.x + this.width > pipe.x &&
+        this.y < pipe.y + pipe.height &&
+        this.y + this.height > pipe.y
       )
     }
   }
@@ -135,14 +135,6 @@ const imgs = {
     
   }
   function gameOver() {
-    const title = "GAME OVER"
-    const msj = `Your score is: ${score}`
-
-    ctx.fillStyle = 'red'
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.fillText(title, (canvas.width / 2) - 50, 300)
-    ctx.fillText(msj, (canvas.width / 2) - 60, 320)
-    obstacles = []
     clearInterval(interval)
 
   }
