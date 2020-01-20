@@ -18,4 +18,11 @@ body button {
   margin-bottom: 20px;
 }
 
-
+p {
+  font-size: 50px;
+  color: black;
+  position: relative;
+  right: 300px;
+  top: 300px;
+  
+}

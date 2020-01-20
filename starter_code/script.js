@@ -2,6 +2,7 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 let interval;
+let points = 10;
 let frames = 0;
 const obstacles = []
 
@@ -27,14 +28,14 @@ class Board {
     this.x = 0,
     this.y = 0,
     this.width = canvas.width,
-    this.heigth = canvas.height, //this can generate a mistake
+    this.height = canvas.height, //this can generate a mistake
     this.img = new Image(),
     this.img.src = images.background
   }
 
   draw(){
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.heigth );
-    ctx.drawImage(this.img, this.x + canvas.width, this.y, this.width, this.heigth )
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height );
+    ctx.drawImage(this.img, this.x + canvas.width, this.y, this.width, this.height )
     this.x -=2
     if(this.x < -canvas.width){
       this.x = 0
@@ -47,29 +48,36 @@ class Bird {
     this.speedX = 50,
     this.speedY= 0,
     this.width= 40,
-    this.heigth = 40,
+    this.height = 40,
     this.birdImg = new Image(),
     this.birdImg.src = images.flappy
   }
 
   draw(){
-    ctx.drawImage(this.birdImg, this.speedX,this.speedY, this.width, this.heigth)
+    ctx.drawImage(this.birdImg, this.speedX,this.speedY, this.width, this.height)
     this.speedY +=2
     
   }
 
   gravity(){
-    this.speedY -=20
+    this.speedY -=25
   }
+
+  pipeTouch(pipe){
+    return( this.speedX < pipe.x + pipe.width && this.speedX + this.width > pipe.x 
+      && this.speedY < pipe.y + pipe.height && this.speedY + this.height > pipe.y)
+  }
+
+  
 
 }
 
 class Pipes {
-  constructor(y,heigth,imgType){
+  constructor(y,height,imgType){
     this.x = canvas.width,
     this.y = y,
     this.width = canvas.width / 5,
-    this.heigth = heigth,
+    this.height = height,
     this.pipeBot = new Image(),
     this.pipeTop = new Image(),
     this.pipeBot.src = images.obstacleBottom,
@@ -80,10 +88,10 @@ class Pipes {
   draw(){
     this.x -= 1
     if(this.imgType){
-      ctx.drawImage(this.pipeTop, this.x, this.y, this.width, this.heigth)
+      ctx.drawImage(this.pipeTop, this.x, this.y, this.width, this.height)
       
     }else {
-      ctx.drawImage(this.pipeBot, this.x, this.y, this.width, this.heigth)
+      ctx.drawImage(this.pipeBot, this.x, this.y, this.width, this.height)
     }
   }
 }
@@ -96,6 +104,17 @@ function startGame() {
   startBoard.draw()
   bird.draw()
 }
+
+function update() {
+  frames += 1
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  startBoard.draw()
+  bird.draw()
+  //bird.gravity()
+  generatePipes()
+  drawPipes()
+  checkCrashes()
+  }
 
 
 function generatePipes(){
@@ -114,24 +133,29 @@ function drawPipes(){
   obstacles.forEach( pipe => pipe.draw())
 }
 
+function checkCrashes(){
+  if(bird.speedY >= canvas.height - bird.height ) return gameOver()
+  obstacles.forEach((pipe,i) => {
+    if(pipe.x + pipe.width <= 0){
+      obstacles.splice(i, 1)
+    }
+    bird.pipeTouch(pipe) ? gameOver() : null
+  })
+}
 
-function update() {
-frames += 1
-//ctx.clearRect(0, 0, canvas.width, canvas.height)
-startBoard.draw()
-bird.draw()
-//bird.gravity()
-generatePipes()
-drawPipes()
+//function counter (){
+ //  points +=1
+//}
 
-
+function gameOver(){
+  clearInterval(interval)
 }
 
 function start(){
   interval = setInterval(update, 1000 / 60);
 }
 
-
+start()
 
 document.addEventListener('keydown', ({keyCode}) => {
 
@@ -141,5 +165,6 @@ if(keyCode == 32) {
 }
 })
 
-start()
+//const counterDisplay = document.querySelector('p');
+//counterDisplay.innerHTML = points
 
