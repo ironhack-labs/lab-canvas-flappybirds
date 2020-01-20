@@ -1,8 +1,8 @@
-
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
+
 let interval;
-let points = 10;
+let counter =0;
 let frames = 0;
 const obstacles = []
 
@@ -17,9 +17,7 @@ const images = {
 
 window.onload = function() {
   document.getElementById("start-button").onclick = function() {
-    startGame();
-   
-   
+    //startGame();
   };
 }
 
@@ -28,7 +26,7 @@ class Board {
     this.x = 0,
     this.y = 0,
     this.width = canvas.width,
-    this.height = canvas.height, //this can generate a mistake
+    this.height = canvas.height, 
     this.img = new Image(),
     this.img.src = images.background
   }
@@ -67,9 +65,6 @@ class Bird {
     return( this.speedX < pipe.x + pipe.width && this.speedX + this.width > pipe.x 
       && this.speedY < pipe.y + pipe.height && this.speedY + this.height > pipe.y)
   }
-
-  
-
 }
 
 class Pipes {
@@ -114,6 +109,7 @@ function update() {
   generatePipes()
   drawPipes()
   checkCrashes()
+  score()
   }
 
 
@@ -126,7 +122,7 @@ function generatePipes(){
    obstacles.push(new Pipes(0,randomHeight,true))
    obstacles.push(new Pipes(randomHeight + spaceBetween, canvas.height - randomHeight, false))
   }
-console.log(obstacles)
+//console.log(obstacles)
 }
 
 function drawPipes(){
@@ -137,15 +133,16 @@ function checkCrashes(){
   if(bird.speedY >= canvas.height - bird.height ) return gameOver()
   obstacles.forEach((pipe,i) => {
     if(pipe.x + pipe.width <= 0){
+      points()
       obstacles.splice(i, 1)
     }
     bird.pipeTouch(pipe) ? gameOver() : null
   })
 }
 
-//function counter (){
- //  points +=1
-//}
+function points (){
+  return counter += 0.5
+}
 
 function gameOver(){
   clearInterval(interval)
@@ -153,6 +150,13 @@ function gameOver(){
 
 function start(){
   interval = setInterval(update, 1000 / 60);
+  
+}
+
+function score(){
+  ctx.fillStyle = "white";
+  ctx.font = "50px Arial";
+  ctx.fillText(counter, 100, 50);
 }
 
 start()
@@ -165,6 +169,5 @@ if(keyCode == 32) {
 }
 })
 
-//const counterDisplay = document.querySelector('p');
-//counterDisplay.innerHTML = points
+
 
