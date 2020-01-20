@@ -33,7 +33,7 @@ class Background{
   }
   
   class Flappy{
-    constructor(){ //¿por que en el flappy del constructor no tenemos nada?
+    constructor(){ 
       this.x = 50
       this.y = 50
       this.width = 50
@@ -71,19 +71,19 @@ class Background{
       this.img2 = new Image()
       this.img.src = images.obstaculo1
       this.img2.src = images.obstaculo2
-      this.imgType = imgType //¿para que sirve imgType?
+      this.imgType = imgType 
     }
     draw(){
       this.x--
       if(this.imgType){
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height,)
       } else {
-        ctx.drawImage(this.img2, this.x, this.y, this.width, this.height) //aquí son dos obstaculos pero por que tenemos un if/else
+        ctx.drawImage(this.img2, this.x, this.y, this.width, this.height) 
       }
     }
   }
 
-  const flappy = new Flappy() //Por que creaamos un new?
+  const flappy = new Flappy() 
   const background = new Background()
   
   const generatePipes = () => { //entender como funciona la funcion generatePipes
@@ -91,7 +91,7 @@ class Background{
         const min = 100
         const max = 300
         const espacio = 200
-        const randomHeight = Math.floor(Math.random() * (max - min)) + min //Me puedes explicar esta funcion??
+        const randomHeight = Math.floor(Math.random() * (max - min)) + min //no entiendo muy bien como funciona, se lo que hace pero no ecuentro como explicarla.
         obstacles.push(new Pipe(0, randomHeight, false))
         obstacles.push(new Pipe(600, randomHeight + espacio, canvas.height - randomHeight, true))
       console.log(obstacles)
