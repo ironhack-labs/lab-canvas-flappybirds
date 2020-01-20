@@ -4,6 +4,7 @@ let interval;
 let frames = 0;
 let obstacles = [];
 let score=0;
+let gameover=false;
 
 const images={
   background:"./images/bg.png",
@@ -128,6 +129,7 @@ function gameOver(){
   fondo.draw();
   ave.draw();
   drawTubo();
+  gameover=true;
   ctx.fillStyle = "red";
   ctx.font = "30px Courier New";
   ctx.fillText("GAME OVER", 125, 200);
@@ -158,11 +160,14 @@ window.onload = function() {
   }
 
   function restartGame(bird){
-    obstacles = [];
-    frames = 0;
-    score = 0;
-    bird.y=50;
-    startGame();
+  	if (gameover) {
+    	obstacles = [];
+    	frames = 0;
+    	score = 0;
+    	bird.y=50;
+    	gameover=false;
+    	startGame();
+	}
   }
   window.onkeydown = function({keyCode}){
     switch(keyCode){
