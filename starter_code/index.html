@@ -4,16 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script type="text/javascript" src="script.js">
-
-  </script>
   <link rel="stylesheet" href="style.css">
-  <title>Document</title>
+  <title>Flaby Bird</title>
 </head>
 <body>
-  <img src="./images/logo.png" alt="" style="width:50%;">
-  <br>
-  <button id="start-button">StartGame</button>
-  <div id="game-board"></div>
+  <main>
+    <img src="./images/logo.png" alt="" style="width:50%;">
+    <br>
+    <button id="start-button">StartGame</button>
+  </main>
+  <div id="game-board">
+    <!--Added once the game starts: <p>Instructions: Press space to fly. Avoid pipes. Don't touch ground. Score: ${score}.</p>-->
+    <!--Added once the game starts: <canvas width="400" height="600"></canvas>-->
+  </div>
+  <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

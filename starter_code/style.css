@@ -17,3 +17,12 @@ body button {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+
+canvas {
+  border: 1px solid black;
+}
+
+p {
+  color: green;
+  font-size: 20px
+}
