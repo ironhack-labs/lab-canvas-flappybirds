@@ -33,25 +33,27 @@ const game = {
             this.clear();
             this.drawAll();
             this.clearObstacles();
-             if (this.count % 500 == 0) {
-                 this.createObstacles();
-             }
+            this.scoreShow()
+            if (this.detectCol() || this.birdOut()) this.crashed()
+            if (this.count % 500 == 0 && this.started) {
+                this.createObstacles();
+            }
             this.count++
 
-        }, this.fps/60)
+        }, this.fps / 60)
 
     },
 
     drawAll() {
         this.background.draw();
         this.bird.draw();
-        this.obstacles.forEach(elm=>elm.draw())
+        this.obstacles.forEach(elm => elm.draw())
     },
 
     reset() {
         this.background = new Background(this.ctx, this.width, this.height)
         this.bird = new Bird(this.ctx, this.width, this.height)
-        this.obstacles=[]
+        this.obstacles = []
 
     },
     clear() {
@@ -61,7 +63,7 @@ const game = {
     moveAll() {
         this.background.move();
         this.bird.move();
-        this.obstacles.forEach(elm=>elm.move())
+        this.obstacles.forEach(elm => elm.move())
 
     },
 
@@ -73,9 +75,8 @@ const game = {
                 this.bird.gravity = 0.15
                 this.started = true
                 this.bird.jump()
+                this.count=0
             }
-
-
 
         }
 
@@ -95,6 +96,39 @@ const game = {
         let obj = new Obstacles(this.ctx, this.width, this.height)
         obj.randomIzer();
         this.obstacles.push(obj)
+    },
+
+    detectCol() {
+        return this.obstacles.some(
+            obs =>
+            (this.bird.posX + this.bird.width >= obs.posX &&
+                this.bird.posY <= obs.posY + obs.height) ||
+            (this.bird.posX + this.bird.width >= obs.posX &&
+                this.bird.posY + this.bird.height >= obs.posY + obs.height + obs.spaceEmpty)
+
+        )
+    },
+
+    birdOut() {
+
+        return this.bird.posY + this.bird.height >= this.canvas.height
+    },
+
+    crashed() {
+        confirm("Continue?")?this.restart(): window.close()
+    },
+
+    scoreShow() {
+
+        this.ctx.font = "30px Arial";
+        this.ctx.fillText(`Score: ${this.count}`, 50, 50)
+    },
+    restart(){
+
+        this.started=false
+        this.reset()
     }
 
 }
+
+console.log(this.bird.velY)
