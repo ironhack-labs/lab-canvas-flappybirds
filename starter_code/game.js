@@ -7,13 +7,12 @@ const Game = {
   obstacles: [],
   framesCounter: 0,
   score: undefined,
-  keys: {
-    SPACE: 32
-  },
+  keys: 32,
 
   init() {
     this.canvas = document.getElementById("canvas");
     this.ctx = this.canvas.getContext("2d");
+    // this.allEventListeners();
     this.setDimensions();
     this.start();
   },
@@ -35,7 +34,7 @@ const Game = {
 
   reset() {
     this.background = new Background(this.ctx, this.width, this.height);
-    this.character = new Character(this.ctx, 100, 100, 0)
+    this.character = new Character(this.ctx, 100, 100, 0, this.keys);
     this.obstacles = [];
   },
   drawAll() {
@@ -43,6 +42,11 @@ const Game = {
     this.character.draw();
   },
   moveAll() {
-      this.character.move();
+    this.character.move();
+    this.character.jump();
   }
+
+  //   allEventListeners() {
+  //       this.character.setListeners();
+  //   }
 };
