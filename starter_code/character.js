@@ -27,7 +27,7 @@ class Character {
 
   move() {
     // this._speedY = 1.1;
-    this._gravity = 0.07
+    this._gravity = 0.13
 
     this._posY += this._speedY;
     this._speedY += this._gravity
@@ -39,7 +39,7 @@ class Character {
   jump() {
     window.onkeydown = e => {
       if (e.keyCode === 32) {
-        this._speedY = -2;
+        this._speedY = -3.5;
         this._posY -= this._speedY;
     //   } else {
         // this._posY += this._speedY;

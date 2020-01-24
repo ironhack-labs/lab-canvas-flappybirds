@@ -28,7 +28,7 @@ const Game = {
     this.reset();
     this.interval = setInterval(() => {
       this.framesCounter++;
-      if (this.framesCounter > 1000) this.framesCounter = 0;
+      if (this.framesCounter > 1790) this.framesCounter = 0;
       this.drawAll();
       this.moveAll();
       this.generateObstacles();
@@ -37,7 +37,7 @@ const Game = {
 
   reset() {
     this.background = new Background(this.ctx, this.width, this.height);
-    this.character = new Character(this.ctx, 100, 100, 0, this.keys);
+    this.character = new Character(this.ctx, 80, 80, 0, this.keys);
     this.obstacles = [];
   },
   drawAll() {
@@ -52,9 +52,9 @@ const Game = {
   },
 
   generateObstacles() {
-    if (this.framesCounter % 70 === 0) {
+    if (this.framesCounter % 90 === 0) {
       this.obstacles.push(
-        new Obstacles(this.ctx, this.canvas.width, this.canvas.height)
+        new Obstacles(this.ctx, this.canvas.width)
       );
       console.log(this.obstacles);
     }
