@@ -4,10 +4,10 @@ class Character {
     this._width = width;
     this._height = height;
     this._posX = 40;
-    this._speedY = undefined;
+    this._speedY = 1.4;
     this._gravity = undefined;
     this._gravitySpeed = gravitySpeed;
-    this._posY = 300;
+    this._posY = 200;
 
     this._image = new Image();
     this._image.src = "images/flappy.png";
@@ -26,19 +26,20 @@ class Character {
   }
 
   move() {
-    this._speedY = 1.1;
-    this._gravity = 0.4
-    this._speedY += this._gravity
+    // this._speedY = 1.1;
+    this._gravity = 0.07
+
     this._posY += this._speedY;
+    this._speedY += this._gravity
    
-    console.log(`pos y ${this._posY}`)
-    console.log(`speed ${this._speedY}`)
+    // console.log(`pos y ${this._posY}`)
+    // console.log(`speed ${this._speedY}`)
   }
 
   jump() {
     window.onkeydown = e => {
       if (e.keyCode === 32) {
-        this._speedY = 30;
+        this._speedY = -2;
         this._posY -= this._speedY;
     //   } else {
         // this._posY += this._speedY;

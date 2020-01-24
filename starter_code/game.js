@@ -27,8 +27,11 @@ const Game = {
   start() {
     this.reset();
     this.interval = setInterval(() => {
+      this.framesCounter++;
+      if (this.framesCounter > 1000) this.framesCounter = 0;
       this.drawAll();
       this.moveAll();
+      this.generateObstacles();
     }, 1000 / this.fps);
   },
 
@@ -40,12 +43,25 @@ const Game = {
   drawAll() {
     this.background.draw();
     this.character.draw();
+    this.obstacles.forEach(obs => obs.draw());
   },
   moveAll() {
     this.character.move();
     this.character.jump();
-  }
+    this.obstacles.forEach(obs => obs.move());
+  },
 
+  generateObstacles() {
+    if (this.framesCounter % 70 === 0) {
+      this.obstacles.push(
+        new Obstacles(this.ctx, this.canvas.width, this.canvas.height)
+      );
+      console.log(this.obstacles);
+    }
+  }
+  //   console.log(this.obstacles)
+
+  //   }
   //   allEventListeners() {
   //       this.character.setListeners();
   //   }
