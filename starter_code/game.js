@@ -28,6 +28,12 @@ const Game = {
     this.reset();
     this.interval = setInterval(() => {
       this.framesCounter++;
+      if (this.isCollisionsTop()) {
+        this.gameOver();
+      }
+      if (this.isCollisionsBottom()) {
+        this.gameOver();
+      }
       if (this.framesCounter > 1790) this.framesCounter = 0;
       this.drawAll();
       this.moveAll();
@@ -49,15 +55,40 @@ const Game = {
     this.character.move();
     this.character.jump();
     this.obstacles.forEach(obs => obs.move());
+    this.background.move();
   },
 
   generateObstacles() {
     if (this.framesCounter % 90 === 0) {
-      this.obstacles.push(
-        new Obstacles(this.ctx, this.canvas.width)
-      );
-      console.log(this.obstacles);
+      this.obstacles.push(new Obstacles(this.ctx, this.canvas.width));
+      //   console.log(this.obstacles);
     }
+  },
+
+  isCollisionsTop() {
+    return this.obstacles.some(
+      obs =>
+        this.character._posX + this.character._width >= obs._posX &&
+        this.character._posY + this.character._height >= obs._posY &&
+        this.character._posX <= obs._posX + obs._width &&
+        this.character._posY <= obs._posY + obs._height
+    );
+    console.log(this.character._posX);
+  },
+
+  isCollisionsBottom() {
+    return this.obstacles.some(
+      obs =>
+        this.character._posX + this.character._width >= obs._posX &&
+        this.character._posY + this.character._height >= obs._posYBot &&
+        this.character._posX <= obs._posX + obs._width &&
+        this.character._posY <= obs._posYBot + obs._height
+    );
+    console.log(this.character._posX);
+  },
+
+  gameOver() {
+      clearInterval(this.interval)
   }
   //   console.log(this.obstacles)
 
