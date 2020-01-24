@@ -24,7 +24,8 @@ const Game = {
           // this.framesCounter++;
           // this.clear();
           this.drawAll();
-          // this.moveAll();
+          this.moveBird();
+          
           // this.obstacles()
       }, 1000 / this.fps)
   },
@@ -35,14 +36,10 @@ const Game = {
   drawAll() {
       this.background.draw();
       this.player.draw();
-      console.log("llamar")
+  },
+  moveBird(){
+      this.player.move();
   }
   
+  //Obstacles
 };
-
-///Refactorizar!
-document.body.onkeyup = function(e){
-  if(e.keyCode == 32){
-      alert("Space pressed!");
-  }
-}
