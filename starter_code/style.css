@@ -1,5 +1,6 @@
 body {
   text-align: center;
+  font-family: sans-serif;
 }
 
 body h1 {
@@ -16,4 +17,17 @@ body button {
   box-shadow: 0;
   border-radius: 5px;
   margin-bottom: 20px;
+}
+
+#game-board {
+  position: relative;
+display: flex;
+justify-content: center;
+}
+
+#score {
+  position: absolute;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
 }

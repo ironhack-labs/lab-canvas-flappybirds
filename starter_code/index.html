@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +11,18 @@
   <link rel="stylesheet" href="style.css">
   <title>Document</title>
 </head>
+
 <body>
   <img src="./images/logo.png" alt="" style="width:50%;">
   <br>
   <button id="start-button">StartGame</button>
-  <div id="game-board"></div>
+  <div id="game-board">
+    <p id="score">SCORE: <span id="score-number"></span></p>
+    <canvas width="900" height="504" style="border: 1px solid #e0e0e0;" id="canvas"></canvas>
+  </div>
+
+  <script src="./game.js"></script>
+  <script src="./script.js"></script>
 </body>
+
 </html>
