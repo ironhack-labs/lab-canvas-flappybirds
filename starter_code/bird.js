@@ -21,10 +21,8 @@ class Bird {
   newPos() {
     this.x += this.speedX;
     this.y += this.speedY;
-    // console.log(this.x, this.y);
   }
   move(event) {
-    console.log('move');
     switch (event.keyCode) {
       case 38: // up arrow
         this.speedY -= 1;
@@ -43,6 +41,5 @@ class Bird {
   stopMoving() {
     this.speedX = 0;
     this.speedY = 0;
-    console.log(stop);
   }
 }

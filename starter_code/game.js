@@ -18,10 +18,13 @@ class Game {
   startGame() {
     this.backGround = new BackGround(this);
     this.bird = new Bird(this);
+    this.obstacles = new Obstacles(this);
     this.loop();
   }
   runLogic() {
     this.bird.newPos();
+    this.obstacles.updateObstacles();
+    this.obstacles.paint();
     this.paint();
   }
   loop() {
