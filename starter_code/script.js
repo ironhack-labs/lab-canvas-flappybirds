@@ -1,10 +1,3 @@
-window.onload = function() {
-  document.getElementById("start-button").onclick = function() {
-    startGame();
-  };
+const $canvas = document.querySelector('canvas');
 
-  function startGame() {
-
-  }
-
-};
+let game = new Game($canvas);
