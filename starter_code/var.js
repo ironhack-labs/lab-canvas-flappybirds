@@ -8,3 +8,6 @@ const obstacle_top = new Image();
 obstacle_top.src = './images/obstacle_top.png';
 const bottom = new Image();
 bottom.src = './images/obstacle_bottom.png';
+
+const flappy = new Image();
+flappy.src = './images/flappy.png';

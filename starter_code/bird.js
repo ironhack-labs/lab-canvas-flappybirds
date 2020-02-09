@@ -14,8 +14,7 @@ class Bird {
 
   update() {
     const ctx = this.game.ctx;
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.drawImage(flappy, this.x, this.y, this.width, this.height);
   }
 
   newPos() {

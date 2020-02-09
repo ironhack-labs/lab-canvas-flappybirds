@@ -1,7 +1,7 @@
 class Game {
   constructor($canvas) {
     this.ctx = $canvas.getContext('2d');
-    this.gameRun = true;
+    this.gameRun = false;
 
     this.activateStartButton();
     this.keyListnerDown();
@@ -16,6 +16,7 @@ class Game {
     };
   }
   startGame() {
+    this.gameRun = true;
     this.backGround = new BackGround(this);
     this.bird = new Bird(this);
     this.obstacles = new Obstacles(this);
@@ -24,17 +25,18 @@ class Game {
   runLogic() {
     this.bird.newPos();
     this.obstacles.updateObstacles();
-    this.obstacles.paint();
+    this.obstacles.crashCheck();
     this.paint();
   }
   loop() {
     this.runLogic();
-    window.requestAnimationFrame(timestamp => this.loop(timestamp));
+    if (this.gameRun) window.requestAnimationFrame(timestamp => this.loop(timestamp));
   }
   paint() {
     this.clearCanvas();
     this.backGround.backGroundPaint();
     this.bird.update();
+    this.obstacles.paint();
   }
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.ctx.width, this.ctx.height);
