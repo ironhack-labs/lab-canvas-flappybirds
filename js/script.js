@@ -112,7 +112,7 @@ class Pipe {
       p2 = 0;
     while (p2 < 10) {
       p1 = this.randomNumber(70, canvas.height - 10);
-      p2 = this.randomNumber(0, p1-100);
+      p2 = this.randomNumber(0, p1 - 100);
     }
     this.lowerY = p1;
     this.upperY = p2 - this.height;
@@ -140,9 +140,10 @@ window.onload = () => {
 // main functions
 const startGame = () => {
   if (board.interval) {
-    board.gameOver();
+    window.location.reload();
     return;
   }
+  document.getElementById('start-button').innerText='restart';
   board.interval = setInterval(updategame, 1000 / 60);
 };
 
