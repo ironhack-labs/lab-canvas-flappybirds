@@ -1,5 +1,6 @@
 body {
   text-align: center;
+  background: lightslategrey;
 }
 
 body h1 {
@@ -17,3 +18,5 @@ body button {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+
+canvas {}
