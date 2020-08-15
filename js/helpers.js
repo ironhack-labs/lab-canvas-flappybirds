@@ -9,6 +9,7 @@ function update() {
     drawObstacles()
     printScore()
     checkCollision()
+    checkLimits()
 }
 
 function clearCanvas() {
@@ -36,16 +37,21 @@ function drawObstacles() {
 }
 
 function checkCollision() {
+    collision = false
+    obstacles.forEach(obstacle => {
+        if (flappy.isTouching(obstacle)) {
+            gameOver()
+            collision = true
+        }
+    })
+    return collision
+}
+
+function checkLimits() {
     if (flappy.flyOut()) {
         gameOver()
         return true
     }
-    obstacles.forEach(obstacle => {
-        if (flappy.isTouching(obstacle)) {
-            gameOver()
-            return true
-        }
-    })
 }
 
 function printScore() {

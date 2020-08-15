@@ -1,10 +1,11 @@
 window.onload = function() {
     document.getElementById("start-button").onclick = function() {
+        console.log(flappy.x, flappy.y, obstacles)
         startGame();
     };
 
     function startGame() {
-        if (checkCollision()) {
+        if (checkCollision() || checkLimits()) {
             reboot()
             intervalId = setInterval(update, 1000 / 60)
         } else if (intervalId) {

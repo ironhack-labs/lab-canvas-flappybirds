@@ -6,6 +6,7 @@ class Board {
         this.height = $canvas.height
         this.img = new Image()
         this.img.src = '../images/bg.png'
+        this.img.onload = () => this.draw()
     }
     draw() {
         this.x--;
