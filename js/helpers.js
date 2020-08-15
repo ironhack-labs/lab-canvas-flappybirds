@@ -21,7 +21,7 @@ function createObstacles() {
         const minY = -476
         const maxY = 0
         const randomY = Math.floor(Math.random() * (maxY - minY) + minY)
-        const minGap = 100
+        const minGap = 140
         const maxGap = 200
         const gap = Math.floor(Math.random() * (maxGap - minGap) + minGap)
         obstacles.push(new Obstacle(randomY))
