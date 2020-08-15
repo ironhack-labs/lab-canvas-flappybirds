@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="styles/style.css" />
-    <title>LAB | Flappy Birds</title>
-  </head>
-  <body>
-    <img src="./images/logo.png" alt="" style="width:50%;" />
-    <br />
-    <button id="start-button">StartGame</button>
-    <div id="game-board">
-      <canvas id="my-canvas"></canvas>
-    </div>
+    <title>LAB | Flappy Pig</title>
+</head>
 
-    <script type="text/javascript" src="js/script.js"></script>
-  </body>
+<body>
+
+    <img src="./images/logo.png" alt="" style="width:20%;" />
+    <br />
+    <!--     <button id="start-button">StartGame</button> -->
+    -->
+    <!--      <div id="game-board">
+ --><canvas width="1200" height="600" style="border: 2px solid;" id='artCanvas'></canvas>
+    <!--    </div> -->-->
+    <img id="gameOver" style="visibility: hidden" width="100" height="100" src="images/gameover.png" alt="">
+    <script type="text/javascript" src="variables.js"></script>
+
+    <script type="text/javascript" src="clases.js"></script>
+    <script type="text/javascript" src="keys.js"></script>
+    <script type="text/javascript" src="helper.js"></script>
+    <script type="text/javascript" src="backs.js"></script>
+
+    <script type="text/javascript" src="central.js"></script>
+
+</body>
+
 </html>
