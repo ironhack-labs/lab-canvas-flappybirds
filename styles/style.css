@@ -17,3 +17,9 @@ body button {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+
+p{
+  font-family: "Nunito";
+  font-size: 30px;
+  margin: 2px;
+}

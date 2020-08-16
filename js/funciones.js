@@ -1,4 +1,14 @@
 
+window.onload = function() {
+    document.getElementById("start-button").onclick = function() {
+        startGame();
+    };
+    
+    function startGame() {
+        window.location.reload()}
+        intervalId = setInterval(update, 1000 / 60)
+};
+
 const board = new Board()
 const flaby = new Flaby
 
@@ -22,8 +32,8 @@ function generarObst(){
     if (frames % 250 === 0){
         const minY = -580
         const maxY = 0
-        const minGap = 60
-        const maxGap = 120
+        const minGap = 80
+        const maxGap = 130
         const randomGap = Math.floor(Math.random() * (maxGap - minGap) + maxGap)
         const randomY = Math.floor(Math.random() * (maxY - minY) + minY)
     
@@ -72,4 +82,3 @@ document.addEventListener("keydown", e => {
     }
 })
 
-intervalId = setInterval(update, 1000 / 60)
