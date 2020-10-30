@@ -4,7 +4,6 @@ window.onload = function() {
   };
 
   function startGame() {
-
+    flappyBirdsApp.init('my-canvas')
   }
-
 };
