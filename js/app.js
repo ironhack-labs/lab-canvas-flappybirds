@@ -20,7 +20,9 @@ const flappyGame = {
 
     render() {
         const myInterval = setInterval(() => {
+            this.clearScreen()
             this.background.drawBackground()
+            this.background.moveBackground()
         }, 50)
     },
 
@@ -31,6 +33,10 @@ const flappyGame = {
         }
         this.canvasDom.width = this.canvasSize.w
         this.canvasDom.height = this.canvasSize.h
+    },
+
+    clearScreen() {
+        this.ctx.clearRect(0, 0, this.canvasSize.w, this.canvasSize.w)
     }
 
 }
