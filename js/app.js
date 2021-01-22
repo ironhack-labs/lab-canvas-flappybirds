@@ -25,6 +25,7 @@ const flappyGame = {
             this.background.drawBackground()
             this.background.moveBackground()
             this.flappy.drawFlappy()
+            this.flappy.move()
         }, 50)
     },
 

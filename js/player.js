@@ -5,10 +5,10 @@ class Player {
         this.canvasSize = canvasSize
         this.width = 50
         this.height = 50
-        this.speedX = 10
-        this.speedY = 10
-        this.gravity = 'negative'
-        this.gravitySpeed = 10
+        this.speedX = 1
+        this.speedY = 3
+        this.gravity = 'positive'
+        this.gravitySpeed = .2
         this.posX = this.canvasSize.w / 3
         this.posY = this.canvasSize.h / 2
         this.imageInstance = new Image()
@@ -17,5 +17,19 @@ class Player {
 
     drawFlappy() {
         this.ctx.drawImage(this.imageInstance, this.posX, this.posY, this.width, this.height)
+    }
+
+    resetSpeed() {
+        this.speedY = 3
+    }
+
+    move() {
+        if (this.gravity === 'negative') {
+            this.posY += this.speedY
+                // this.speedX += this.gravitySpeed
+        } else {
+            this.posY -= this.speedY
+            this.speedY -= this.gravitySpeed
+        }
     }
 }
