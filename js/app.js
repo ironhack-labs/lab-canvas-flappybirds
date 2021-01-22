@@ -15,6 +15,7 @@ const flappyGame = {
         this.ctx = this.canvasDom.getContext('2d')
         this.setDimensions()
         this.background = new Background(this.ctx, this.canvasSize)
+        this.flappy = new Player(this.ctx, this.canvasSize)
         this.render()
     },
 
@@ -23,6 +24,7 @@ const flappyGame = {
             this.clearScreen()
             this.background.drawBackground()
             this.background.moveBackground()
+            this.flappy.drawFlappy()
         }, 50)
     },
 
