@@ -4,7 +4,9 @@ window.onload = function() {
     };
 
     function startGame() {
-
+        document.getElementById("start-button").setAttribute('disabled', 'true')
+        flappyGame.render()
+        console.log('startgame')
     }
 
 };
