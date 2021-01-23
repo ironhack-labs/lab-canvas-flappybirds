@@ -9,6 +9,9 @@ const flappyGame = {
     ctx: undefined,
     canvasSize: undefined,
     background: undefined,
+    flappy: undefined,
+    obstacles: [],
+    frames: 0,
 
     init(canvasID) {
         this.canvasDom = document.getElementById(`${canvasID}`)
@@ -20,6 +23,7 @@ const flappyGame = {
         this.render()
     },
 
+
     render() {
         const myInterval = setInterval(() => {
             this.clearScreen()
@@ -27,6 +31,18 @@ const flappyGame = {
             this.background.moveBackground()
             this.flappy.drawFlappy()
             this.flappy.move()
+            this.obstacles.forEach(elm => {
+                elm.drawObstacle()
+                elm.move()
+            })
+            this.obstacles = this.obstacles.filter((elm) => elm.getPosition() >= -elm.getWidth())
+            this.frames++
+                if (this.frames === 5000) {
+                    this.frames = 0
+                }
+            if (!(this.frames % 100)) {
+                this.createObstacle()
+            }
         }, 50)
     },
 
@@ -52,12 +68,15 @@ const flappyGame = {
 
         document.addEventListener('keyup', (event) => {
             if (event.code === 'Space') {
-                setTimeout(() => {
-                    this.flappy.setGravity('negative')
-                }, 5000)
+                this.flappy.setGravity('negative')
             }
         })
 
+    },
+
+    createObstacle() {
+        this.obstacles.push(new Obstacle(this.ctx, this.canvasSize, 'top'))
+        this.obstacles.push(new Obstacle(this.ctx, this.canvasSize, 'bottom'))
     }
 
 }
