@@ -1,28 +1,27 @@
 class Obstacle {
-    constructor(ctx, canvasSize, obstacleType, pairObstacleHeight) {
+    constructor(ctx, canvasSize, obstacleType, pairObstacleBorder) {
         this.ctx = ctx
         this.canvasSize = canvasSize
         this.width = 50
-        this.height = 80
+        this.height = 300
         this.obstacleType = obstacleType
         this.imageInstance = new Image()
-        this.posX = this.canvasSize.w - this.width
+        this.posX = this.canvasSize.w
         this.posY = 0
         this.speedX = 5
-        this.pairObstacleHeight = pairObstacleHeight
+        this.pairObstacleBorder = pairObstacleBorder
     }
 
 
-    setObstacleDimensions() {
+    setObstaclePosition() {
         if (this.obstacleType === 'top') {
-            this.height = Math.floor(50 + Math.random() * (this.canvasSize.h - 250))
+            this.posY = Math.floor(Math.random() * (-250))
         } else {
-            this.height = this.canvasSize.h - this.pairObstacleHeight - 150
+            this.posY = this.pairObstacleBorder + 150
         }
     }
 
     drawObstacle() {
-        this.obstacleType === 'top' ? this.posY = 0 : this.posY = this.canvasSize.h - this.height
         this.imageInstance.src = `images/obstacle_${this.obstacleType}.png`
         this.ctx.drawImage(this.imageInstance, this.posX, this.posY, this.width, this.height)
     }
@@ -40,5 +39,25 @@ class Obstacle {
 
     move() {
         this.posX -= this.speedX
+    }
+
+    getLeftBorder() {
+        return this.posX
+    }
+
+    getRightBorder() {
+        return this.posX + this.width
+    }
+    getTopBorder() {
+        if (this.obstacleType === 'bottom') {
+            return this.posY
+        }
+        return 0
+    }
+    getBottomBorder() {
+        if (this.obstacleType === 'top') {
+            return this.posY + this.height
+        }
+        return this.canvasSize.h
     }
 }

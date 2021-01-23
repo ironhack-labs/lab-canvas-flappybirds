@@ -20,7 +20,7 @@ class Player {
     }
 
     resetSpeed() {
-        this.speedY = -10
+        this.speedY = -5
     }
 
     move() {
@@ -33,5 +33,18 @@ class Player {
 
     setGravity(gravitySign) {
         this.gravity = gravitySign
+    }
+
+    getLeftBorder() {
+        return this.posX
+    }
+    getRightBorder() {
+        return this.posX + this.width
+    }
+    getTopBorder() {
+        return this.posY
+    }
+    getBottomBorder() {
+        return this.posY + this.height
     }
 }
