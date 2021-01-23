@@ -16,6 +16,7 @@ const flappyGame = {
         this.setDimensions()
         this.background = new Background(this.ctx, this.canvasSize)
         this.flappy = new Player(this.ctx, this.canvasSize)
+        this.setListeners()
         this.render()
     },
 
@@ -40,6 +41,23 @@ const flappyGame = {
 
     clearScreen() {
         this.ctx.clearRect(0, 0, this.canvasSize.w, this.canvasSize.w)
+    },
+
+    setListeners() {
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Space') {
+                this.flappy.setGravity('positive')
+            }
+        })
+
+        document.addEventListener('keyup', (event) => {
+            if (event.code === 'Space') {
+                setTimeout(() => {
+                    this.flappy.setGravity('negative')
+                }, 5000)
+            }
+        })
+
     }
 
 }

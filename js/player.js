@@ -7,8 +7,8 @@ class Player {
         this.height = 50
         this.speedX = 1
         this.speedY = 3
-        this.gravity = 'positive'
-        this.gravitySpeed = .2
+        this.gravity = 'negative'
+        this.gravitySpeed = .5
         this.posX = this.canvasSize.w / 3
         this.posY = this.canvasSize.h / 2
         this.imageInstance = new Image()
@@ -26,10 +26,14 @@ class Player {
     move() {
         if (this.gravity === 'negative') {
             this.posY += this.speedY
-                // this.speedX += this.gravitySpeed
         } else {
             this.posY -= this.speedY
             this.speedY -= this.gravitySpeed
         }
+    }
+
+    setGravity(gravitySign) {
+        this.resetSpeed()
+        this.gravity = gravitySign
     }
 }
