@@ -75,8 +75,12 @@ const flappyGame = {
     },
 
     createObstacle() {
-        this.obstacles.push(new Obstacle(this.ctx, this.canvasSize, 'top'))
-        this.obstacles.push(new Obstacle(this.ctx, this.canvasSize, 'bottom'))
+        const newTopObstacle = new Obstacle(this.ctx, this.canvasSize, 'top', 0)
+        newTopObstacle.setObstacleDimensions()
+        this.obstacles.push(newTopObstacle)
+        const newBottomObstacle = new Obstacle(this.ctx, this.canvasSize, 'bottom', newTopObstacle.getHeight())
+        newBottomObstacle.setObstacleDimensions()
+        this.obstacles.push(newBottomObstacle)
     }
 
 }
