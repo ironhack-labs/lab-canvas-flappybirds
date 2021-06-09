@@ -1,8 +1,7 @@
-const KEY_UP = 38
-const KEY_RIGHT = 39
-const KEY_LEFT = 37
-const KEY_FIRE = 32
+const GRAVITY = 0.4;
 
-const MOVEMENT_FRAMES = 10
-const SPEED = 4
-const GRAVITY = 0.4
+const PIPES_FRAMES = 240;
+
+//const SPEED_INCREMENT_FRAMES = 240;
+
+const PIPES_SPEED = 2.5;

@@ -8,17 +8,22 @@
     <title>LAB | Flappy Birds</title>
   </head>
   <body>
-    <img src="./images/logo.png" alt="" style="width:50%;" />
-    <br />
-    <button id="start-button">StartGame</button>
+    <div id="start">
+      <img src="./images/logo.png" alt="" style="width:50%;" />
+      <br />
+      <button id="start-button">StartGame</button>
+    </div>
+    
     <div id="game-board">
       <canvas id="my-canvas"></canvas>
     </div>
 
     <script type="text/javascript" src="js/constants.js"></script>
-    <script type="text/javascript" src="js/background.js"></script>
-    <script type="text/javascript" src="js/faby.js"></script>
-    <script type="text/javascript" src="js/game.js"></script>
+    <script type="text/javascript" src="js/models/background.js"></script>
+    <script type="text/javascript" src="js/models/pipeTop.js"></script>
+    <script type="text/javascript" src="js/models/pipeBot.js"></script>
+    <script type="text/javascript" src="js/models/faby.js"></script>
+    <script type="text/javascript" src="js/models/game.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
   </body>
 </html>

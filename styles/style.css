@@ -17,3 +17,11 @@ body button {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+
+.inactive{
+  display: none;
+}
+
+#game-board{
+  margin-top: 3%;
+}
