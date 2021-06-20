@@ -1,9 +1,6 @@
 window.onload = function() {
   document.getElementById("start-button").addEventListener("click", startGame);
 
-  function startGame() {
-
-  }
 };
 
 // The Canvas
@@ -22,10 +19,10 @@ class BackgroundCanvas {
       this.height = backgroundCanvas.height;
       this.img = new Image();
       this.img.src = "../images/bg.png";
-      this.speed = 2;
+      this.speed = -1;
   }
 
-  drawRoad() {
+  drawBackground() {
       ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
       ctx.drawImage(
           this.img,
@@ -37,9 +34,26 @@ class BackgroundCanvas {
   }
 
   move() {
-      this.y += this.speed;
-      this.y %= backgroundCanvas.height;
+      this.x += this.speed;
+      this.x %= backgroundCanvas.width;
   }
 }
 
 let background = new BackgroundCanvas(0, 0);
+
+
+// START GAME
+
+function startGame() {
+  console.log("Game has started!");
+
+  setInterval(() => {
+    ctx.clearRect(0, 0, 700, 300);
+
+    // Background
+    background.move();
+    background.drawBackground();
+
+
+}, 20);
+}
