@@ -26,8 +26,8 @@ class BackgroundCanvas {
       ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
       ctx.drawImage(
           this.img,
-          this.x,
-          this.y - backgroundCanvas.height,
+          this.x + backgroundCanvas.width,
+          this.y,
           this.width,
           this.height
       );
@@ -40,6 +40,42 @@ class BackgroundCanvas {
 }
 
 let background = new BackgroundCanvas(0, 0);
+
+// The Player
+
+class Player {
+  constructor(x,y) {
+    this.x = x;
+    this.y = y;
+    this.speedX = 1;
+    this.speedY = 1;
+    this.gravity = 1;
+    this.gravitySpeed = 1;
+    this.width = 20;
+    this.height = 30;
+
+  }
+update() {
+
+}
+
+newPos() {
+  this.x += this.speedX;
+  this.y += this.speedY;
+}
+}
+
+
+let faby = new Player();
+
+// Spacebar
+
+document.onkeydown = function (e) {
+  console.log("it moves", e);
+  if (e.keyCode === 32) {
+
+  } else {}
+};
 
 
 // START GAME
