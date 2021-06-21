@@ -46,12 +46,12 @@ class Player {
     this.y = y;
     this.speedX = 1;
     this.speedY = 1;
-    this.gravity = 0.5;
+    this.gravity = 1;
+    this.userPull = 0;
     this.img = new Image();
     this.img.src = "../images/flappy.png";
     this.width = 50;
     this.height = 50;
-    this.userPull = 0;
   }
 
 update() {
@@ -67,29 +67,29 @@ hitBottom() {
 
 newPos() {
   this.speedY += (this.gravity - this.userPull);
+  console.log(this.speedY);
   this.x += this.speedX;
   this.y += this.speedY;
   this.hitBottom();
 }
 }
 
+// Spacebar Control
+
+  document.addEventListener('keydown', function(e) {
+    if (e.keyCode == 32) {
+      this.userPull = 0.5;
+    }
+  });
+  
+  document.addEventListener('keyup', function(e) {
+    if (e.keyCode == 32) {
+      this.userPull = 0;
+    }
+  });
+
 
 let faby = new Player(100,80);
-
-// Spacebar
-
-document.onkeydown = function(e) {
-  if (e.keyCode == 32) {
-    this.userPull = 0.3;
-  }
-};
-
-document.onkeyup = function(e) {
-  if (e.keyCode == 32) {
-    this.userPull = 0;
-  }
-};
-
 
 // START GAME
 
@@ -104,9 +104,9 @@ function startGame() {
     background.drawBackground();
 
     // Player
-    faby.update();
     faby.newPos();
-
+    faby.update();
 
 }, 20);
+
 }
