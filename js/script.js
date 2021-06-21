@@ -8,6 +8,7 @@ const canvas = document.getElementById("my-canvas");
 let ctx = canvas.getContext("2d");
 
 
+let frames = 0;
 class Background {
   constructor(x, y) {
       this.x = x;
@@ -91,6 +92,39 @@ newPos() {
 
 let faby = new Player(100,80);
 
+// Obstacles
+const obstacles = [];
+
+class Obstacle {
+  constructor() {
+    this.x = canvas.width;
+    this.minHeight = 20;
+    this.maxHeight = 200;
+    this.height = Math.floor(Math.random() * (this.maxHeight - this.minHeight + 1) + this.minHeight);
+    this.minGap = 50;
+    this.maxGap = 200;
+    this.gap = Math.floor(Math.random() * (this.maxGap - this.minGap + 1) + this.minGap);
+  }
+
+  drawObstacle() {
+    ctx.drawImage(10, this.height, 'green', x, 0);
+    ctx.drawImage(10, x - this.height - gap, 'green', x, height + gap);
+  }
+}
+
+function updateObstacles() {
+  if (frames % 120 === 0) {
+    obstacles.push(new Obstacle());
+  }
+}
+
+function drawAllObstacles () {
+  for (let i = 0; i < obstacles.length; i++) {
+    obstacles[i].drawObstacle;
+    obstacles[i].x += -1;
+  }
+}
+
 // START GAME
 
 function startGame() {
@@ -106,6 +140,13 @@ function startGame() {
     // Player
     faby.newPos();
     faby.update();
+
+    // Obstacles
+    updateObstacles();
+    drawAllObstacles();
+
+
+    frames ++;
 
 }, 20);
 
