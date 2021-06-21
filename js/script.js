@@ -7,26 +7,23 @@ window.onload = function() {
 const canvas = document.getElementById("my-canvas");
 let ctx = canvas.getContext("2d");
 
-// The Background Canvas
-const backgroundCanvas = document.getElementById("my-canvas-background");
-let backgroundCtx = backgroundCanvas.getContext("2d");
 
-class BackgroundCanvas {
+class Background {
   constructor(x, y) {
       this.x = x;
       this.y = y;
-      this.width = backgroundCanvas.width;
-      this.height = backgroundCanvas.height;
+      this.width = canvas.width;
+      this.height = canvas.height;
       this.img = new Image();
       this.img.src = "../images/bg.png";
       this.speed = -1;
   }
 
   drawBackground() {
-      ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-      ctx.drawImage(
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    ctx.drawImage(
           this.img,
-          this.x + backgroundCanvas.width,
+          this.x + canvas.width,
           this.y,
           this.width,
           this.height
@@ -35,11 +32,11 @@ class BackgroundCanvas {
 
   move() {
       this.x += this.speed;
-      this.x %= backgroundCanvas.width;
+      this.x %= canvas.width;
   }
 }
 
-let background = new BackgroundCanvas(0, 0);
+let background = new Background(0, 0);
 
 // The Player
 
@@ -49,32 +46,48 @@ class Player {
     this.y = y;
     this.speedX = 1;
     this.speedY = 1;
-    this.gravity = 1;
-    this.gravitySpeed = 1;
-    this.width = 20;
-    this.height = 30;
-
+    this.gravity = 0.5;
+    this.img = new Image();
+    this.img.src = "../images/flappy.png";
+    this.width = 50;
+    this.height = 50;
+    this.userPull = 0;
   }
-update() {
 
+update() {
+  ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+}
+
+hitBottom() {
+  let bottom = canvas.height - this.height;
+  if (this.y > bottom) {
+    this.y = bottom;
+  }
 }
 
 newPos() {
+  this.speedY += (this.gravity - this.userPull);
   this.x += this.speedX;
   this.y += this.speedY;
+  this.hitBottom();
 }
 }
 
 
-let faby = new Player();
+let faby = new Player(100,80);
 
 // Spacebar
 
-document.onkeydown = function (e) {
-  console.log("it moves", e);
-  if (e.keyCode === 32) {
+document.onkeydown = function(e) {
+  if (e.keyCode == 32) {
+    this.userPull = 0.3;
+  }
+};
 
-  } else {}
+document.onkeyup = function(e) {
+  if (e.keyCode == 32) {
+    this.userPull = 0;
+  }
 };
 
 
@@ -89,6 +102,10 @@ function startGame() {
     // Background
     background.move();
     background.drawBackground();
+
+    // Player
+    faby.update();
+    faby.newPos();
 
 
 }, 20);
