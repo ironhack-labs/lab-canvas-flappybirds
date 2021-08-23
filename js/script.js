@@ -108,16 +108,6 @@ window.onload = function() {
     score.draw();
   }
 
-  // GameOver check
-  function gameOver () {
-    if (collision) {
-      cancelAnimationFrame(frameId);
-      clearInterval(obstaclesId);
-      alert("Game Over");
-      window.location.reload();
-    }
-  }
-
   // Check for collisions
   function checkCollision(bird, pipe) {
       collision =                             // top pipe:
@@ -131,6 +121,13 @@ window.onload = function() {
       bird.x + bird.width > pipe.x &&               // check right side of bird
       bird.y < pipe.BottomY + pipe.bottomHeight &&  // check top of bird
       bird.y + bird.height > pipe.BottomY)          // check bottom of bird
+
+      if (collision) {
+        cancelAnimationFrame(frameId);
+        clearInterval(obstaclesId);
+        alert("Game Over");
+        window.location.reload();
+      }
 
   }
 
@@ -197,8 +194,6 @@ window.onload = function() {
 
     //update game
     update();
-
-    gameOver ();
   }
 
   // create obstacles
