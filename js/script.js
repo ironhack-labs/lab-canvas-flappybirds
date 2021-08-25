@@ -157,7 +157,7 @@ window.onload = function() {
   // remove obstacle from array: when they go to the left of the canvas
   function removeObstacles() {
     obstaclesArray = obstaclesArray.filter(pipe => {
-      pipe.x + pipe.width > 0;
+      return (pipe.x + pipe.width > 0);
     });
   }
 
