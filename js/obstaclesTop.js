@@ -23,7 +23,7 @@ class ObstaclesTop {
     
       startGame() {
         this.image = new Image()
-        this.image.src = '../images/witch-obstacle-top.png'
+        this.image.src = './images/witch-obstacle-top.png'
       }
     
     

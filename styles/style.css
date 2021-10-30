@@ -1,19 +1,155 @@
+
 body {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url('../images/bg-body.jpg');
+  background-size: 300px;
 }
+
 
 body h1 {
   font-size: 30px;
   text-transform: uppercase;
 }
 
-body button {
-  font-size: 20px;
-  background-color: black;
-  color: #fff;
-  padding: 10px 20px;
-  border: 0;
-  box-shadow: 0;
-  border-radius: 5px;
-  margin-bottom: 20px;
+
+
+#points {
+  font-family: Helvetica, sans-serif;
+  color: rgb(106, 114, 111);
+  font-size: 26px;
+  font-weight: 900;
+  margin: 0px;
+  margin-bottom: 0.5em;
+  text-align: end;
+}
+
+
+h2 {
+  color: rgb(154, 163, 160);
+  font-family: Helvetica, sans-serif;
+  margin: 0px;
+  margin-bottom: 0.5em;
+  margin-right: 1em;
+  text-align: end;
+}
+
+
+#main-elements {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 40px;
+  padding-bottom: 0px;
+  padding-top: 20px;
+}
+
+#score-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+
+#character-txt {
+  font-family: Helvetica, sans-serif;
+  color: rgb(87, 86, 102);
+  font-size: 16px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+#character {
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+}
+
+#start-button-sara {
+  width: 100px;
+  cursor: pointer;
+}
+
+#start-button-laura {
+  width: 100px;
+  cursor: pointer;
+}
+
+#start-button-guille {
+  width: 100px;
+  cursor: pointer;
+}
+
+#start-button-sara:hover {
+  width: 130px;
+}
+
+#start-button-laura:hover {
+  width: 130px;
+}
+
+#start-button-guille:hover {
+  width: 130px;
+}
+
+#choose-character-txt {
+  font-family: Helvetica, sans-serif;
+  color: rgb(98, 95, 116);
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 26em;
+}
+
+#game-board {
+  display: flex;
+  justify-content: center;
+}
+
+
+.gameOverImg {
+  width: 800px;
+  position: absolute;
+  bottom: 90px;
+  left: 320px;
+}
+
+#scoreFinalTxt {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 200px;
+  left: 600px;
+  font-family: Helvetica, sans-serif;
+  color: rgb(160, 195, 216);
+  font-size: 30px;
+}
+
+.totalPointsFinal{
+  
+}
+
+h3 {
+  margin-left: 50px;
+}
+
+
+.hide {
+  display: none;
+}
+
+#closeBtn {
+  position: absolute;
+  width: 50px;
+  bottom: 460px;
+  left: 1040px;
+  cursor: pointer;
+}
+
+#closeBtn:hover {
+  width: 60px;
+  bottom: 455px;
+  left: 1032;
 }

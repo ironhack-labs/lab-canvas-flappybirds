@@ -29,6 +29,7 @@ class Background {
       draw() {
         this.ctx.drawImage(this.image, this.pos.x, this.pos.y, this.size.width, this.size.height);
         this.ctx.drawImage(this.image, this.pos.x + this.size.width, this.pos.y, this.size.width, this.size.height);
+        this.ctx.drawImage(this.image, this.pos.x + this.size.width*2, this.pos.y, this.size.width, this.size.height);
       }
          
       move() {

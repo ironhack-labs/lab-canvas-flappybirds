@@ -8,17 +8,71 @@
     <title>Flappy TAs</title>
   </head>
   <body>
-    <img src="./images/logo.png" alt="" style="width:50%;" />
-    <br />
-    <button id="start-button">StartGame</button>
+    
+    <div id="main-elements">
+    
+      <img src="./images/flappyTa-logo-01.png" alt="" style="width:30%;" />
+      
+      <div id="character">
+        <img id="start-button-sara" src="./images/choose-character-sara.png" alt="choose-character-sara">
+        <p id="character-txt">Sara</p>
+      </div>
+
+      <div id="character">
+        <img id="start-button-laura" src="./images/choose-character-laura.png" alt="choose-character-laura">
+        <p id="character-txt">Laura</p>
+      </div>
+
+      <div id="character">
+        <img id="start-button-guille" src="./images/choose-character-guille.png" alt="choose-character-sara">
+        <p id="character-txt">Guille</p>
+      </div>
+      
+    </div>
+    
+    <div id="score-box">  
+      <h2>Score :</h2>  
+      <p id="points"></p>
+      <p id="choose-character-txt">- Choose a character to start the game -</p>
+    </div>
+
+
     <div id="game-board">
       <canvas id="myCanvas" width="1200" height="600"></canvas>
     </div>
+
+
+    <div id="gameOver">
+      <div  class="hide">
+        <img class="gameOverImg" src="./images/game-over-01.png" alt="duck-game-over">
+        
+        <div id="scoreFinalTxt">
+          <p class="totalPointsFinal">Total points :</p> 
+          <h3 id="scoredFinal"></h3>
+        </div>
+
+        <img id="closeBtn" src="./images/close-btn-01.png" alt="close-btn-01">
+      
+      </div>  
+    </div>
+
+
     
     <script type="text/javascript" src="js/background.js"></script>
+    <script type="text/javascript" src="js/background-guille.js"></script>
+    <script type="text/javascript" src="js/background-laura.js"></script>
     <script type="text/javascript" src="js/obstaclesTop.js"></script>
+    <script type="text/javascript" src="js/obstaclesTop-guille.js"></script>
+    <script type="text/javascript" src="js/obstaclesTop-laura.js"></script>
     <script type="text/javascript" src="js/obstaclesBottom.js"></script>
+    <script type="text/javascript" src="js/obstaclesBottom-guille.js"></script>
+    <script type="text/javascript" src="js/obstaclesBottom-laura.js"></script>
     <script type="text/javascript" src="js/player.js"></script>
+    <script type="text/javascript" src="js/player-guille.js"></script>
+    <script type="text/javascript" src="js/player-laura.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/script-guille.js"></script>
+    <script type="text/javascript" src="js/script-laura.js"></script>
+    <script type="text/javascript" src="js/gameLauncher.js"></script>
   </body>
 </html>

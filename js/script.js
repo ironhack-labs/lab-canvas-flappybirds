@@ -1,10 +1,3 @@
-window.onload = function() {
-  document.getElementById("start-button").onclick = function() {
-    basicGame.startGame();
-  };
-};
-
-
 
 const basicGame = {
   ctx : undefined,
@@ -33,10 +26,10 @@ const basicGame = {
     this.drawFilledRectangle();
     this.createBackground();
     this.drawBackground();
+    this.createObstacles()
     this.createPlayer();
     this.start()
     this.setListeners()
-    this.createObstacles()
    
 
   },
@@ -82,18 +75,25 @@ const basicGame = {
       this.moveBackground()
       this.movePlayer()
       this.setListeners()
-      this.player.draw()
       this.framesCounter % 200 === 0 ? this.createObstacles(): null
+      this.framesCounter % 200 === 0 ? this.scoreCounter(): null
       this.drawObstaclesBottom()
       this.moveObstaclesBottom()
       this.drawObstaclesTop()
       this.moveObstaclesTop()
+      this.player.draw()
       if (this.createCollisionBottom()) {
         this.gameOver();
+        this.finalScore();
+        this.points = 0;
+        document.querySelector('#gameOver div').removeAttribute('class', 'hide')
       }
 
       if (this.createCollisionTop()) {
         this.gameOver();
+        this.finalScore();
+        this.points = 0;
+        document.querySelector('#gameOver div').removeAttribute('class', 'hide')
       }
       
       
@@ -171,7 +171,7 @@ const basicGame = {
       return this.obstaclesBottom.some(obs => {
   
         return (
-          this.player.pos.x + this.player.size.width > obs.pos.x && //lado drch del player lado izq del obs
+          this.player.pos.x + this.player.size.width-40 > obs.pos.x && //lado drch del player lado izq del obs
           this.player.pos.x < obs.pos.x + obs.size.width &&         //lado izq del player lado drch del obs
           this.player.pos.y-20 + this.player.size.height > obs.pos.y //lado de abajo del player lado de arriba del obs
         )
@@ -189,7 +189,7 @@ const basicGame = {
     return this.obstaclesTop.some(obs => {
 
       return (
-        this.player.pos.x + this.player.size.width > obs.pos.x && //lado drch del player lado izq del obs
+        this.player.pos.x + this.player.size.width-40 > obs.pos.x && //lado drch del player lado izq del obs
         this.player.pos.x < obs.pos.x + obs.size.width &&         //lado izq del player lado drch del obs
         this.player.pos.y < obs.pos.y + obs.size.height //lado de abajo del player lado de abajo del obs
       )
@@ -210,8 +210,18 @@ const basicGame = {
 
   moveBackground() {
     this.backgroundImages.forEach(image => image.move());
-  }
-  
+  },
+
+  scoreCounter() {
+    this.points++
+    document.querySelector('#points').textContent = this.points
+    console.log(this.points) 
+  },
+
+  finalScore() {
+    document.querySelector('#scoredFinal').textContent = this.points
+  },
+    
 
 }
 
