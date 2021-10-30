@@ -17,12 +17,13 @@ const basicGame = {
   randomPos: [],
   framesCounter: 0,
   points: 0,
-  background: undefined,
+  backgroundImages: [],
   player: undefined,
   keys: {
     player: {
       SPACE: " ",
-    }
+    },
+  background : [],
   },
 
 
@@ -30,6 +31,8 @@ const basicGame = {
     this.setContext()
     this.setDimensions()
     this.drawFilledRectangle();
+    this.createBackground();
+    this.drawBackground();
     this.createPlayer();
     this.start()
     this.setListeners()
@@ -76,6 +79,7 @@ const basicGame = {
 
       this.clearScreen()
       this.drawElements()
+      this.moveBackground()
       this.movePlayer()
       this.setListeners()
       this.player.draw()
@@ -110,7 +114,7 @@ const basicGame = {
 
   
   createPlayer() {
-    this.player = new Player(this.ctx, 200, 200, 80, 80, -0.5)
+    this.player = new Player(this.ctx, 200, 200, 120, 120, -0.5)
   },
 
 
@@ -129,6 +133,7 @@ const basicGame = {
 
   drawElements() {
     this.drawFilledRectangle();
+    this.drawBackground();
   },
 
 
@@ -168,7 +173,7 @@ const basicGame = {
         return (
           this.player.pos.x + this.player.size.width > obs.pos.x && //lado drch del player lado izq del obs
           this.player.pos.x < obs.pos.x + obs.size.width &&         //lado izq del player lado drch del obs
-          this.player.pos.y + this.player.size.height > obs.pos.y //lado de abajo del player lado de arriba del obs
+          this.player.pos.y-20 + this.player.size.height > obs.pos.y //lado de abajo del player lado de arriba del obs
         )
   
       })
@@ -192,6 +197,20 @@ const basicGame = {
     })
   },
 
+
+
+  createBackground() {
+    this.backgroundImages.push(new Background(this.ctx, 0, 0, 2298, 600, 1));
+  },
+
+
+  drawBackground() {
+    this.backgroundImages.forEach(image => image.draw());
+  },
+
+  moveBackground() {
+    this.backgroundImages.forEach(image => image.move());
+  }
   
 
 }

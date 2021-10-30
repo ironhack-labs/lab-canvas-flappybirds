@@ -31,7 +31,7 @@ class Player {
       startGame() {
     
         this.image = new Image();
-        this.image.src = './images/flappy.png';
+        this.image.src = './images/sara-witch.png';
       }
 
 
