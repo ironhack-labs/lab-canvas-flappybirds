@@ -21,7 +21,7 @@ class Player {
         this.image = undefined
 
         this.physics = {
-          gravity: 0.2
+          gravity: 0.1
         } 
     
         this.startGame()
@@ -56,7 +56,7 @@ class Player {
       
       jump() {
                
-        this.pos.y -= 80;
+        this.pos.y -= 50;
         this.speed.y = this.physics.gravity;
 
 
