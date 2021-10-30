@@ -112,16 +112,16 @@ h2 {
 .gameOverImg {
   width: 800px;
   position: absolute;
-  bottom: 90px;
-  left: 320px;
+  bottom: 180px;
+  left: 430px;
 }
 
 #scoreFinalTxt {
   display: flex;
   align-items: center;
   position: absolute;
-  bottom: 200px;
-  left: 600px;
+  bottom: 250px;
+  left: 710px;
   font-family: Helvetica, sans-serif;
   color: rgb(160, 195, 216);
   font-size: 30px;
@@ -143,13 +143,13 @@ h3 {
 #closeBtn {
   position: absolute;
   width: 50px;
-  bottom: 460px;
-  left: 1040px;
+  bottom: 555px;
+  left: 1155px;
   cursor: pointer;
 }
 
 #closeBtn:hover {
   width: 60px;
-  bottom: 455px;
-  left: 1032;
+  bottom: 550px;
+  left: 1145;
 }
