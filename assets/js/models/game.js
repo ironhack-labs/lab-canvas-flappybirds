@@ -16,4 +16,17 @@ class Game {
         this.footerBackground.draw();
         this.player.draw();
     }
+    
+    move() {
+        this.player.move();
+    }
+
+    /* oneKeyUp(keyCode) {
+        this.player.oneKeyUp(keyCode);
+    }
+ */
+    oneKeyDown(keyCode) {
+        this.player.oneKeyDown(keyCode);    
+    }
+
 }

@@ -9,5 +9,13 @@ window.onload = function() {
     game.start();
   };
 
+  document.addEventListener('keydown' , (event) => {
+    game.oneKeyDown(event.keyCode)
+  })
+
+  /* document.addEventListener('keyup' , (event) => {
+    game.oneKeyUp(event.keyCode)
+  }) */
+
 
 };
