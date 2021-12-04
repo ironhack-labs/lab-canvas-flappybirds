@@ -4,7 +4,7 @@ class Lowerobstacle {
         this.x = x
         this.y = y
         this.width = 138
-        this.height = 200
+        this.height = 793
 
         this.img = new Image ()
         this.img.src = './images/obstacle_bottom.png'

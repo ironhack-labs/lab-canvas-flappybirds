@@ -68,4 +68,22 @@ class Player {
           this.jumping = true
         }
     }
+
+
+    collidesWith(obstacle) {
+        console.log('entra')
+
+        if (
+          this.x < obstacle.x + obstacle.width &&
+          this.x + this.width > obstacle.x &&
+          this.y < obstacle.y + obstacle.height &&
+          this.y + this.height > obstacle.y
+        ) {
+            console.log('collision')
+          return true
+        }
+        
+        return false
+      }
+
 }
