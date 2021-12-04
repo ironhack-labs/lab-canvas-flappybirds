@@ -3,7 +3,7 @@ class Game {
         this.ctx = ctx;
         this.intervalId = undefined;
         this.background = new Background(ctx)
-
+        this.footer = new Footer(ctx)
     }
 
     start() {
@@ -21,6 +21,7 @@ class Game {
 
     draw() {
         this.background.draw();
+        this.footer.draw();
     }
     move() {
 

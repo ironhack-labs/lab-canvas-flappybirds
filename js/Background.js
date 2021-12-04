@@ -5,8 +5,8 @@ class Background {
         this.x = 0;
 
 
-        this.width = this.ctx.canvas.width;
-        this.height = this.ctx.canvas.height;
+        this.width = 900;
+        this.height = 504;
 
 
 
