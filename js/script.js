@@ -6,10 +6,16 @@ const button = document.getElementById('start-button');
 window.onload = function() {
   document.getElementById("start-button").onclick = function() {
     startGame();
+    
   };
 
   function startGame() {
     game.start();
+    
   }
 
+  document.addEventListener('keydown',(event) => {
+    game.onKeyDown(event.keyCode);
+    console.log('test')
+  })
 };

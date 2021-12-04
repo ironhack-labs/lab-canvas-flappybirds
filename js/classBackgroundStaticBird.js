@@ -23,12 +23,19 @@ class BackgroundStatic {
                 this.img,
                 this.x,
                 0,
-                this.ctx.canvas.width = 900,
-                this.ctx.canvas.height = 504,
-            )            
+                this.width,
+                this.height,
+            )   
+            this.ctx.drawImage(
+                this.img,
+                this.x + this.width,
+                0,
+                this.width,
+                this.height,
+            )          
         }
     }
-    
+
     move(){
         this.x += this.vx;
         if(this.x + this.width <= 0){

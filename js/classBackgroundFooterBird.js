@@ -22,8 +22,8 @@ class BackgroundFooter {
                 this.img,
                 this.x,
                 425,
-                this.ctx.canvas.width = 900,
-                this.ctx.canvas.height = 79,
+                this.width,
+                this.height,
             )
             this.ctx.drawImage(
                 this.img,
@@ -34,6 +34,7 @@ class BackgroundFooter {
             )
             
         }
+        
     }
 
     move(){
