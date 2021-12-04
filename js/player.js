@@ -17,12 +17,10 @@ class Player {
             this.img.isReady = true
         }
 
-        this.speed = 1
-
         this.vx = 0
         this.vy = 0
 
-        this.ay = 0.5
+        this.ay = 0.3
 
         this.jumping = false
         this.maxY = 370
