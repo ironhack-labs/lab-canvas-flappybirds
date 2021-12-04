@@ -1,0 +1,1 @@
+const KEY_SPACEBAR = 32
