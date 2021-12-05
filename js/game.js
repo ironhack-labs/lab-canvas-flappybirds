@@ -27,6 +27,8 @@ class Game {
 
             this.draw();
 
+            this.isColliding();
+
             this.obstaclesFrameCount++;
 
             }, this.fps);
@@ -34,7 +36,9 @@ class Game {
     }
 
     clear(){
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+
+        //this.obstacles = this.obstacles.filter()
     }
     
     move(){
@@ -60,6 +64,35 @@ class Game {
 
     addObstacle() {
         this.obstacles.push(new Obstacles(ctx));
+    }
+
+    isColliding(){
+        const condition = this.obstacles.some(obstacle => this.player.colladesWith(obstacle));
+
+        if(condition || this.player.y + this.player.height >= this.ctx.canvas.height - 79){
+            this.gameOver();
+        }
+    }
+
+    gameOver(){
+        clearInterval(this.intervalId);
+
+        this.ctx.save();
+
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+        this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+
+
+        this.ctx.fillStyle = 'red';
+        this.ctx.textAlign = 'center';
+        this.ctx.font = 'bold 24px sans-serif';
+        this.ctx.fillText(`Game Over :(`, this.ctx.canvas.width / 2, this.ctx.canvas.height / 2 - 30);
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText(`Your final score:`, this.ctx.canvas.width / 2, this.ctx.canvas.height / 2 + 30);
+        this.ctx.font = 'bold 28px sans-serif';
+        this.ctx.fillText(`${this.score}`, this.ctx.canvas.width / 2, this.ctx.canvas.height / 2 + 60);
+
+        this.ctx.restore();
     }
 
 }

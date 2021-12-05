@@ -72,6 +72,28 @@ class Player {
         //
     }
 
-    
+    colladesWith(obstacle){
+        //checking the top obstacle
+        if (
+            this.x < obstacle.x + obstacle.imgTop.width &&
+            this.x + this.width > obstacle.x &&
+            this.y < obstacle.y + obstacle.imgTop.height &&
+            this.y + this.height > obstacle.y
+        ){
+            return true;
+        }
+
+        //checking the bottom obstacle        
+        if (
+            this.x < obstacle.x + obstacle.imgBot.width &&
+            this.x + this.width > obstacle.x &&
+            this.y < obstacle.imgTop.finish + obstacle.space + obstacle.imgBot.height &&
+            this.y + this.height > obstacle.imgTop.finish + obstacle.space
+        ){
+            return true;
+        }
+
+        return false;
+    }
 
 }
