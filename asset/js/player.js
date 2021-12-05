@@ -82,11 +82,11 @@ class Player {
         }
     }
   
-    // collidesWith(coin) {
-    //   return this.x < coin.x + coin.width &&
-    //     this.x + this.width > coin.x &&
-    //     this.y < coin.y + coin.height &&
-    //     this.y + this.height > coin.y
-    // }
-  
+    collidesWith(obstacle) {
+      return(
+        this.x < obstacle.x + obstacle.width &&
+        this.x + this.width > obstacle.x &&
+        this.y < obstacle.y + obstacle.height &&
+        this.y + this.width > obstacle.y)
+    }
 }
