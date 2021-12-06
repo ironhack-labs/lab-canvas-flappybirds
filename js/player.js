@@ -10,8 +10,6 @@ class Player {
         this.vy = 0;
         this.ay = 0.2;
 
-        this.speedX = 3;
-
         this.width = 46; 
         this.height = 32;
 
@@ -78,10 +76,7 @@ class Player {
     onKeyDown(keyCode) {
         if (keyCode === SPACE_KEY) {
           this.vy = -5;
-          this.jumping = true
-          console.log('ntr')
-          
+          this.jumping = true         
         }
-        
     }    
 }

@@ -16,6 +16,5 @@ window.onload = function() {
 
   document.addEventListener('keydown',(event) => {
     game.onKeyDown(event.keyCode);
-    console.log('test')
   })
 };
