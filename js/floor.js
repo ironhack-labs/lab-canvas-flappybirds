@@ -3,7 +3,7 @@ class Floor {
         this.ctx = ctx
 
         this.x = 0
-        this.y = 390
+        this.y = 430
 
         this.width = this.ctx.canvas.width
         this.height = this.ctx.canvas.height

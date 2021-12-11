@@ -12,8 +12,4 @@ window.onload = function() {
     game.onKeyDown(event.keyCode)
   })
 
-  document.addEventListener('keyup', (event) => {
-    game.onKeyUp(event.keyCode)
-  })
-
 };

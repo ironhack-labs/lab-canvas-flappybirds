@@ -22,7 +22,7 @@ class Background {
             this.ctx.drawImage(
                 this.img,
                 this.x,
-                this.y - 100,
+                this.y - 55,
                 this.width,
                 this.height
             )

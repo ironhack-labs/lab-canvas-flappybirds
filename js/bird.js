@@ -7,7 +7,7 @@ class Bird {
 
         this.x = this.ctx.canvas.width / 3
         this.y = this.ctx.canvas.height / 2
-        this.maxY = 350
+        this.maxY = 394
 
         this.img = new Image()
         this.img.src = './images/bird.png'
@@ -55,27 +55,40 @@ class Bird {
 
         if (this.y >= this.maxY)  {
             this.y = this.maxY
-        }
-
-        // if (!this.fly) {
-        //     this.xFrame = 1
-        
-        
+        }        
     }
 
     onKeyDown(keyCode) {
         if (keyCode === SPACE_KEY) {
-            this.vy -= 9
-            
+            this.vy = -5
         }
-
     }
 
-    onKeyUp(keyCode) {
-        if (keyCode === SPACE_KEY) {
-            this.vy = 0
+    collidesWith(obstacle) {
+        if (
+            this.x < obstacle.x + obstacle.imgTop.width &&
+            this.x + this.width > obstacle.x &&
+            this.y < obstacle.y + obstacle.imgTop.height &&
+            this.y + this.height > obstacle.y
+        ) {
+            return true
         }
 
+        if (
+            this.x < obstacle.x + obstacle.imgBottom.width &&
+            this.x + this.width > obstacle.x &&
+            this.y < obstacle.imgTop.limit + obstacle.gap + obstacle.imgBottom.height &&
+            this.y + this.height > obstacle.imgTop.limit + obstacle.gap
+        ){
+            return true
+        } 
+        
+        else {
+            return false
+        }
     }
+
+    
+
 }
 
