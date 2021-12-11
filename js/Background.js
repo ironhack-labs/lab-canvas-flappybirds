@@ -5,8 +5,8 @@ class Background {
         this.x = 0;
 
 
-        this.width = 900;
-        this.height = 504;
+        this.width = this.ctx.canvas.width;
+        this.height = this.ctx.canvas.height;
 
 
 
@@ -23,8 +23,7 @@ class Background {
         if (this.img.isReady) {
             this.ctx.drawImage(
                 this.img,
-                this.x,
-                0,
+                this.x, 0,
                 this.width,
                 this.height)
 

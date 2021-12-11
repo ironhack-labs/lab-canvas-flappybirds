@@ -1,46 +1,40 @@
 class Footer {
     constructor(ctx) {
         this.ctx = ctx;
-
         this.x = 0;
-        this.vx = -3;
         this.width = 466;
         this.height = 79;
-
-
-
-
-        this.img = new Image()
-        this.img.src = './images/game-bg-footer.png'
-        this.img.isReady = false;
-
-        this.img.onload = () => {
-            this.img.isReady = true;
-        }
+        this.velocity = -2;
+        this.image = new Image();
+        this.image.src = "./images/game-bg-footer.png";
+        this.image.onload = () => {
+            this.isLoaded = true;
+        };
     }
+
     draw() {
-        if (this.img.isReady) {
+        this.isLoaded &&
             this.ctx.drawImage(
-                this.img,
+                this.image,
                 this.x,
                 this.ctx.canvas.height - this.height,
                 this.width,
-                this.height)
-            this.ctx.drawImage(
-                this.img,
-                this.x - this.width,
-                0,
-                this.width,
-                this.height)
+                this.height
+            );
 
-        }
-
+        this.ctx.drawImage(
+            this.image,
+            this.x + this.width,
+            this.ctx.canvas.height - this.height,
+            this.width,
+            this.height
+        );
     }
-    move() {
-        this.x += this.vx
 
+    move() {
+        this.x += this.velocity;
         if (this.x + this.width <= 0) {
-            this.x = 0
+            this.x = 0;
         }
     }
 }
