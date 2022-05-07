@@ -13,14 +13,14 @@ window.onload = function () {
   };
 
   function startGame() {
-    console.log("si funciono");
+    //console.log("si funciono");
     //updateGame() // v1.0 este paso para hacer arrancar el juego. Recuerda que el requestAnimationFrame tiene un callback al update que crea un loop
     
     audio.play()
     requestId = requestAnimationFrame(updateGame); // v1.2
   }
   function gameOver() {
-    console.log("te moriste, we");
+    //console.log("te moriste, we");
     ctx.drawImage(dead,400,400,400,400)
     audio.pause()
 requestId = undefined;
@@ -70,7 +70,7 @@ ctx.fillText (`Points: ${points}`,canvas.width -200 ,100)
 
   //generar y dibujar pipes
   function generatePipes() {
-    console.log("franes", frames);
+    //console.log("franes", frames);
     //limitando qe mi arreglo de pipes
     if (!(frames % 160 === 0)) {
       return true;
