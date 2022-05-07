@@ -1,103 +1,139 @@
-//CLASSES
-//BACKGROUND
-class Background {
-    constructor(w,h){
-         //from the origin we start drawin
-         this.x = 0;
-        this.y = 0;
-        //its size
-        this.width = w;
-        this.height = h;
-        this.img = new Image() //this gives imgBg lots of methods, like src, onload, etc.
-        this.img.src =  "images/bg.png"
-    }
-    //methods
-    render(){
-        //infinite loop
-        if(this.x < -canvas.width){
-            this.x=0
-        }
-        //move canvas
-        this.x--; // x axis
-
-        //drawImage(img,x,y,w,h)
-        ctx.drawImage(this.img,this.x,this.y,this.width,this.heigth);
-        //repeat bg
-        ctx.drawImage(this.img,
-        this.x + this.width,
-        this.y,
-        this.height);
-    }
-    
-}
-
-//CHARACTER
-class Flappy{
+//background
+class Background{
     //constructor
-    constructor(x,y,w,h){ //from the origin we start drawin
-        this.x = x;
-       this.y = y;
-       //its size
-       this.width = w;
-       this.height = h;
-       this.img = new Image() //this gives imgBg lots of methods, like src, onload, etc.
-       this.img.src =  "images/flappy.png"
-       //gravity
-       this.vy=2
-       //power to raise
-       this.userPull=0;
+    constructor(w,h,life,points){
+        this.x = 0;
+        this.y = 0;
+        this.width = w;
+        this.height= h;
+        this.image = new Image();
+        //image={src:"",onload:()=>{}}
+        this.image.src = "images/bg.png" // "./" => en este mismo nivel; "../" => un nivel antes
+        this.gamerOverPic = new Image();
+        this.gamerOverPic.src = "https://w7.pngwing.com/pngs/359/749/png-transparent-death-certificate-sword-art-online-gamebanana-died-text-rectangle-logo.png"
     }
-    //methods
-    render(){
-        //validate gravity
-        this.vy = this.vy + (gravity - this.userPull)
+    //metodos
+    draw(){
+        //hacer que el background se mueva
+        //loop infinito 
+        if(this.x < -canvas.width){
+            this.x = 0
+        }
+        this.x --;
 
-        //validate that gflappy doesnt leave y = 0
-        if (this.y <=0){
+        //dibujar imagen en canvas!!!
+        //drawImage(Imagen,x,y,w,h)
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
+        ctx.drawImage(
+            this.image,
+            this.x + this.width,
+            this.y,
+            this.width,
+            this.height
+        )
+    }
+
+    gameOver(){
+        //colocar letras
+        //ctx.font = "80px Arial"
+        //ctx.fillText="Te moriste!!"
+        ctx.drawImage(
+            this.gamerOverPic,
+            300,
+            140,
+            400,
+            400
+        )
+    }
+}
+//flappy
+class Flappy{
+    constructor(x,y,w,h){
+        this.x = x;
+        this.y = y;
+        this.width = w;
+        this.height= h;
+        this.image = new Image();
+        this.image.src = "images/flappy.png" // "./" => en este mismo nivel; "../" => un nivel antes
+
+        this.vy = 2 //gravity
+        this.userPull= 0; //
+    }
+
+    draw(){
+        //validar gravedad
+        this.vy = this.vy + (gravity - this.userPull)
+        //validar que el flppy no salga del canvas
+        if(this.y <= 0){
             this.userPull = 0;
-            this.y = 2;
+            this.y=2;
             this.vy=2;
         }
-
-        //modify gravity by Y
-        if (this.y+this.height < canvas.height){
-            this.y += this.vy;
+        //modificamos su "Y" con la gravedad
+        if(this.y + this.height < canvas.height){
+            this.y +=  this.vy;
         }
 
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+        //dibujamos al flappy!
+        ctx.drawImage(
+            this.image,
+            this.x,
+            this.y,
+            this.width,
+            this.height
+        )
     }
-    //collision. returns true || false. item being object or enemy
+
     collision(item){
+
         return (
             this.x < item.x + item.width &&
-            this.x + this.width > item.x && //full area is inside item
+            this.x+ this.width > item.x &&
             this.y < item.y + item.height &&
             this.y + this.height > item.y
         )
     }
-    //validate gravity
-    //contain flappy in Y axis
 }
 
-//ENEMY
+//pipes
 
 class Pipe extends Flappy{
-    //(top,x,y,h)
-constructor(pos,x,y,h){
-super(x,y,50,h)
-this.img.src=
-pos === "top"// condition
-? "images/obstacle_top.png"
-:"images/obstacle_bottom.png"
+    constructor(pos,x,y,h){
+        super(x,y,50,h)
+        this.image.src =
+        pos === "top" //condicion
+        ? "images/obstacle_top.png"
+        : "images/obstacle_bottom.png"
+        //(condicion) "?" true  ":" false 
+    }
+
+    draw(){
+        //movemos el pipe
+        this.x -= 2;
+        ctx.drawImage(
+            this.image,
+            this.x,
+            this.y,
+            this.width,
+            this.height
+        )
+    }
 }
-render(){
-this.x -= 2;
-ctx.drawImage(
-    this.img,
-    this.x,
-    this.y,
-    this.width,
-    this.height
-)
-}
+
+class Bullet extends Flappy{
+    constructor(x,y){
+        super(x,y,50,50)
+        this.image.src="images/haduken.jpg";
+    }
+
+    draw(){
+        this.x+= 2;
+        ctx.drawImage(
+            this.image,
+            this.x,
+            this.y,
+            this.width,
+            this.height
+        )
+    }
 }

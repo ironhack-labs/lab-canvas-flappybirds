@@ -1,36 +1,41 @@
-/* FILE CONTANING MY VIDEGAMES VARIABLES
-- WE DECLARE CANVAS AND CTX
+/**
+ *  Archivo para vairables que utiliza mi videojuego!!!! 
+ */
+
+/*
+const gameVar = {
+    canvas: "",
+}
 */
 
-const canvas= document.getElementById('my-canvas');
+const canvas = document.getElementById("my-canvas");
 const ctx = canvas.getContext("2d");
 
-//
 let frames = 0;
 const gravity = 0.1;
 
-//pipes
-const pipes = [];
+//pipes  newArry = [...array, {...} ] newArray = [{...}, ...array ] spread operator 
+let pipes = [];
 
-//points
+//bala
+let bullets = [];
+//
 let points = 0;
 
-//requestId, helps us stop the game
-let requestId;
+//algo extra
+let diff =  1; // dificultad
+
+let requestId; 
 
 //audio
-const audio = new Audio()
-//audio.src ="";
-//audio.loog = true;
+const audio = new Audio();
+audio.src = "audio/drama.mp3";
+audio.loop = true;
 
-// if we would like to reset the hero
-let birdDefault = {
-    vida: 3,
-    status: "pequeño",
-    monedas: 0,
-    x: 100,
-    y: 10
+//heroe default ejemplo 
+let dylanDefault = {
+    vida:3,
+    status:"pequeño",
+    monedas:0,
 }
 
-//extras
-let diff = 1; //difficulty lvl example
