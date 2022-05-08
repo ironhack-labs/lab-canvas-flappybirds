@@ -17,7 +17,7 @@ window.onload = function () {
     //test1
     // updateGame();
     //final1 
-    audio.play()
+    q.play()
     requestId =  requestAnimationFrame(updateGame)
   }
 
@@ -27,7 +27,10 @@ window.onload = function () {
     bg.gameOver()
     requestId= undefined
   }
-
+  function winGame(){
+    console.log("ganaste consigue una vida porque si estaba dificil!")
+    requestId = undefined
+  }
   //motor del juego (updateGame)
   function updateGame() {
     frames ++;
@@ -38,7 +41,9 @@ window.onload = function () {
     // el ctx.drawImage solo funcionara dentro de una funcion que se este ejecutando
     // con requestAnimation frames o un setInterval
     flappy.draw();
-    drawPipes()
+    drawPipes();
+    ctx.font = "30px arial"
+    ctx.fillText(`Points: ${points}`, canvas.width -200,100)
 
     if(flappy.y + flappy.height > canvas.height){
       gameOver()
@@ -79,8 +84,9 @@ window.onload = function () {
     //["David","Esteban","Alfonso"]
     pipes.forEach((pipe,index_pipe)=>{//star forEach
 
-      //scar los pipes si se salen del canvas
+      //sacar los pipes si se salen del canvas
       if(pipe.x < -30 ){
+        points++;
         pipes.splice(index_pipe, 1)
       }
       pipe.draw()
