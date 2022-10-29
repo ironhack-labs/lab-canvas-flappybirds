@@ -19,14 +19,15 @@ let frames = 0; // *Importante
 const gravity = .1; // *Importante
 
 // Array con los objetos a esquivar
-const pipes = []; // *Importante 
+const arrPipes = []; // *Importante 
 let points = 0; 
 
 let hardLevel = 1; // Dificultad
 let requestId; // Para validar que está corriendo *Importante
 
-/** Si tuviera audio 
- * const audio = new Audio()
- * audio.src =  ''; 
- * efecto
- */
+ 
+const audio = new Audio()
+audio.src =  'audio/drama.mp3'; 
+ audio.volume = .2
+ audio.loop = true;
+ 

@@ -55,6 +55,59 @@ class Flappy{
         this.vy = 2 //
         this.userPull = 0 // Movimiento
     }
-    update(){}
-    collision(){}
+    update(){
+        // dropdown 
+        this.vy = this.vy + (gravity - this.userPull)
+        if(this.y  <=0){
+            this.userPull =0; 
+            this.y = 2; 
+            this.vy = 2; 
+        }
+        // Modificar el valor de la posición y con la gravedad
+        this.y += this.vy
+        // .drawImage(image, x,y, w,h)
+        ctx.drawImage(
+            this.image, 
+            this.x, 
+            this.y, 
+            this.width, 
+            this.height
+        )
+    }
+    /**
+     * @param {*} item = {x:..., y:...,, vida, width, height}
+     */
+    collision(item){
+        return(
+            this.x  < item.x + item.width &&
+            this.x + this.width > item.x && 
+            this.y  < item.y + item.height  && 
+            this.y + this.height > item.y 
+        );
+    }
 }
+
+
+class Pipe extends Flappy{
+    /**
+     * @param {*} pos 
+     * @param {*} x 
+     * @param {*} y 
+     * @param {*} w 
+     * @param {*} h 
+     */
+    constructor(pos, x, y, h){
+        super(x,y,50,h)
+        this.image.src = pos === 'top' ? 'images/obstacle_top.png' : 'images/obstacle_bottom.png';
+
+    }
+    update(){
+        console.log('sdfsg');
+        this.x -=2; 
+        ctx.drawImage(this.image,
+            this.x, 
+            this.y, 
+            this.width, 
+            this.height)
+    }
+  }
