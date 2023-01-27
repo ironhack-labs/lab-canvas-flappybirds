@@ -17,3 +17,23 @@ body button {
   border-radius: 5px;
   margin-bottom: 20px;
 }
+
+canvas{
+  border-style: solid;
+  border-color: black;
+  margin-left:18%;
+  
+}
+
+#score{
+  border-style: solid;
+  border-color:black;
+  width:200px;
+  height:200px;
+  font-size: 30px;
+}
+
+#game-board{
+  display: flex;
+  justify-content: space-evenly;
+}
