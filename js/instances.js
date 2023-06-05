@@ -1,0 +1,1 @@
+const background = new Background()
