@@ -32,6 +32,7 @@ function gameEngine() {
   clearCanvas()
 
   background.draw()
+  bird.draw()
 
   if (requestId) requestAnimationFrame(gameEngine)
 }
