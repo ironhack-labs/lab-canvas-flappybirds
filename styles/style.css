@@ -16,4 +16,8 @@ body button {
   box-shadow: 0;
   border-radius: 5px;
   margin-bottom: 20px;
+  cursor: pointer;
+}
+body button:hover {
+  background-color: darkgray;
 }
