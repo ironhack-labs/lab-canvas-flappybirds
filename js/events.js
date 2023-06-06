@@ -1,7 +1,9 @@
 document.addEventListener("keydown", e => {
-  switch (e.keyCode) {
-    case 32:
+  if (requestId) {
+    console.log(e)
+
+    if (e.code === 'Space') {
       bird.update()
-      return
+    }
   }
 })

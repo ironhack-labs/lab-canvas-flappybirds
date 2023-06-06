@@ -6,8 +6,8 @@ const ctx = canvas.getContext("2d")
 let gameFrames = 0
 let requestId
 let speed = 1.5
-
 let obstacles = []
+let points = 0
 
 const clearCanvas = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -27,7 +27,7 @@ function startGame() {
 }
 
 function obstacleGenerator() {
-  if (gameFrames % 140 === 0) { 
+  if (gameFrames % 140 === 0) {
     const obstacle = new Obstacle()
     obstacles.push(obstacle)
   }
@@ -39,8 +39,29 @@ function drawObstacles() {
 
     if (obstacle.x + obstacle.width < 0) {
       obstacles.shift()
+      points++
     }
   })
+}
+
+function collisionCheck() {
+  obstacles.forEach((obstacle, i) => {
+    if (((bird.x + bird.width - 5) > obstacle.x) &&
+      ((bird.y +5)< (obstacle.height + obstacle.yTop))) {
+      requestId = cancelAnimationFrame(gameEngine)
+    } else if (
+      bird.x + bird.width - 5 > obstacle.x &&
+      bird.y + bird.height -5 > obstacle.yBot
+    ) {
+      requestId = cancelAnimationFrame(gameEngine)
+    }
+  })
+}
+
+function drawPoints() {
+  ctx.font = "20px Arial"
+  ctx.fillStyle = "white"
+  ctx.fillText("Points: " + points, 10, 20)
 }
 
 function gameEngine() {
@@ -49,10 +70,16 @@ function gameEngine() {
   clearCanvas()
 
   background.draw()
-  bird.draw()
-
   obstacleGenerator()
   drawObstacles()
+
+  bird.draw()
+
+  collisionCheck()
+
+  drawPoints()
+
+  
 
   if (requestId) requestAnimationFrame(gameEngine)
 }

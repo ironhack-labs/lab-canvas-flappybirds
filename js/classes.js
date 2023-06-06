@@ -45,7 +45,6 @@ class Bird {
 
   update() {
     this.speedY = -3
-    console.log(this.speedY)
   }
 
   draw() {
