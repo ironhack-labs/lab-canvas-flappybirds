@@ -21,10 +21,3 @@ body button {
 body button:hover {
   background-color: darkgray;
 }
-
-#game-board {
-  border: 1px solid blue;
-}
-#canvas {
-  border: 1px solid red;
-}
